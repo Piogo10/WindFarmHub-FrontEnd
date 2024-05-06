@@ -1,0 +1,332 @@
+<nav class="border-b border-gray-300 bg bg-gray-50 bg-opacity-80 backdrop-blur-sm fixed w-full z-20 top-0 start-0">
+    <div class="max-w-screen-xl mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+            <!-- Logo e nome da empresa -->
+            <div class="flex items-center">
+                <a href="#" class="flex items-center space-x-2">
+                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="" />
+                    <span class="text-xl font-semibold text-gray-800 ">WindFarmHub</span>
+                </a>
+            </div>
+
+            <!-- Labels -->
+            <div
+                class="hidden md:flex space-x-6 p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent">
+                <a href="#" [routerLink]="['/home']"
+                    class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Home</a>
+                <a href="#" [routerLink]="['/models']"
+                    class="block py-2 px-3 text-black rounded md:bg-transparent md:hover:text-blue-700 md:p-0">Models</a>
+
+            </div>
+
+            <!-- Dropdown de usuário -->
+            <div class="relative" *ngIf="isLoggedIn">
+                <button type="button" class="flex items-center text-gray-800 hover:text-gray-600 focus:outline-none"
+                    (click)="toggleUserDropdown()" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+                    <svg id="animated-svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="9" r="3" stroke="#000000" stroke-width="1.5"></circle>
+                        <path d="M17.9691 20C17.81 17.1085 16.9247 15 11.9999 15C7.07521 15 6.18991 17.1085 6.03076 20"
+                            stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
+                        <path
+                            d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                            stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
+                    </svg>
+                </button>
+
+
+                <!-- Dropdown menu do usuário -->
+                <div [class.hidden]="!userDropdownOpen"
+                    class="absolute top-full right-0 mt-2 border-b border-gray-300 bg bg-gray-50 bg-opacity-80 backdrop-blur-sm  rounded-md shadow-lg"
+                    id="user-dropdown">
+                    <div class="py-1">
+                        <div class="px-4 py-3 border-b-4">
+                            <span class="block text-sm text-gray-900 ">{{userName}}</span>
+                            <span class="block text-sm text-gray-900 ">{{userEmail}}</span>
+                        </div>
+                        <a href="#" class="block px-4 py-2 text-gray-800  hover:bg-gray-100" (click)="goToLogin()">Sign
+                            out</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative md:hidden">
+                <button type="button" class="text-gray-800  hover:text-gray-600  focus:outline-none"
+                    (click)="toggleHamburgerDropdown()">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <!-- Dropdown menu do hamburger -->
+                <div *ngIf="hamburgerDropdownOpen"
+                    class="absolute top-full left-0 mt-2 -ml-16 bg-white border border-gray-200  rounded-md shadow-lg">
+                    <div class="py-1">
+                        <a href="#" [routerLink]="['/home']"
+                            class="block px-4 py-2 text-gray-800  hover:bg-gray-100 ">Home</a>
+                        <a href="#" [routerLink]="['/models']"
+                            class="block px-4 py-2 text-gray-800  hover:bg-gray-100 ">Models</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+
+<section id="models" class="bg-gray-50 h-full">
+    <div class="container py-5">
+        <div class="text-center m-auto my-20 text-2xl">
+            <h1 class="font-bold text-black mb-4">Modelo {{ model.name }}</h1>
+        </div>
+        <div id="render-section" class=" h-max grid lg:grid-cols-2 md:grid-cols-1 gap-12 lg:gap-8 px-4 sm:px-6 lg:px-8">
+            <div id="photo-model"
+                class="h-max text-center px-5 rounded-2xl cursor-pointer w-9/12 justify-center mx-auto items-center">
+                <div class="w-full h-96 bg-model_eco80 bg-cover"></div>
+                <h3 class="text-xl font-bold py-4 bg-gray-300">{{ model.name }}</h3>
+                <p class="leading-relaxed bg-gray-300">{{ model.description }}</p>
+            </div>
+
+            <div id="render-table" class="overflow-x-auto">
+                <table class="w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Especificação</th>
+                            <th scope="col"
+                                class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-300">
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Nome</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.name || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Potência Nominal</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.power_rated_power || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Potência Flexível</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.power_flexible_ratings || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Velocidade do Vento de Corte</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.power_cut_in_speed || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Velocidade do Vento Nominal</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.power_rated_speed || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Velocidade do Vento de Corte Final</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.power_cut_out_speed || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Velocidade do Vento de Sobrevivência</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.power_survival_speed || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Zona de Vento (DIBt)</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.power_wind_zone || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Classe de Vento (IEC)</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.power_wind_class || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Diâmetro do Rotor</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_diameter || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Área Varrida pelo Rotor</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_swept_area || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Número de Pás do Rotor</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_blades || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Velocidade Máxima do Rotor</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_max_speed || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Velocidade das Pontas das Pás do Rotor</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_tipspeed || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Tipo de Rotor</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_type || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Material do Rotor</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_material || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Fabricante do Rotor</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_manufacturer || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Densidade de Potência do Rotor 1</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_power_density1 || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Densidade de Potência do Rotor 2</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_power_density2 || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Tipo de Caixa de Engrenagens</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.gearbox_type || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Estágios da Caixa de Engrenagens</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.gearbox_stages || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Rácio da Caixa de Engrenagens</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.gearbox_ratio || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Fabricante da Caixa de Engrenagens</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.gearbox_manufacturer || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Tipo de Gerador</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_type || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Número de Geradores</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_number || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Velocidade Máxima do Gerador</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_max_speed || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Voltagem do Gerador</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_voltage || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Conexão à Rede do Gerador</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_grid_connection || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Frequência da Rede do Gerador</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_grid_frequency || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Fabricante do Gerador</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_manufacturer || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Altura do Cubo da Torre</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.tower_hub_height || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Tipo de Torre</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.tower_type || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Formato da Torre</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.tower_shape || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Proteção contra Corrosão da Torre</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.tower_corrosion_protection || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Fabricante da Torre</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.tower_manufacturer || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Peso de Uma Única Pá</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.weight_single_blade || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Peso do Cubo</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.weight_hub || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Peso do Rotor</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.weight_rotor || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Peso da Nacele</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.weight_nacelle || 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 whitespace-nowrap">Peso Total da Torre</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ model.weight_tower_max || 'n/a' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <div class="accordion">
+            <!-- Item 1 -->
+            <div class="accordion-item border border-gray-300 rounded-lg mb-1" [class.active]="activeItem === 1" (click)="toggleItem(1)">
+              <h2 class="accordion-header bg-gray-100 text-gray-700 border-b border-gray-300 py-2 px-4 cursor-pointer">
+                Item 1
+              </h2>
+              <div class="accordion-content bg-white text-gray-700 py-2 px-4 overflow-hidden transition-max-height duration-300 max-h-0" [@expandCollapse]="activeItem === 1 ? 'expanded' : 'collapsed'">
+                <!-- Conteúdo do item 1 -->
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </div>
+            </div>
+          
+            <!-- Item 2 -->
+            <div class="accordion-item border border-gray-300 rounded-lg mb-1" [class.active]="activeItem === 2" (click)="toggleItem(2)">
+              <h2 class="accordion-header bg-gray-100 text-gray-700 border-b border-gray-300 py-2 px-4 cursor-pointer">
+                Item 2
+              </h2>
+              <div class="accordion-content bg-white text-gray-700 py-2 px-4 overflow-hidden transition-max-height duration-300 max-h-0" [@expandCollapse]="activeItem === 2 ? 'expanded' : 'collapsed'">
+                <!-- Conteúdo do item 2 -->
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </div>
+            </div>
+          
+            <!-- Adicione mais itens conforme necessário -->
+          </div>
+          
+          
+
+          
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</section>
+
+<section>
+
+</section>

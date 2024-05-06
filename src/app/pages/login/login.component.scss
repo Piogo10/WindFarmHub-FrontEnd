@@ -1,0 +1,68 @@
+form .form-field::before {
+    font-size: 16px;
+    position: absolute;
+    left: 15px;
+    top: 17px;
+    color: #888888;
+    content: " ";
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  form .form-field:nth-child(1)::before {
+    background-image: url(../../imagens/user-icon.png);
+    width:  20px;
+    height: 20px;
+    top: 17px;
+  }
+  form .form-field:nth-child(2)::before {
+    background-image: url(../../imagens/lock-icon.png);
+    top: 21px;
+    width: 16px;
+    height: 16px;
+  }
+  form .form-field {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 80%;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+  }
+  form input {
+    font-family: 'Lato', sans-serif;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    border-radius: 4px;
+    border: none;
+    display: block;
+    padding: 0.9rem 0.7rem;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    font-size: 17px;
+    color: #4A4A4A;
+    text-indent: 40px;
+    margin-bottom: 1rem;
+  }
+  form .btn {
+    width: 391.19px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0.9rem 2.5rem;
+    text-align: center;
+    background-color: #8EC684;
+    color: #fff;
+    border-radius: 23.01px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    font-size: 17px;
+  }

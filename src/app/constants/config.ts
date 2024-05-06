@@ -1,0 +1,2 @@
+export const LOGO_URL = 'https://img.freepik.com/vetores-gratis/vetor-de-design-de-gradiente-colorido-de-passaro_343694-2506.jpg';
+export const BG_URL = 'https://i.pinimg.com/originals/b2/03/2b/b2032b1efe2f01348d051cc472a49238.jpg';
