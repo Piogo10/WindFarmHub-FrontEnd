@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   userDropdownOpen: boolean = false;
   hamburgerDropdownOpen: boolean = false;
   isLoggedIn: boolean = false;
-
+  havePerms: boolean = false;
   userName: string = "";
   userEmail: string = "";
 
@@ -23,6 +23,10 @@ export class HomeComponent implements OnInit {
     this.userAuthService.isLoggedIn().then(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       console.log('isLoggedIn:', this.isLoggedIn);
+    });
+    this.userAuthService.havePerms().then(havePerms => {
+      this.havePerms = havePerms;
+      console.log('havePerms:', this.havePerms);
     });
     this.updateUserInformation();
   }

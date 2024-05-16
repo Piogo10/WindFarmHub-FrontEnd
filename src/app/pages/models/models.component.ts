@@ -13,6 +13,7 @@ export class ModelsComponent implements OnInit{
   userDropdownOpen: boolean = false;
   hamburgerDropdownOpen: boolean = false;
   isLoggedIn: boolean = false;
+  havePerms: boolean = false;
   models: any[] = [];
   userName: string = "";
   userEmail: string = "";
@@ -23,6 +24,10 @@ export class ModelsComponent implements OnInit{
     this.userAuthService.isLoggedIn().then(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       console.log('isLoggedIn:', this.isLoggedIn);
+    });
+    this.userAuthService.havePerms().then(havePerms => {
+      this.havePerms = havePerms;
+      console.log('havePerms:', this.havePerms);
     });
     this.updateUserInformation();
   }
@@ -35,7 +40,7 @@ export class ModelsComponent implements OnInit{
       this.userEmail = email;
 
       const { id } = response;
-      const models = await this.userAuthService.getModels(id);
+      const models = await this.userAuthService.getModelsByUserId(id);
       if (models && models.length > 0) {
         this.models = models;
       }

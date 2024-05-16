@@ -33,10 +33,11 @@ export class ModelDetailsComponent implements OnInit {
   toggleItem(item: number): void {
     this.activeItem = (this.activeItem === item) ? null : item;
   }
-  
+
   userDropdownOpen: boolean = false;
   hamburgerDropdownOpen: boolean = false;
   isLoggedIn: boolean = false;
+  havePerms: boolean = false;
   model: any = {}; // Apenas um modelo, não uma matriz
   userName: string = "";
   userEmail: string = "";
@@ -53,6 +54,10 @@ export class ModelDetailsComponent implements OnInit {
     this.userAuthService.isLoggedIn().then(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
     });
+    this.userAuthService.havePerms().then(havePerms => {
+      this.havePerms = havePerms;
+      console.log('havePerms:', this.havePerms);
+    });
     this.updateUserInformation();
     this.modelName = this.route.snapshot.params['modelName'];
   }
@@ -65,7 +70,7 @@ export class ModelDetailsComponent implements OnInit {
       this.userEmail = email;
 
       const { id } = response;
-      const models = await this.userAuthService.getModels(id);
+      const models = await this.userAuthService.getModelsByUserId(id);
       if (models && models.length > 0) {
         // Encontre o modelo correto com base no nome
         this.model = models.find((model: { name: string; }) => model.name === this.modelName);

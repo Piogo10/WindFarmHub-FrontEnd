@@ -1,0 +1,205 @@
+<div class="flex items-center justify-center w-full mt-5 mb-6">
+    <!-- Estatísticas de Usuários -->
+    <div class="bg-white rounded-lg shadow-md p-6 me-6">
+        <h2 class="text-lg font-semibold mb-4">Nº total de utilizadores</h2>
+        <p class="text-center text-xl" >{{ usuarios.length }}</p> <!--{{ activeUsers }}-->
+    </div>
+    <div class="bg-white rounded-lg shadow-md p-6 me-6">
+        <h2 class="text-lg font-semibold mb-4">Nº de utilizadores ativos</h2>
+        <p class="text-center text-xl" >{{activeUsers}}</p> <!--{{ activeUsers }}-->
+    </div>
+    <div class="bg-white rounded-lg shadow-md p-6 me-6">
+        <h2 class="text-lg font-semibold mb-4">Estatísticas de Usuários</h2>
+        <p class="text-center text-xl" >10</p> <!--{{ activeUsers }}-->
+    </div>
+</div>
+
+<div class="bg-white rounded-lg shadow-md p-6 w-full space-y-4">
+    <!-- Cabeçalho da Lista -->
+    <div class="flex mb-4 items-center">
+        <h2 class="text-lg font-semibold">Lista de Usuários</h2>
+
+        <div class="flex-grow"></div>
+
+        <div class="flex items-center justify-center space-x-2 lg:me-44"> <!-- Modified: Added justify-center class -->
+            <input type="text" placeholder="Pesquisar usuários" class="border border-gray-300 rounded-md py-2 px-3"
+                   [(ngModel)]="searchField">
+            <select [(ngModel)]="searchOption" class="border border-gray-300 rounded-md py-2 px-3">
+                <option value="name">Nome</option>
+                <option value="email">Email</option>
+            </select>
+        </div>
+
+        <button (click)="toggleAddUserModal()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Adicionar Usuário</button>
+    </div>
+
+    <table class="w-full">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of filtrarUsuarios()" class="border-b text-center">
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <!-- Editar -->
+                    <button (click)="toggleEditUserTemplate(user)"
+                        class="text-white me-1 text-sm bg-gray-700 hover:bg-gray-500 border border-slate-200 rounded-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                            </svg>
+                        </span>
+                        <span class="hidden md:inline-block">Edit</span>
+                    </button>
+
+                     <!-- Delete -->
+                    <button (click)="toggleDeleteModal(user)" class="text-white me-1 my-4 bg-red-600 text-sm hover:bg-red-700 border border-slate-200 rounded-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
+                        <span>
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                          </svg>
+                        </span>
+                        <span class="hidden md:inline-block">Delete</span>
+                      </button>                    
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+                         
+
+
+
+
+<!-- DELETE DIV -->
+<div *ngIf="showDeleteModal" class="fixed top-0 left-0 w-full h-full flex justify-center items-center">
+    <div class="absolute inset-0 bg-transparent bg-opacity-50 backdrop-blur-sm"></div>
+    <div class="bg-gray-800 p-8 rounded-lg shadow-lg relative">
+        <button (click)="toggleDeleteModal(null)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </button>
+        <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor"
+            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                clip-rule="evenodd"></path>
+        </svg>
+        <p class="mb-4 text-gray-500 dark:text-gray-300">Deseja mesmo eliminar?</p>
+        <div class="flex justify-center items-center space-x-4">
+            <button (click)="toggleDeleteModal(null)" type="button"
+                class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                Cancelar
+            </button>
+            <button type="submit" (click)="confirmDelete()" type="button"
+                class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                Continuar
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- EDIT DIV-->
+<div *ngIf="showEditModal" class="fixed top-0 left-0 w-full h-full flex justify-center items-center">
+    <div class="absolute inset-0 bg-transparent bg-opacity-50 backdrop-blur-sm"></div>
+    <div class="bg-white p-8 rounded-lg shadow-lg relative">
+        <button (click)="toggleEditUserTemplate(null)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </button>
+        <h2 class="text-xl font-semibold mb-4 text-center">Editar Usuário</h2>
+        <div class="mb-4">
+            <label for="name" class="block text-gray-700 font-medium">Nome</label>
+            <input id="name" type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                [(ngModel)]="editedUser.name">
+        </div>
+        <div class="mb-4">
+            <label for="email" class="block text-gray-700 font-medium">Email</label>
+            <input id="email" type="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                [(ngModel)]="editedUser.email">
+        </div>
+        <div class="mb-4 flex items-center space-x-2">
+            <label class="block text-gray-700 font-medium">Cargo</label>
+            <select [(ngModel)]="editedUser.role" class="mt-1 w-52 block text-center border-gray-300  border-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+        <label class="flex items-center space-x-2">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [(ngModel)]="editedUser.status">
+            <span class="text-sm">Ativado</span>
+        </label>          
+        <div class="flex justify-center items-center mt-3">
+            <button (click)="confirmEdit()" type="button"
+                class="py-2 px-4 text-sm font-medium w-52 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300">
+                Confirmar
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- ADD USER DIV -->
+<div *ngIf="showAddUserModal"  class="fixed top-0 left-0 w-full h-full flex justify-center items-center">
+    <div class="fixed top-0 left-0 w-full h-full bg-black opacity-50"></div> <!-- Elemento de sobreposição -->
+    <div class="bg-white p-8 rounded-lg shadow-lg relative">
+        <button (click)="toggleAddUserModal()" class="absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+        </button>
+        <h2 class="text-xl font-semibold mb-4 text-center">Adicionar Utilizador</h2>
+        <div class="mb-4">
+            <label for="name" class="block text-gray-700 font-medium">Nome</label>
+            <input id="name" type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50" [(ngModel)]="newUser.name">
+        </div>
+        <div class="mb-4">
+            <label for="email" class="block text-gray-700 font-medium">Email</label>
+            <input id="email" type="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50" [(ngModel)]="newUser.email">
+        </div>
+        <div class="mb-4">
+            <label for="password" class="block text-gray-700 font-medium">Password</label>
+            <input id="password" type="password" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50" [(ngModel)]="newUser.password">
+        </div>
+        <div class="mb-4 flex items-center space-x-2">
+            <label class="block text-gray-700 font-medium">Cargo</label>
+            <select [(ngModel)]="newUser.role" class="mt-1 w-52 block text-center border-gray-300  border-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <label class="flex items-center cursor-pointer">
+                <input id="active" type="checkbox" class="peer sr-only" [(ngModel)]="newUser.status" />
+                <span class="block w-4 h-4 rounded-full border-gray-300 border mr-2 peer-checked:bg-green-500"></span>
+                <span class="text-gray-700 font-medium">Ativo</span>
+            </label>
+        </div>
+        <div class="flex justify-center items-center">
+            <button (click)="addUser()" type="button" class="py-2 px-4 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300">
+                Add User
+            </button>
+        </div>
+    </div>
+</div>
+

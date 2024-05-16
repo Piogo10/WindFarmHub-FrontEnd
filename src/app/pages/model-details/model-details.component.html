@@ -44,6 +44,7 @@
                             <span class="block text-sm text-gray-900 ">{{userName}}</span>
                             <span class="block text-sm text-gray-900 ">{{userEmail}}</span>
                         </div>
+                        <a *ngIf="havePerms" [routerLink]="['/dashboard/main']" class="block px-4 py-2 text-gray-800  hover:bg-gray-100">Dashboard</a>
                         <a href="#" class="block px-4 py-2 text-gray-800  hover:bg-gray-100" (click)="goToLogin()">Sign
                             out</a>
                     </div>

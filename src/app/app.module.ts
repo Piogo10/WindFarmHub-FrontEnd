@@ -10,7 +10,10 @@ import { RouterModule } from '@angular/router';
 import { ModelsComponent } from './pages/models/models.component';
 import { ModelDetailsComponent } from './pages/model-details/model-details.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
- 
+import { UsersComponent } from './pages/slidebar/users/users.component';
+import { ModelosComponent } from './pages/slidebar/modelos/modelos.component';
+import { DashboardmainComponent } from './pages/slidebar/dashboardmain/dashboardmain.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +21,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     LoginComponent,
     ModelsComponent,
     ModelDetailsComponent,
-    DashboardComponent
+    DashboardComponent,
+    UsersComponent,
+    ModelosComponent,
+    DashboardmainComponent
   ],
   imports: [
     BrowserModule,

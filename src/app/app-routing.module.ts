@@ -6,6 +6,9 @@ import { ModelsComponent } from './pages/models/models.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { ModelDetailsComponent } from './pages/model-details/model-details.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { UsersComponent } from './pages/slidebar/users/users.component';
+import { ModelosComponent } from './pages/slidebar/modelos/modelos.component';
+import { DashboardmainComponent } from './pages/slidebar/dashboardmain/dashboardmain.component';
 
 const availableModels = ['Eco-80', 'Eco-81'];
 
@@ -28,9 +31,15 @@ const routes: Routes = [
     component: ModelsComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent,
+    children: [
+      { path: 'main', component: DashboardmainComponent },
+      { path: 'users', component: UsersComponent },
+      { path: 'modelos', component: ModelosComponent },
+    ],
+    canActivate: [AuthGuard]
   },
   {
     path: "**",
