@@ -18,8 +18,8 @@ export class UsersComponent implements OnInit{
   activeUsers: number = 0;
 
 
-  searchField: string = ''; // Variável para armazenar o termo de pesquisa
-  searchOption: string = 'name'; // Opção padrão de pesquisa é 'name'
+  searchField: string = '';
+  searchOption: string = 'name';
   
   constructor(private userAuthService: UserAuthService, private router: Router, private animationsService: AnimationsService) {}
 

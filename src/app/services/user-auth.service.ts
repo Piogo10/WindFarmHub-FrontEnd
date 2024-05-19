@@ -278,4 +278,58 @@ export class UserAuthService {
       console.error('Erro ao deletar a associação:', error);
     }
   }
+
+  async getAllProducts(): Promise<any> {
+    try {
+      const token = localStorage.getItem('accessToken');
+      if (!token) {
+        throw new Error('No access token found');
+      }
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      const response = await this.http.get<any[]>('/api/product/all', { headers }).toPromise() as any[];
+      return response;
+    } catch (error) {
+      console.error('Erro ao obter os produtos:', error)
+    }
+  }
+
+  async editProduct(product: any): Promise<void> {
+    try {
+      const token = localStorage.getItem('accessToken');
+      if (!token) {
+        throw new Error('No access token found');
+      }
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      await this.http.post<any>('/api/product/update', product, { headers }).toPromise();
+    } catch (error) {
+      console.error('Erro ao editar o produto:', error);
+    }
+  }
+
+  async addProduct(product: any): Promise<void> {
+    try {
+      const token = localStorage.getItem('accessToken');
+      if (!token) {
+        throw new Error('No access token found');
+      }
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      const response = await this.http.post<any>('/api/product/add', product, { headers }).toPromise();
+      return response.id;
+    } catch (error) {
+      console.error('Erro ao adicionar o produto:', error);
+    }
+  }
+
+  async deleteProduct(id: any): Promise<void> {
+    try {
+      const token = localStorage.getItem('accessToken');
+      if (!token) {
+        throw new Error('No access token found');
+      }
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      await this.http.post<any>(`/api/product/delete/${id}`, null, { headers }).toPromise();
+    } catch (error) {
+      console.error('Erro ao deletar o produto:', error);
+    }
+  }
 }
