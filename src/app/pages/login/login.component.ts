@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private userAuthService: UserAuthService, private router: Router) { }
+  constructor(private alertService: AlertService, private userAuthService: UserAuthService, private router: Router) { }
 
   async ngOnInit() {
     const isLoggedIn = await this.userAuthService.isLoggedIn();
@@ -22,6 +23,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+
+    // Add code to check if the user has exceeded the maximum number of login attempts
+    const loginAttempts = localStorage.getItem('loginAttempts');
+    if (loginAttempts && parseInt(loginAttempts) >= 3) {
+      this.errorMessage = 'Número máximo de tentativas de login excedido. Por favor, tente novamente mais tarde.';
+      return;
+    }
+
+    // Perform the login
     this.userAuthService.login(this.email, this.password).subscribe(
       (response: any) => {
         if (response.accessToken) {
@@ -34,6 +44,10 @@ export class LoginComponent implements OnInit {
       (error) => {
         console.error('Erro no login:', error);
         this.errorMessage = 'Erro ao efetuar login. Por favor, tente novamente.';
+        
+        // Increment the login attempts counter
+        const currentAttempts = loginAttempts ? parseInt(loginAttempts) : 0;
+        localStorage.setItem('loginAttempts', (currentAttempts + 1).toString());
       }
     );
   }

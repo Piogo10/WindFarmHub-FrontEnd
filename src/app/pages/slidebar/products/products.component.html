@@ -1,3 +1,6 @@
+<app-alert></app-alert>
+
+
 <div class="flex items-center justify-center w-full mt-5 mb-6">
     <!-- Estatísticas de Usuários -->
     <div class="bg-white rounded-lg shadow-md p-6 me-6">
@@ -79,9 +82,17 @@
 </div>
 
 
-<div *ngIf="showEditModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-20">
-    <div class="absolute inset-0 bg-transparent bg-opacity-50 backdrop-blur-sm -mt-20"></div> <!-- FILTRO-->
-    <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full"> 
+
+
+
+
+
+
+
+<!-- EDIT -->
+<div *ngIf="showEditModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-20 z-10">
+    <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div>
+    <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full">
         <button (click)="toggleEditModal(null)"
             class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -168,11 +179,11 @@
         </div>
     </div>
 </div>
-
-
+<!-- ADD -->
 <div *ngIf="showAddProductModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-20">
-    <div class="absolute inset-0 bg-transparent bg-opacity-50 backdrop-blur-sm -mt-20"></div> <!-- FILTRO-->
+    <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
     <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full"> 
+         
         <button (click)="toggleAddProductModal()"
             class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -259,10 +270,11 @@
         </div>
     </div>
 </div>
-
+<!-- DELETE -->
 <div *ngIf="showDeleteModal" class="fixed top-0 left-0 w-full h-full flex justify-center items-center">
-    <div class="absolute inset-0 bg-transparent bg-opacity-50 backdrop-blur-sm"></div>
+    <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
     <div class="bg-gray-800 p-8 rounded-lg shadow-lg relative">
+         
         <button (click)="toggleDeleteModal(null)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">

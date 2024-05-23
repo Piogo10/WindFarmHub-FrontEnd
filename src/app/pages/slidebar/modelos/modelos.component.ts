@@ -230,6 +230,10 @@ export class ModelosComponent implements OnInit {
     this.showDeleteModal = !this.showDeleteModal;
     this.addModel = model;
     console.log('Model selected for deletion:', this.addModel);
+
+    document.body.style.overflow = this.showDeleteModal ? 'hidden' : 'auto';
+    const method = this.showDeleteModal ? 'addEventListener' : 'removeEventListener';
+    document.body[method]('scroll', this.scrollHandler);
   }
   confirmDelete(): void {
     if (this.addModel) {

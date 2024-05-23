@@ -1,3 +1,5 @@
+<app-alert></app-alert>
+
 <div class="flex items-center justify-center w-full mt-5 mb-6">
     <!-- Estatísticas de Usuários -->
     <div class="bg-white rounded-lg shadow-md p-6 me-6">
@@ -151,8 +153,8 @@
 
 <!-- DIV - EDIT - MODELO -->
 <div *ngIf="showEditModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-20">
-    <div class="absolute inset-0 bg-transparent bg-opacity-50 backdrop-blur-sm -mt-20"></div>
-    <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full"> <!-- FILTRO-->
+    <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
+    <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full">
         <button (click)="toggleEditModelTemplate(null)"
             class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -451,7 +453,7 @@
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
-                <div class="flex items-center space-x-2">
+                <div class="flex space-x-2 justify-center mt-1">
                     <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [(ngModel)]="modelModelo.status">
                     <label class="block text-gray-700 font-medium">Ativado</label>
                 </div>
@@ -467,7 +469,7 @@
 </div>
 <!-- DIV - ADD - MODELO -->
 <div *ngIf="showAddModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-20">
-    <div class="absolute inset-0 bg-transparent bg-opacity-50 backdrop-blur-sm -mt-20"></div> <!-- FILTRO-->
+    <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
     <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full"> 
         <button (click)="toggleAddModelTemplate()"
             class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
@@ -765,10 +767,12 @@
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="modelModelo.weight_total">
             </div>
-            <label class="flex items-center space-x-2">
-                <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [(ngModel)]="modelModelo.status">
-                <span class="text-sm">Ativado</span>
-            </label>  
+            <div class="bg-gray-200 p-4 rounded-md">
+                <div class="flex space-x-2 justify-center mt-1">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [(ngModel)]="modelModelo.status">
+                    <label class="block text-gray-700 font-medium">Ativado</label>
+                </div>
+            </div>
         </div>
         <div class="flex justify-center items-center mt-3">
             <button (click)="confirmAdd()" type="button"
@@ -778,9 +782,9 @@
         </div>
     </div>
 </div>
-<!-- DELETE - DIV - MODELO -->
+<!-- DIV - DELETE - MODELO -->
 <div *ngIf="showDeleteModal" class="fixed top-0 left-0 w-full h-full flex justify-center items-center">
-    <div class="absolute inset-0 bg-transparent bg-opacity-50 backdrop-blur-sm"></div>
+    <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
     <div class="bg-gray-800 p-8 rounded-lg shadow-lg relative">
         <button (click)="toogleDeleteModelTemplate(null)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -810,13 +814,13 @@
     </div>
 </div>
 
+<!------------------------------------------>
+<!------------------------------------------>
 
-
-
-
+<!-- DIV - EDIT - ASSOCIATION -->
 <div *ngIf="showEditAssociationModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-20">
-    <div class="absolute inset-0 bg-transparent bg-opacity-50 backdrop-blur-sm -mt-20"></div>
-    <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full"> <!-- FILTRO-->
+    <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
+    <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full">
         <button (click)="toggleEditAssociationTemplate(null)"
             class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -845,7 +849,7 @@
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
-                <div class="flex items-center space-x-2 justify-center mt-3">
+                <div class="flex space-x-2 justify-center mt-4">
                     <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [(ngModel)]="modelAssociation.status">
                     <label class="block text-gray-700 font-medium">Ativado</label>
                 </div>
@@ -860,9 +864,9 @@
     </div>
 </div>
 
-
+<!-- DIV - ADD ASSOCIATION -->
 <div *ngIf="showAddAssociationModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-20">
-    <div class="absolute inset-0 bg-transparent bg-opacity-50 backdrop-blur-sm -mt-20"></div>
+    <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
     <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full"> <!-- FILTRO-->
         <button (click)="toggleAddAssociationTemplate()"
             class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
@@ -892,7 +896,7 @@
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
-                <div class="flex items-center space-x-2 justify-center mt-3">
+                <div class="flex space-x-2 justify-center mt-4">
                     <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600" [(ngModel)]="modelAssociation.status">
                     <label class="block text-gray-700 font-medium">Ativado</label>
                 </div>
@@ -907,8 +911,9 @@
     </div>
 </div>
 
+<!-- DIV - DELETE - ASSOCIATION -->
 <div *ngIf="showDeleteAssociationModal" class="fixed top-0 left-0 w-full h-full flex justify-center items-center">
-    <div class="absolute inset-0 bg-transparent bg-opacity-50 backdrop-blur-sm"></div>
+    <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
     <div class="bg-gray-800 p-8 rounded-lg shadow-lg relative">
         <button (click)="toggleDeleteAssociationTemplate(null)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"

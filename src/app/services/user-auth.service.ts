@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { response } from 'express';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private alertService: AlertService,private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
     const url = '/api/user/login';
@@ -22,7 +23,6 @@ export class UserAuthService {
     if (typeof localStorage === 'undefined') {
       return false;
     }
-    console.log('CHAMADA');
     const token = localStorage.getItem('accessToken');
     if (!token) {
       return false;
@@ -31,6 +31,7 @@ export class UserAuthService {
       if (isValidToken) {
         return true;
       } else {
+        this.alertService.showAlert('Sua sessão expirou. Por favor, faça login novamente.', 'error');
         return false;
       }
     }
@@ -58,6 +59,7 @@ export class UserAuthService {
   
 
   logout(): void {
+    this.alertService.showAlert('Sessão terminada', 'info');
     localStorage.clear();
   }
 

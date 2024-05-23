@@ -1,0 +1,30 @@
+/* Adicione a classe de animação para o fade-in slide-right */
+.animate-fade-in-slide-right {
+    animation: fade-in-slide-right 0.5s ease-out;
+  }
+  
+  /* Adicione a classe de animação para o slide-left */
+  .animate-slide-left {
+    animation: slide-left 0.5s ease-out;
+  }
+  
+  @keyframes fade-in-slide-right {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slide-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  

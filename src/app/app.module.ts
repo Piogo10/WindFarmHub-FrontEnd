@@ -14,6 +14,8 @@ import { UsersComponent } from './pages/slidebar/users/users.component';
 import { ModelosComponent } from './pages/slidebar/modelos/modelos.component';
 import { DashboardmainComponent } from './pages/slidebar/dashboardmain/dashboardmain.component';
 import { ProductsComponent } from './pages/slidebar/products/products.component';
+import { AlertComponent } from './alert/alert.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ProductsComponent } from './pages/slidebar/products/products.component'
     UsersComponent,
     ModelosComponent,
     DashboardmainComponent,
-    ProductsComponent
+    ProductsComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

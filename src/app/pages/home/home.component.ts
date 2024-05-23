@@ -24,11 +24,15 @@ export class HomeComponent implements OnInit {
       this.isLoggedIn = isLoggedIn;
       console.log('isLoggedIn:', this.isLoggedIn);
     });
-    this.userAuthService.havePerms().then(havePerms => {
-      this.havePerms = havePerms;
-      console.log('havePerms:', this.havePerms);
-    });
-    this.updateUserInformation();
+
+    if (this.isLoggedIn) {
+      this.userAuthService.havePerms().then(havePerms => {
+        this.havePerms = havePerms;
+        console.log('havePerms:', this.havePerms);
+      });
+
+      this.updateUserInformation();
+    }
   }
 
   toggleUserDropdown() {

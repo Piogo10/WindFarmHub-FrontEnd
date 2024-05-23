@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationsService } from '../../../services/animations.service';
 import { UserAuthService } from '../../../services/user-auth.service';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-users',
@@ -10,6 +11,10 @@ import { UserAuthService } from '../../../services/user-auth.service';
 })
 export class UsersComponent implements OnInit{
   
+  alertMessage: string = '';
+  alertType: string = '';
+  mainalert: boolean = true;
+
   switchState: boolean = false;
   showModal: boolean = false;
   usuarios: any[] = [];
@@ -21,15 +26,13 @@ export class UsersComponent implements OnInit{
   searchField: string = '';
   searchOption: string = 'name';
   
-  constructor(private userAuthService: UserAuthService, private router: Router, private animationsService: AnimationsService) {}
+  constructor(private alertService: AlertService,private userAuthService: UserAuthService, private router: Router, private animationsService: AnimationsService) {}
 
   ngOnInit() {
     this.userAuthService.getUsers().then(users => {
       this.usuarios = users;
       this.VerifyStatus();
       console.log('users:', this.usuarios);
-  
-      
     });
   }
 
@@ -42,6 +45,7 @@ export class UsersComponent implements OnInit{
       );
     }
   }
+
   
   async VerifyStatus(): Promise<void> {
     this.activeUsers = 0;
@@ -58,10 +62,11 @@ export class UsersComponent implements OnInit{
   //EDIT
   showEditModal = false;
   editedUser = { id: 0, name: '', email: '', role: '', status: false};
-  toggleEditUserTemplate(user: any): void { // Receber o usuário como parâmetro
+  toggleEditUserTemplate(user: any): void {
     this.showEditModal = !this.showEditModal;
-    this.editUser = user; // Atribuir o usuário selecionado a selectedUser
-    // Preencher os campos do formulário de edição com as informações do selectedUser
+    this.mainalert = !this.mainalert;
+    this.editUser = user;
+
     if (this.showEditModal && this.editUser) {
       this.editedUser = { id: this.editUser.id, name: this.editUser.name, email: this.editUser.email, role: this.editUser.role, status: this.editUser.status};
     }
@@ -73,30 +78,32 @@ export class UsersComponent implements OnInit{
 
         const isEmailUnique = this.usuarios.some(usuario => usuario.email === this.editedUser.email && usuario.id !== this.editedUser.id);
         if (!isEmailUnique) {
-          console.log('Usuário editado:', this.editedUser.id);
           this.editUser.id = this.editedUser.id;
           this.editUser.name = this.editedUser.name;
           this.editUser.email = this.editedUser.email;
           this.editUser.role = this.editedUser.role;
           this.editUser.status = this.editedUser.status;
           this.userAuthService.editUser(this.editUser);
-          console.log('Usuário editado:', this.editUser);
+          this.toggleEditUserTemplate(null);
+          console.log(this.mainalert)
           this.VerifyStatus();
           this.editUser = null;
+          this.alertService.showAlert('Usuário editado com sucesso!', 'success');
+          
         } else {
-          console.log('O email já está sendo usado por outro usuário.');
+          this.alertService.showAlert('O email já está sendo usado por outro usuário.', 'warn');
         }
       } else {
-        console.log('Por favor, preencha todos os campos obrigatórios.');
+        this.alertService.showAlert('Por favor, preencha todos os campos obrigatórios.', 'warn');
       }
     }
-    this.toggleEditUserTemplate(null); // Fechar o modal após a confirmação
   }
 
   //DELETE
   showDeleteModal = false;
   toggleDeleteModal(user: any): void {
       this.showDeleteModal = !this.showDeleteModal;
+      this.mainalert = !this.mainalert;
       this.delUser = user;
       console.log('Usuário selecionado para deletar:', this.delUser);
   }
@@ -106,7 +113,7 @@ export class UsersComponent implements OnInit{
       const index = this.usuarios.findIndex(u => u.id === this.delUser.id);
       if (index !== -1) {
         this.usuarios.splice(index, 1);
-        console.log('Usuário deletado:', this.delUser);
+        this.alertService.showAlert('Usuário deletado com sucesso!', 'success');
         this.VerifyStatus();
       }
     }
@@ -119,6 +126,7 @@ export class UsersComponent implements OnInit{
   newUser = { name: '', email: '', password: '', role: '', status: false };
   toggleAddUserModal(): void {
     this.showAddUserModal = !this.showAddUserModal;
+    this.mainalert = !this.mainalert;
   }
   addUser(): void {
     if (this.newUser.name && this.isEmailValid(this.newUser.email) && this.newUser.password && this.newUser.role) {
@@ -129,17 +137,17 @@ export class UsersComponent implements OnInit{
 
           if (isEmailUnique) {
             this.usuarios.push({ id: userId, ...this.newUser });
-            console.log('Usuário adicionado:', this.newUser);
+            this.alertService.showAlert('Usuário adicionado com sucesso!', 'success');
             this.newUser = { name: '', email: '', password: '', role: '', status: false };
             this.VerifyStatus
           }
           else{
-            console.log('O email já está sendo usado por outro usuário.');
+            this.alertService.showAlert('O email já está sendo usado por outro usuário.', 'warn');
           }
         }
       });
     } else {
-      console.log('Por favor, preencha todos os campos obrigatórios.');
+      this.alertService.showAlert('Por favor, preencha todos os campos obrigatórios.', 'warn');
     }
 
     this.toggleAddUserModal();

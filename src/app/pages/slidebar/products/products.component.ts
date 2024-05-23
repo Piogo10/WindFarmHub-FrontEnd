@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../../../services/user-auth.service';
 import { Router } from '@angular/router';
 import { AnimationsService } from '../../../services/animations.service';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-products',
@@ -28,7 +29,7 @@ export class ProductsComponent implements OnInit{
     stock_count: '',
     difference: ''
   };
-  constructor(private userAuthService: UserAuthService, private router: Router, private animationsService: AnimationsService) {}
+  constructor(private alertService: AlertService,private userAuthService: UserAuthService, private router: Router, private animationsService: AnimationsService) {}
 
   ngOnInit() {
     this.userAuthService.getAllProducts().then(products => {
@@ -61,24 +62,28 @@ export class ProductsComponent implements OnInit{
     }
   }
   confirmEdit() {
-    if (this.editModel && this.editModel.material !== null && this.editModel.text_brief_material != null) {
+    if (this.editModel || this.editModel.material !== null || this.editModel.text_brief_material != null) {
 
-      const materialExists = this.products.find(product => product.material === this.editModel.material && product.id !== this.editModel.id);
+      const materialExists = this.products.some(product => product.material === this.editModel.material && product.id !== this.editModel.id);
       
+      console.log('materialExists:', materialExists);
       if (materialExists) {
-        console.log('materialExists:', materialExists);
-        console.log('Material already exists.');
+        this.alertService.showAlert('O ID do material já existe!', 'warn');
+        return;
+      }
+      else if (materialExists === undefined) {
+        this.alertService.showAlert('Ocorreu um erro [PC-1]', 'error');
         return;
       }
 
       Object.assign(this.editModel, this.productmodal);
       this.userAuthService.editProduct(this.editModel);
-      console.log('Product edited:', this.editModel);
+      this.alertService.showAlert('Peça editado com sucesso!', 'success')
       this.limparvariavels();
       this.toggleEditModal(null);
     }
     else{
-      console.log('Please fill in all required fields.');
+      this.alertService.showAlert('Por favor, preencha todos os campos.', 'warn');
     }
   }
 
@@ -88,18 +93,17 @@ export class ProductsComponent implements OnInit{
   toggleDeleteModal(product: any) {
     this.deleteModel = product;
     this.showDeleteModal = !this.showDeleteModal;
-    console.log('Product to delete:', this.deleteModel);
+    console.log('Peça to delete:', this.deleteModel);
   }
   confirmDelete() {
 
     if(this.deleteModel){
       this.userAuthService.deleteProduct(this.deleteModel.material);
-      console.log('Product deleted:', this.deleteModel.id);
       
       const index = this.products.findIndex(a => a.id === this.deleteModel.id);
       if (index !== -1) {
         this.products.splice(index, 1);
-        console.log('Association deleted:', this.deleteModel);
+        this.alertService.showAlert('Peça eliminada com sucesso!', 'success');
       }
     }
 
@@ -117,13 +121,13 @@ export class ProductsComponent implements OnInit{
 
   confirmAdd() {
     if (!this.productmodal.material || !this.productmodal.text_brief_material) {
-      console.log('Please fill in the material field.');
+      this.alertService.showAlert('Por favor, preencha todos os campos obrigatórios.', 'warn');
       return;
     }
   
     const materialExists = this.products.find(product => product.material === this.productmodal.material);
     if (materialExists) {
-      console.log('Material already exists.');
+      this.alertService.showAlert('O ID do material já existe!', 'warn');
       return;
     }
   
@@ -139,7 +143,7 @@ export class ProductsComponent implements OnInit{
   
     this.userAuthService.addProduct(this.productmodal);
     this.products.push(this.productmodal);
-    console.log('Product added:', this.productmodal);
+    this.alertService.showAlert('Peça adicionada com sucesso!', 'success');
     this.limparvariavels();
     this.toggleAddProductModal();
   }
