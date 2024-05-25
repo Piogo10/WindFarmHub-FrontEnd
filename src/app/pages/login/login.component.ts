@@ -23,15 +23,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
-    // Add code to check if the user has exceeded the maximum number of login attempts
-    const loginAttempts = localStorage.getItem('loginAttempts');
-    if (loginAttempts && parseInt(loginAttempts) >= 3) {
-      this.errorMessage = 'Número máximo de tentativas de login excedido. Por favor, tente novamente mais tarde.';
-      return;
-    }
-
-    // Perform the login
     this.userAuthService.login(this.email, this.password).subscribe(
       (response: any) => {
         if (response.accessToken) {
@@ -44,10 +35,6 @@ export class LoginComponent implements OnInit {
       (error) => {
         console.error('Erro no login:', error);
         this.errorMessage = 'Erro ao efetuar login. Por favor, tente novamente.';
-        
-        // Increment the login attempts counter
-        const currentAttempts = loginAttempts ? parseInt(loginAttempts) : 0;
-        localStorage.setItem('loginAttempts', (currentAttempts + 1).toString());
       }
     );
   }

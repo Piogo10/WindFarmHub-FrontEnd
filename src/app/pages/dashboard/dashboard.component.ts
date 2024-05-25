@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { AnimationsService } from '../../services/animations.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,12 @@ export class DashboardComponent implements OnInit {
   userName: string = "";
   userEmail: string = "";
 
-  constructor(private userAuthService: UserAuthService, private router: Router, private animationsService: AnimationsService) { }
+  constructor(
+    private userAuthService: UserAuthService,
+    private userService: UserService,
+    private router: Router, 
+    private animationsService: AnimationsService
+  ) { }
 
   ngOnInit() {
     this.userAuthService.isLoggedIn().then(isLoggedIn => {
@@ -32,7 +38,7 @@ export class DashboardComponent implements OnInit {
   }
 
   async updateUserInformation() {
-    const response = await this.userAuthService.getUserInfo();
+    const response = await this.userService.getUserInfo();
     if (response) {
       const { name, email } = response;
       this.userName = name;

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router';
 import { AnimationsService } from '../../services/animations.service';
+import { ModelService } from '../../services/model.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-models',
@@ -18,7 +20,12 @@ export class ModelsComponent implements OnInit{
   userName: string = "";
   userEmail: string = "";
 
-  constructor(private userAuthService: UserAuthService, private router: Router, private animationsService: AnimationsService) { }
+  constructor(
+    private userAuthService: UserAuthService, 
+    private userService: UserService,
+    private modelService: ModelService,
+    private router: Router, 
+    private animationsService: AnimationsService) { }
 
   ngOnInit() {
     this.userAuthService.isLoggedIn().then(isLoggedIn => {
@@ -33,14 +40,14 @@ export class ModelsComponent implements OnInit{
   }
 
   async updateUserInformation() {
-    const response = await this.userAuthService.getUserInfo();
+    const response = await this.userService.getUserInfo();
     if (response) {
       const { name, email } = response;
       this.userName = name;
       this.userEmail = email;
 
       const { id } = response;
-      const models = await this.userAuthService.getModelsByUserId(id);
+      const models = await this.modelService.getModelsByUserId(id);
       if (models && models.length > 0) {
         this.models = models;
       }

@@ -1,7 +1,7 @@
 import { Component, OnInit, model } from '@angular/core';
-import { UserAuthService } from '../../../services/user-auth.service';
-import { Router } from '@angular/router';
-import { AnimationsService } from '../../../services/animations.service';
+import { ModelService } from '../../../services/model.service';
+import { DashboardService } from '../../../services/dashboard.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-modelos',
@@ -68,13 +68,13 @@ export class ModelosComponent implements OnInit {
   scrollHandler!: EventListenerObject;
 
   constructor(
-    private userAuthService: UserAuthService,
-    private router: Router,
-    private animationsService: AnimationsService
+    private modelService: ModelService,
+    private dashboardService: DashboardService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.userAuthService.getModels().then(models => {
+    this.modelService.getModels().then(models => {
       this.modelos = models;
       console.log('modelos:', this.modelos);
       this.VerifyStatus();
@@ -82,7 +82,7 @@ export class ModelosComponent implements OnInit {
 
     this.updateAssociations();
 
-    this.userAuthService.getUsers().then(users => {
+    this.userService.getUsers().then(users => {
       this.users = users;
       console.log('users:', this.users);
       this.VerifyStatus();
@@ -112,7 +112,7 @@ export class ModelosComponent implements OnInit {
   }
 
   async updateAssociations(): Promise<void> {
-    this.userAuthService.getAllAssociations().then(associations => {
+    this.modelService.getAllAssociations().then(associations => {
       this.associacoes = associations;
       this.associacoes.sort((a, b) => a.user.name.localeCompare(b.user.name));
       console.log('associacoes:', this.associacoes);
@@ -178,7 +178,7 @@ export class ModelosComponent implements OnInit {
         return;
       }
       Object.assign(this.editModel, this.modelModelo);
-      this.userAuthService.editModel(this.editModel);
+      this.dashboardService.editModel(this.editModel);
       console.log('Model edited:', this.editModel);
       this.VerifyStatus();
       this.toggleEditModelTemplate(null);
@@ -212,7 +212,7 @@ export class ModelosComponent implements OnInit {
         }
       }
 
-      this.userAuthService.addModel(this.modelModelo).then((userId: any) => {
+      this.dashboardService.addModel(this.modelModelo).then((userId: any) => {
         console.log('AAAAAAAAAAAAA:', userId);
         if (userId !== undefined) {
           this.modelos.push({ id: userId, ...this.modelModelo })
@@ -237,7 +237,7 @@ export class ModelosComponent implements OnInit {
   }
   confirmDelete(): void {
     if (this.addModel) {
-      this.userAuthService.deleteModel(this.addModel.id);
+      this.dashboardService.deleteModel(this.addModel.id);
       const index = this.modelos.findIndex(m => m.id === this.addModel.id);
       if (index !== -1) {
         this.modelos.splice(index, 1);
@@ -342,7 +342,7 @@ export class ModelosComponent implements OnInit {
       status: this.modelAssociation.status
     };
 
-    this.userAuthService.editAssociation(DataInfo).then(() => {
+    this.dashboardService.editAssociation(DataInfo).then(() => {
       this.updateAssociations();
       this.limparvariavels();
       this.toggleEditAssociationTemplate(null);
@@ -387,7 +387,7 @@ export class ModelosComponent implements OnInit {
       status: this.modelAssociation.status
     };
 
-    this.userAuthService.addAssociation(DataInfo).then(() => {
+    this.dashboardService.addAssociation(DataInfo).then(() => {
       this.updateAssociations();
       this.limparvariavels();
       this.toggleAddAssociationTemplate();
@@ -405,7 +405,7 @@ export class ModelosComponent implements OnInit {
   }
   confirmDeleteAssociation(): void {
     if (this.deleteAssociation) {
-      this.userAuthService.deleteAssociation(this.deleteAssociation.id);
+      this.dashboardService.deleteAssociation(this.deleteAssociation.id);
       const index = this.associacoes.findIndex(a => a.id === this.deleteAssociation.id);
       if (index !== -1) {
         this.associacoes.splice(index, 1);

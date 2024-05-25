@@ -3,6 +3,8 @@ import { UserAuthService } from '../../services/user-auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AnimationsService } from '../../services/animations.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { UserService } from '../../services/user.service';
+import { ModelService } from '../../services/model.service';
 
 @Component({
   selector: 'app-model-details',
@@ -44,6 +46,8 @@ export class ModelDetailsComponent implements OnInit {
   modelName: string = "";
 
   constructor(
+    private userService: UserService, 
+    private modelService: ModelService,
     private userAuthService: UserAuthService,
     private router: Router,
     private route: ActivatedRoute,
@@ -63,14 +67,14 @@ export class ModelDetailsComponent implements OnInit {
   }
 
   async updateUserInformation() {
-    const response = await this.userAuthService.getUserInfo();
+    const response = await this.userService.getUserInfo();
     if (response) {
       const { name, email } = response;
       this.userName = name;
       this.userEmail = email;
 
       const { id } = response;
-      const models = await this.userAuthService.getModelsByUserId(id);
+      const models = await this.modelService.getModelsByUserId(id);
       if (models && models.length > 0) {
         // Encontre o modelo correto com base no nome
         this.model = models.find((model: { name: string; }) => model.name === this.modelName);

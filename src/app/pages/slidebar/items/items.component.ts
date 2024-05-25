@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UserAuthService } from '../../../services/user-auth.service';
-import { Router } from '@angular/router';
-import { AnimationsService } from '../../../services/animations.service';
 import { AlertService } from '../../../services/alert.service';
+import { DashboardService } from '../../../services/dashboard.service';
+import { ItemService } from '../../../services/item.service';
 
 @Component({
   selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.scss'
+  templateUrl: './items.component.html',
+  styleUrl: './items.component.scss'
 })
 export class ProductsComponent implements OnInit{
 
@@ -29,10 +28,14 @@ export class ProductsComponent implements OnInit{
     stock_count: '',
     difference: ''
   };
-  constructor(private alertService: AlertService,private userAuthService: UserAuthService, private router: Router, private animationsService: AnimationsService) {}
+  constructor(
+    private alertService: AlertService,
+    private dashboardService: DashboardService,
+    private itemService: ItemService,
+  ) {}
 
   ngOnInit() {
-    this.userAuthService.getAllProducts().then(products => {
+    this.itemService.getAllItems().then(products => {
       this.products = products;
       console.log('products:', this.products);
     });
@@ -77,7 +80,7 @@ export class ProductsComponent implements OnInit{
       }
 
       Object.assign(this.editModel, this.productmodal);
-      this.userAuthService.editProduct(this.editModel);
+      this.dashboardService.editItem(this.editModel);
       this.alertService.showAlert('Peça editado com sucesso!', 'success')
       this.limparvariavels();
       this.toggleEditModal(null);
@@ -98,7 +101,7 @@ export class ProductsComponent implements OnInit{
   confirmDelete() {
 
     if(this.deleteModel){
-      this.userAuthService.deleteProduct(this.deleteModel.material);
+      this.dashboardService.deleteItem(this.deleteModel.material);
       
       const index = this.products.findIndex(a => a.id === this.deleteModel.id);
       if (index !== -1) {
@@ -141,7 +144,7 @@ export class ProductsComponent implements OnInit{
     this.productmodal.stock_count = this.productmodal.stock_count || '0';
     this.productmodal.difference = this.productmodal.difference || '0';
   
-    this.userAuthService.addProduct(this.productmodal);
+    this.dashboardService.addItem(this.productmodal);
     this.products.push(this.productmodal);
     this.alertService.showAlert('Peça adicionada com sucesso!', 'success');
     this.limparvariavels();

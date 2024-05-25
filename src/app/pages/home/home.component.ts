@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserAuthService } from '../../services/user-auth.service';
 import { AnimationsService } from '../../services/animations.service';
+import { UserService } from '../../services/user.service';
+import { UserAuthService } from '../../services/user-auth.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,11 @@ export class HomeComponent implements OnInit {
   userName: string = "";
   userEmail: string = "";
 
-  constructor(private userAuthService: UserAuthService, private router: Router, private animationsService: AnimationsService) { }
+  constructor(
+    private userService: UserService, 
+    private userAuthService: UserAuthService,
+    private router: Router,
+    private animationsService: AnimationsService) { }
 
   ngOnInit() {
     this.userAuthService.isLoggedIn().then(isLoggedIn => {
@@ -25,14 +30,12 @@ export class HomeComponent implements OnInit {
       console.log('isLoggedIn:', this.isLoggedIn);
     });
 
-    if (this.isLoggedIn) {
-      this.userAuthService.havePerms().then(havePerms => {
-        this.havePerms = havePerms;
-        console.log('havePerms:', this.havePerms);
-      });
+    this.userAuthService.havePerms().then(havePerms => {
+      this.havePerms = havePerms;
+      console.log('havePerms:', this.havePerms);
+    });
 
-      this.updateUserInformation();
-    }
+    this.updateUserInformation();
   }
 
   toggleUserDropdown() {
@@ -53,7 +56,8 @@ export class HomeComponent implements OnInit {
   }
 
   async updateUserInformation() {
-    const response = await this.userAuthService.getUserInfo();
+    const response = await this.userService.getUserInfo();
+    console.log('response:', response)
     if (response) {
       const { name, email } = response;
       this.userName = name;

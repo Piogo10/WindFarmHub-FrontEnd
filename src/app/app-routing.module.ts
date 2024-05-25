@@ -9,7 +9,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsersComponent } from './pages/slidebar/users/users.component';
 import { ModelosComponent } from './pages/slidebar/modelos/modelos.component';
 import { DashboardmainComponent } from './pages/slidebar/dashboardmain/dashboardmain.component';
-import { ProductsComponent } from './pages/slidebar/products/products.component';
+import { ProductsComponent } from './pages/slidebar/items/items.component';
 
 const availableModels = ['Eco-80', 'Eco-81'];
 

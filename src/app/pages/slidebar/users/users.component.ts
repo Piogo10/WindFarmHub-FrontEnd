@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AnimationsService } from '../../../services/animations.service';
-import { UserAuthService } from '../../../services/user-auth.service';
+import { UserService } from '../../../services/user.service';
 import { AlertService } from '../../../services/alert.service';
+import { DashboardService } from '../../../services/dashboard.service';
 
 @Component({
   selector: 'app-users',
@@ -26,10 +25,14 @@ export class UsersComponent implements OnInit{
   searchField: string = '';
   searchOption: string = 'name';
   
-  constructor(private alertService: AlertService,private userAuthService: UserAuthService, private router: Router, private animationsService: AnimationsService) {}
+  constructor(
+    private alertService: AlertService,
+    private userService: UserService,
+    private dashboardService: DashboardService,
+  ) {}
 
   ngOnInit() {
-    this.userAuthService.getUsers().then(users => {
+    this.userService.getUsers().then(users => {
       this.usuarios = users;
       this.VerifyStatus();
       console.log('users:', this.usuarios);
@@ -83,7 +86,7 @@ export class UsersComponent implements OnInit{
           this.editUser.email = this.editedUser.email;
           this.editUser.role = this.editedUser.role;
           this.editUser.status = this.editedUser.status;
-          this.userAuthService.editUser(this.editUser);
+          this.dashboardService.editUser(this.editUser);
           this.toggleEditUserTemplate(null);
           console.log(this.mainalert)
           this.VerifyStatus();
@@ -109,7 +112,7 @@ export class UsersComponent implements OnInit{
   }
   confirmDelete(): void {
     if (this.delUser) {
-      this.userAuthService.deleteUser(this.delUser.id);
+      this.dashboardService.deleteUser(this.delUser.id);
       const index = this.usuarios.findIndex(u => u.id === this.delUser.id);
       if (index !== -1) {
         this.usuarios.splice(index, 1);
@@ -130,7 +133,7 @@ export class UsersComponent implements OnInit{
   }
   addUser(): void {
     if (this.newUser.name && this.isEmailValid(this.newUser.email) && this.newUser.password && this.newUser.role) {
-      this.userAuthService.addUser(this.newUser).then((userId: any) => {
+      this.dashboardService.addUser(this.newUser).then((userId: any) => {
         if (userId !== undefined) {
 
           const isEmailUnique = this.usuarios.every(usuario => usuario.email !== this.editedUser.email);
