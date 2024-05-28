@@ -4,53 +4,48 @@ import { Router } from '@angular/router';
 import { AnimationsService } from '../../services/animations.service';
 import { ModelService } from '../../services/model.service';
 import { UserService } from '../../services/user.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-models',
   templateUrl: './models.component.html',
-  styleUrl: './models.component.scss'
+  styleUrls: ['./models.component.scss']
 })
-export class ModelsComponent implements OnInit{
-
-  userDropdownOpen: boolean = false;
-  hamburgerDropdownOpen: boolean = false;
-  isLoggedIn: boolean = false;
-  havePerms: boolean = false;
+export class ModelsComponent implements OnInit {
+  userDropdownOpen = false;
+  hamburgerDropdownOpen = false;
+  isLoggedIn = false;
+  havePerms = false;
   models: any[] = [];
-  userName: string = "";
-  userEmail: string = "";
+  userName = '';
+  userEmail = '';
 
   constructor(
-    private userAuthService: UserAuthService, 
+    private userAuthService: UserAuthService,
     private userService: UserService,
     private modelService: ModelService,
-    private router: Router, 
-    private animationsService: AnimationsService) { }
+    private router: Router,
+    private animationsService: AnimationsService,
+    private alertService: AlertService
+  ) { }
 
-  ngOnInit() {
-    this.userAuthService.isLoggedIn().then(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-      console.log('isLoggedIn:', this.isLoggedIn);
-    });
-    this.userAuthService.havePerms().then(havePerms => {
-      this.havePerms = havePerms;
-      console.log('havePerms:', this.havePerms);
-    });
-    this.updateUserInformation();
+  async ngOnInit() {
+    this.isLoggedIn = await this.userAuthService.VerifyLogin();
+    if (this.isLoggedIn) {
+      await this.updateUserInformation();
+    }
+    this.havePerms = await this.userAuthService.havePerms();
   }
 
   async updateUserInformation() {
     const response = await this.userService.getUserInfo();
     if (response) {
-      const { name, email } = response;
+      const { name, email, id } = response;
       this.userName = name;
       this.userEmail = email;
 
-      const { id } = response;
       const models = await this.modelService.getModelsByUserId(id);
-      if (models && models.length > 0) {
-        this.models = models;
-      }
+      this.models = models ?? [];
     }
   }
 
@@ -66,19 +61,8 @@ export class ModelsComponent implements OnInit{
     if (this.isLoggedIn) {
       this.userAuthService.logout();
       this.isLoggedIn = false;
-      this.router.navigateByUrl('/home');
-    } else {
-      this.router.navigateByUrl('/home');
     }
-  }
-
-  isLogedIn() {
-    if (this.isLoggedIn) {
-      return true;
-    }
-    else {
-      return false;
-    }
+    this.router.navigateByUrl('/home');
   }
 
   logout() {
@@ -97,5 +81,4 @@ export class ModelsComponent implements OnInit{
   goToModelDetails(modelName: string) {
     this.router.navigateByUrl(`/models/${modelName}`);
   }
-
 }

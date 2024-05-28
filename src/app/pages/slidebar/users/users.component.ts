@@ -35,7 +35,6 @@ export class UsersComponent implements OnInit{
     this.userService.getUsers().then(users => {
       this.usuarios = users;
       this.VerifyStatus();
-      console.log('users:', this.usuarios);
     });
   }
 

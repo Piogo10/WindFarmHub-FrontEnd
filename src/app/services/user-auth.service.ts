@@ -1,35 +1,55 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private alertService: AlertService) { }
 
-  login(email: string, password: string): Observable<any> {
+  async login(email: string, password: string, browserId: string, ipAddress: string): Promise<any> {
     const url = '/api/user/login';
-    const data = { email, password };
-
-    return this.http.post(url, data);
+    const data = { email, password, browserId, ipAddress};
+    const response = await this.http.post<any>(url, data).toPromise();
+    return response;
   }
 
-  async isLoggedIn(): Promise<boolean> {
+  async VerifyLogin(): Promise<boolean> {
     if (typeof localStorage === 'undefined') {
       return false;
     }
     const token = localStorage.getItem('accessToken');
     if (!token) {
       return false;
-    } else {
-      const isValidToken = await this.verifyToken();
-      if (isValidToken) {
-        return true;
-      } else {
-        return false;
-      }
+    }
+    return await this.verifyToken();
+  }
+
+  async getIPAddress(): Promise<string> {
+    const response = await this.http.get<any>("http://api.ipify.org/?format=json").toPromise();
+    return response.ip;
+  }
+
+  async logout(): Promise<void> {
+    localStorage.removeItem('accessToken');
+  }
+
+  async verifyToken(): Promise<boolean> {
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      return false;
+    }
+    try {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      const response = await this.http.get<any>('/api/user/verify', { headers }).toPromise();
+      if (response.status === false) {
+        this.alertService.showAlert('Sua sessão expirou!', 'warn');
+      }	
+      return response.status;
+    } catch (error) {
+      return false;
     }
   }
 
@@ -48,27 +68,6 @@ export class UserAuthService {
       const response = await this.http.get<any>('/api/user/perms', { headers }).toPromise();
       return response.status;
     } catch (error) {
-      console.error('Erro ao verificar o token na API:', error);
-      return false;
-    }
-  }
-  
-
-  logout(): void {
-    localStorage.clear();
-  }
-
-  async verifyToken(): Promise<boolean> {
-    const token = localStorage.getItem('accessToken');
-    if (!token) {
-      return false;
-    }
-    try {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      const response = await this.http.get<any>('/api/user/verify', { headers }).toPromise();
-      return response.status;
-    } catch (error) {
-      console.error('Erro ao verificar o token na API:', error);
       return false;
     }
   }

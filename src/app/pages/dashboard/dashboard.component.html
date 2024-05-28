@@ -1,88 +1,14 @@
-<nav class="border-b border-gray-300 bg bg-gray-50 bg-opacity-80 backdrop-blur-sm fixed w-full z-20 top-0 start-0">
-    <div class="max-w-screen-xl mx-auto px-4">
-        <div class="flex justify-between items-center py-4">
-            <!-- Logo e nome da empresa -->
-            <div class="flex items-center">
-                <a href="#" class="flex items-center space-x-2">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="" />
-                    <span class="text-xl font-semibold text-gray-800 ">WindFarmHub</span>
-                </a>
-            </div>
-
-            <!-- Labels -->
-            <div
-                class="hidden md:flex space-x-6 p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent">
-                <a class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0" [routerLink]="['/home']">Home</a>
-                <a class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0" [routerLink]="['/models']">Modelos</a>
-
-            </div>
-
-            <!-- Dropdown de usuário -->
-            <div class="relative" *ngIf="isLoggedIn">
-                <button type="button" class="flex items-center text-gray-800 hover:text-gray-600 focus:outline-none" (click)="toggleUserDropdown()"
-                    (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
-                    <svg id="animated-svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="9" r="3" stroke="#000000" stroke-width="1.5"></circle>
-                        <path d="M17.9691 20C17.81 17.1085 16.9247 15 11.9999 15C7.07521 15 6.18991 17.1085 6.03076 20"
-                            stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path
-                            d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
-                            stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
-                    </svg>
-                </button>
+<app-navbar></app-navbar>
 
 
-                <!-- Dropdown menu do usuário -->
-                <div [class.hidden]="!userDropdownOpen"
-                    class="absolute top-full right-0 mt-2 border-b border-gray-300 bg bg-gray-50 bg-opacity-80 backdrop-blur-sm  rounded-md shadow-lg"
-                    id="user-dropdown">
-                    <div class="py-1">
-                        <div class="px-4 py-3 border-b-4">
-                            <span class="block text-sm text-gray-900 ">{{userName}}</span>
-                            <span class="block text-sm text-gray-900 ">{{userEmail}}</span>
-                        </div>
-                        <a *ngIf="havePerms" [routerLink]="['/dashboard/main']" class="block px-4 py-2 text-gray-800  hover:bg-gray-100">Dashboard</a>
-                        <a class="block px-4 py-2 text-gray-800  hover:bg-gray-100" (click)="goToLogin()">Sign
-                            out</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative md:hidden">
-                <button type="button" class="text-gray-800  hover:text-gray-600  focus:outline-none"
-                    (click)="toggleHamburgerDropdown()">
-                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <!-- Dropdown menu do hamburger -->
-                <div *ngIf="hamburgerDropdownOpen"
-                    class="absolute top-full left-0 mt-2 -ml-16 bg-white border border-gray-200  rounded-md shadow-lg">
-                    <div class="py-1">
-                        <a [routerLink]="['/home']" class="block px-4 py-2 text-gray-800  hover:bg-gray-100 ">Home</a>
-                        <a [routerLink]="['/models']" class="block px-4 py-2 text-blue-700  hover:bg-gray-100 ">Models</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</nav>
-
-
-<div class="h-full w-full flex flex-col md:flex-row bg-gray-100 mt-16">
+<div class="h-full w-full flex flex-col md:flex-row bg-gray-100 mt-20">
 
     <!-- Sidebar -->
     <div class="flex flex-row md:flex-col items-center justify-center w-full md:w-16 h-auto md:h-screen overflow-auto md:border-r border-b md:border-b-0 border-gray-300">
         
         <!-- Logo -->
-        <a class="hidden md:flex items-center justify-center flex-shrink-0 md:w-full sm:w-1/4 h-16 bg-gray-300" href="#">
-            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-            </svg>
+        <a class="hidden md:flex items-center justify-center flex-shrink-0 md:w-full sm:w-1/4 h-16" href="#">
+            <div class="bg-logo bg-cover w-12 h-12"></div>
         </a>
 
         <a [routerLink]="['/dashboard/main']"
@@ -104,7 +30,7 @@
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 8V5M11 5H17M6 12H3M3 9V15M21 11V19M9 12H9.01M12 12H12.01M15 12H15.01M6 8V16H8L10 19H18V10L16 8H6Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
         </a>
         <!-- configs-->
-        <a class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-300" href="#">
+        <a class="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-300">
             <svg class="w-5 h-5"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
             </svg>

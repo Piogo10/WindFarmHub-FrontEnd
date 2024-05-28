@@ -31,22 +31,17 @@ import { ModelService } from '../../services/model.service';
 export class ModelDetailsComponent implements OnInit {
 
   activeItem: number | null = null;
-
-  toggleItem(item: number): void {
-    this.activeItem = (this.activeItem === item) ? null : item;
-  }
-
-  userDropdownOpen: boolean = false;
-  hamburgerDropdownOpen: boolean = false;
-  isLoggedIn: boolean = false;
-  havePerms: boolean = false;
-  model: any = {}; // Apenas um modelo, não uma matriz
-  userName: string = "";
-  userEmail: string = "";
-  modelName: string = "";
+  userDropdownOpen = false;
+  hamburgerDropdownOpen = false;
+  isLoggedIn = false;
+  havePerms = false;
+  model: any = {};
+  userName = '';
+  userEmail = '';
+  modelName = '';
 
   constructor(
-    private userService: UserService, 
+    private userService: UserService,
     private modelService: ModelService,
     private userAuthService: UserAuthService,
     private router: Router,
@@ -54,14 +49,9 @@ export class ModelDetailsComponent implements OnInit {
     private animationsService: AnimationsService
   ) { }
 
-  ngOnInit() {
-    this.userAuthService.isLoggedIn().then(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-    });
-    this.userAuthService.havePerms().then(havePerms => {
-      this.havePerms = havePerms;
-      console.log('havePerms:', this.havePerms);
-    });
+  async ngOnInit() {
+    this.isLoggedIn = await this.userAuthService.VerifyLogin();
+    this.havePerms = await this.userAuthService.havePerms();
     this.updateUserInformation();
     this.modelName = this.route.snapshot.params['modelName'];
   }
@@ -69,17 +59,17 @@ export class ModelDetailsComponent implements OnInit {
   async updateUserInformation() {
     const response = await this.userService.getUserInfo();
     if (response) {
-      const { name, email } = response;
+      const { name, email, id } = response;
       this.userName = name;
       this.userEmail = email;
 
-      const { id } = response;
       const models = await this.modelService.getModelsByUserId(id);
-      if (models && models.length > 0) {
-        // Encontre o modelo correto com base no nome
-        this.model = models.find((model: { name: string; }) => model.name === this.modelName);
-      }
+      this.model = models.find((model: { name: string }) => model.name === this.modelName);
     }
+  }
+
+  toggleItem(item: number): void {
+    this.activeItem = (this.activeItem === item) ? null : item;
   }
 
   toggleUserDropdown() {
@@ -94,14 +84,8 @@ export class ModelDetailsComponent implements OnInit {
     if (this.isLoggedIn) {
       this.userAuthService.logout();
       this.isLoggedIn = false;
-      this.router.navigateByUrl('/home');
-    } else {
-      this.router.navigateByUrl('/home');
     }
-  }
-
-  isLogedIn() {
-    return this.isLoggedIn;
+    this.router.navigateByUrl('/home');
   }
 
   logout() {
@@ -116,5 +100,4 @@ export class ModelDetailsComponent implements OnInit {
   onMouseLeave() {
     this.animationsService.scaleAnimation('#animated-svg', 1, 0.5);
   }
-
 }

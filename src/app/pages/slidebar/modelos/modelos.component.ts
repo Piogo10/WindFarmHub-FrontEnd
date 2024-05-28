@@ -84,7 +84,6 @@ export class ModelosComponent implements OnInit {
 
     this.userService.getUsers().then(users => {
       this.users = users;
-      console.log('users:', this.users);
       this.VerifyStatus();
     });
   }

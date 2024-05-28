@@ -1,81 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AnimationsService } from '../../services/animations.service';
-import { UserService } from '../../services/user.service';
 import { UserAuthService } from '../../services/user-auth.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  userDropdownOpen: boolean = false;
-  hamburgerDropdownOpen: boolean = false;
-  isLoggedIn: boolean = false;
-  havePerms: boolean = false;
-  userName: string = "";
-  userEmail: string = "";
+  ip = '';
 
   constructor(
-    private userService: UserService, 
     private userAuthService: UserAuthService,
-    private router: Router,
-    private animationsService: AnimationsService) { }
+  ) { }
 
-  ngOnInit() {
-    this.userAuthService.isLoggedIn().then(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-      console.log('isLoggedIn:', this.isLoggedIn);
-    });
-
-    this.userAuthService.havePerms().then(havePerms => {
-      this.havePerms = havePerms;
-      console.log('havePerms:', this.havePerms);
-    });
-
-    this.updateUserInformation();
+  async ngOnInit() {
+    this.setBrowserId();
   }
 
-  toggleUserDropdown() {
-    this.userDropdownOpen = !this.userDropdownOpen;
-  }
-
-  toggleHamburgerDropdown() {
-    this.hamburgerDropdownOpen = !this.hamburgerDropdownOpen;
-  }
-
-  isLogedIn() {
-    if (this.isLoggedIn) {
-      return true;
+  private async setBrowserId() {
+    const browserId = localStorage.getItem('browserId') || uuidv4();
+    if (localStorage.getItem('browserId') !== browserId) {
+      localStorage.setItem('browserId', browserId);
     }
-    else {
-      return false;
-    }
-  }
-
-  async updateUserInformation() {
-    const response = await this.userService.getUserInfo();
-    console.log('response:', response)
-    if (response) {
-      const { name, email } = response;
-      this.userName = name;
-      this.userEmail = email;
-    }
-  }
-
-  logout() {
-    this.userAuthService.logout();
-    this.router.navigateByUrl('/home');
-  }
-
-  onMouseEnter() {
-    this.animationsService.scaleAnimation('#animated-svg', 1.1, 0.5);
-  }
-
-  onMouseLeave() {
-    this.animationsService.scaleAnimation('#animated-svg', 1, 0.5);
+    this.ip = await this.userAuthService.getIPAddress();
+    localStorage.setItem('ipAddress', this.ip);
   }
 }
-

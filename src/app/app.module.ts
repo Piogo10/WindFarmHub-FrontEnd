@@ -15,6 +15,7 @@ import { ModelosComponent } from './pages/slidebar/modelos/modelos.component';
 import { DashboardmainComponent } from './pages/slidebar/dashboardmain/dashboardmain.component';
 import { ProductsComponent } from './pages/slidebar/items/items.component';
 import { AlertComponent } from './alert/alert.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AlertComponent } from './alert/alert.component';
     ModelosComponent,
     DashboardmainComponent,
     ProductsComponent,
-    AlertComponent
+    AlertComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
