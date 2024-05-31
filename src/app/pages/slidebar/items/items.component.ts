@@ -55,39 +55,41 @@ export class ProductsComponent implements OnInit{
   editModel: any = null;
   showEditModal = false;
 
-  toggleEditModal(product : any) {
+  toggleEditModal(product: any) {
     this.editModel = product;
     this.showEditModal = !this.showEditModal;
-    if (this.showEditModal && this.editModel) {
-      this.productmodal = { ...this.editModel };
-    } else {
-      this.limparvariavels();
-    }
+    this.productmodal = { ... this.editModel };
   }
   confirmEdit() {
-    if (this.editModel || this.editModel.material !== null || this.editModel.text_brief_material != null) {
-
-      const materialExists = this.products.some(product => product.material === this.editModel.material && product.id !== this.editModel.id);
-      
-      console.log('materialExists:', materialExists);
-      if (materialExists) {
-        this.alertService.showAlert('O ID do material já existe!', 'warn');
-        return;
-      }
-      else if (materialExists === undefined) {
-        this.alertService.showAlert('Ocorreu um erro [PC-1]', 'error');
-        return;
-      }
-
-      Object.assign(this.editModel, this.productmodal);
-      this.dashboardService.editItem(this.editModel);
-      this.alertService.showAlert('Peça editado com sucesso!', 'success')
-      this.limparvariavels();
-      this.toggleEditModal(null);
+    if (!this.productmodal.material || !this.productmodal.text_brief_material) {
+      this.alertService.showAlert('Por favor, preencha todos os campos obrigatórios.', 'warn');
+      return;
     }
-    else{
-      this.alertService.showAlert('Por favor, preencha todos os campos.', 'warn');
+
+    const materialExists = this.products.find(
+      product => product.material === this.productmodal.material && product.id !== this.productmodal.id
+    );
+
+    if (materialExists) {
+      this.alertService.showAlert('O ID do material já existe!', 'warn');
+      return;
     }
+
+    this.productmodal.deposit_denomination = this.productmodal.deposit_denomination || 'n/a';
+    this.productmodal.basic_unit_of_measurement = this.productmodal.basic_unit_of_measurement || 'n/a';
+    this.productmodal.lot = this.productmodal.lot || 'n/a';
+    this.productmodal.currency = this.productmodal.currency || 'n/a';
+    this.productmodal.deposit = this.productmodal.deposit || '0';
+    this.productmodal.sap = this.productmodal.sap || '0';
+    this.productmodal.free_utilization_value = this.productmodal.free_utilization_value || '0';
+    this.productmodal.stock_count = this.productmodal.stock_count || '0';
+    this.productmodal.difference = this.productmodal.difference || '0';
+
+    Object.assign(this.editModel, this.productmodal);
+    this.dashboardService.editItem(this.productmodal);
+    this.limparvariavels();
+    this.alertService.showAlert('Peça editada com sucesso!', 'success');
+    this.toggleEditModal(null);
   }
 
   //DELETE
@@ -110,6 +112,7 @@ export class ProductsComponent implements OnInit{
       }
     }
 
+    this.limparvariavels();
     this.toggleDeleteModal(null);
   }
 
@@ -166,6 +169,8 @@ export class ProductsComponent implements OnInit{
       stock_count: '',
       difference: ''
     };
+    this.editModel = null;
+    this.deleteModel = null;
   }
 
 }
