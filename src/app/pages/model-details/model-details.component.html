@@ -1,6 +1,6 @@
 <app-navbar id="mode-detail"></app-navbar>
 
-<section id="models" class="bg-gray-50 h-full mt-10">
+<section id="models" class="bg-gray-100 h-full mt-10">
     <div class="py-5">
         <div class="text-center m-auto my-20 text-2xl">
             <h1 class="font-bold text-black mb-4">Modelo {{ model.name }}</h1>
@@ -15,13 +15,13 @@
 
             <div id="render-table" class="overflow-x-auto">
                 <table class="w-full divide-y divide-gray-300">
-                    <thead class="bg-gray-50">
+                    <thead class="bg-gray-100">
                         <tr>
                             <th scope="col"
-                                class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                class="px-4 py-2 text-left text-xs font-medium text-black uppercase tracking-wider">
                                 Especificação</th>
                             <th scope="col"
-                                class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                class="px-4 py-2 text-left text-xs font-medium text-black uppercase tracking-wider">
                                 Valor</th>
                         </tr>
                     </thead>
@@ -189,33 +189,103 @@
                     </tbody>
                 </table>
             </div>
-        </div> 
-        <div class="accordion">
-            <!-- Item 1 -->
-            <div class="accordion-item border border-gray-300 rounded-lg mb-1" [class.active]="activeItem === 1" (click)="toggleItem(1)">
-              <h2 class="accordion-header bg-gray-100 text-gray-700 border-b border-gray-300 py-2 px-4 cursor-pointer">
-                Item 1
-              </h2>
-              <div class="accordion-content bg-white text-gray-700 py-2 px-4 overflow-hidden transition-max-height duration-300 max-h-0" [@expandCollapse]="activeItem === 1 ? 'expanded' : 'collapsed'">
-                <!-- Conteúdo do item 1 -->
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </div>
-            </div>
-          
-            <!-- Item 2 -->
-            <div class="accordion-item border border-gray-300 rounded-lg mb-1" [class.active]="activeItem === 2" (click)="toggleItem(2)">
-              <h2 class="accordion-header bg-gray-100 text-gray-700 border-b border-gray-300 py-2 px-4 cursor-pointer">
-                Item 2
-              </h2>
-              <div class="accordion-content bg-white text-gray-700 py-2 px-4 overflow-hidden transition-max-height duration-300 max-h-0" [@expandCollapse]="activeItem === 2 ? 'expanded' : 'collapsed'">
-                <!-- Conteúdo do item 2 -->
-                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </div>
-            </div>
-          </div>
+        </div>
     </div>
 </section>
 
-<section>
 
-</section>
+<div class="bg-gray-100 mx-auto p-4">
+    <div class="hs-accordion-group space-y-4">
+        <div class="hs-accordion bg-white border border-transparent rounded-xl shadow-sm"
+            [ngClass]="{'hs-accordion-active:border-gray-200': activeSection === 0}"
+            id="hs-active-bordered-heading-one">
+            <button (click)="toggleSection(0)"
+                class="hs-accordion-toggle inline-flex justify-between items-center gap-x-3 w-full font-semibold text-start text-gray-800 py-4 px-5 hover:text-gray-500 "
+                aria-controls="hs-basic-active-bordered-collapse-one">
+                Nacel
+                <svg class="hs-accordion-active:hidden block size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5v14"></path>
+                </svg>
+                <svg class="hs-accordion-active:block hidden size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                </svg>
+            </button>
+            <div id="hs-basic-active-bordered-collapse-one"
+                class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+                [ngClass]="{'hidden': activeSection !== 0}">
+                <div class="pb-4 px-5">
+                    <div class="flex justify-center items-center bg-cover bg-no-repeat bg-center bg-imageArmario"
+                        style="height: 400px; width: 100%;"></div>
+                    <div class="flex flex-wrap justify-center mt-4 space-x-4">
+                        <button class="bg-red-500 text-white py-2 px-4 rounded-lg mt-2">PITCH PLC RESET</button>
+                        <button class="bg-red-500 text-white py-2 px-4 rounded-lg mt-2">PITCHPOWER RESET</button>
+                        <button class="bg-red-500 text-white py-2 px-4 rounded-lg mt-2">GALILEO RESET</button>
+                        <button class="bg-red-500 text-white py-2 px-4 rounded-lg mt-2">KEY IN MANUAL</button>
+                        <button class="bg-red-500 text-white py-2 px-4 rounded-lg mt-2" (click)="goToClosetDetails(model.name, 'conversor-de-potencia')">Conversor de Potência</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hs-accordion bg-white border border-transparent rounded-xl shadow-sm"
+            [ngClass]="{'hs-accordion-active:border-gray-200': activeSection === 1}"
+            id="hs-active-bordered-heading-two">
+            <button (click)="toggleSection(1)"
+                class="hs-accordion-toggle inline-flex justify-between items-center gap-x-3 w-full font-semibold text-start text-gray-800 py-4 px-5 hover:text-gray-500 "
+                aria-controls="hs-basic-active-bordered-collapse-two">
+                Torre
+                <svg class="hs-accordion-active:hidden block size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5v14"></path>
+                </svg>
+                <svg class="hs-accordion-active:block hidden size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                </svg>
+            </button>
+            <div id="hs-basic-active-bordered-collapse-two"
+                class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+                [ngClass]="{'hidden': activeSection !== 1}">
+                <div class="pb-4 px-5">
+                    <div class="text-center text-red-500 text-lg mt-4">Indisponível</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hs-accordion bg-white border border-transparent rounded-xl shadow-sm"
+            [ngClass]="{'hs-accordion-active:border-gray-200': activeSection === 2}"
+            id="hs-active-bordered-heading-three">
+            <button (click)="toggleSection(2)"
+                class="hs-accordion-toggle inline-flex justify-between items-center gap-x-3 w-full font-semibold text-start text-gray-800 py-4 px-5 hover:text-gray-500"
+                aria-controls="hs-basic-active-bordered-collapse-three">
+                Base
+                <svg class="hs-accordion-active:hidden block size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5v14"></path>
+                </svg>
+                <svg class="hs-accordion-active:block hidden size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                </svg>
+            </button>
+            <div id="hs-basic-active-bordered-collapse-three"
+                class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+                [ngClass]="{'hidden': activeSection !== 2}">
+                <div class="pb-4 px-5">
+                    <div class="text-center text-red-500 text-lg mt-4">Indisponível</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

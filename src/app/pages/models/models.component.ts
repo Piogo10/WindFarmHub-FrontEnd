@@ -30,52 +30,17 @@ export class ModelsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.isLoggedIn = await this.userAuthService.VerifyLogin();
-    if (this.isLoggedIn) {
-      await this.updateUserInformation();
-    }
-    this.havePerms = await this.userAuthService.havePerms();
+    this.updateUserInformation();
   }
 
   async updateUserInformation() {
     const response = await this.userService.getUserInfo();
     if (response) {
-      const { name, email, id } = response;
-      this.userName = name;
-      this.userEmail = email;
+      const { id } = response;
 
       const models = await this.modelService.getModelsByUserId(id);
       this.models = models ?? [];
     }
-  }
-
-  toggleUserDropdown() {
-    this.userDropdownOpen = !this.userDropdownOpen;
-  }
-
-  toggleHamburgerDropdown() {
-    this.hamburgerDropdownOpen = !this.hamburgerDropdownOpen;
-  }
-
-  goToLogin() {
-    if (this.isLoggedIn) {
-      this.userAuthService.logout();
-      this.isLoggedIn = false;
-    }
-    this.router.navigateByUrl('/home');
-  }
-
-  logout() {
-    this.userAuthService.logout();
-    this.router.navigateByUrl('/home');
-  }
-
-  onMouseEnter() {
-    this.animationsService.scaleAnimation('#animated-svg', 1.1, 0.5);
-  }
-
-  onMouseLeave() {
-    this.animationsService.scaleAnimation('#animated-svg', 1, 0.5);
   }
 
   goToModelDetails(modelName: string) {

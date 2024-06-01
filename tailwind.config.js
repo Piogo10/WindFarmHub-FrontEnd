@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
+        'imageArmario': "url('../src/app/imagens/image.png')",
         'logo': "url('../src/app/imagens/logo.png')",
         'home_nav': "url('../src/app/imagens/bg.jpeg')",
         'home_single1': "url('../src/app/imagens/single1.jpg')",

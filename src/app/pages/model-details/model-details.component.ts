@@ -50,8 +50,6 @@ export class ModelDetailsComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.isLoggedIn = await this.userAuthService.VerifyLogin();
-    this.havePerms = await this.userAuthService.havePerms();
     this.updateUserInformation();
     this.modelName = this.route.snapshot.params['modelName'];
   }
@@ -59,10 +57,7 @@ export class ModelDetailsComponent implements OnInit {
   async updateUserInformation() {
     const response = await this.userService.getUserInfo();
     if (response) {
-      const { name, email, id } = response;
-      this.userName = name;
-      this.userEmail = email;
-
+      const { id } = response;
       const models = await this.modelService.getModelsByUserId(id);
       this.model = models.find((model: { name: string }) => model.name === this.modelName);
     }
@@ -72,32 +67,14 @@ export class ModelDetailsComponent implements OnInit {
     this.activeItem = (this.activeItem === item) ? null : item;
   }
 
-  toggleUserDropdown() {
-    this.userDropdownOpen = !this.userDropdownOpen;
+
+  activeSection: number | null = null;
+
+  toggleSection(index: number) {
+    this.activeSection = this.activeSection === index ? null : index;
   }
 
-  toggleHamburgerDropdown() {
-    this.hamburgerDropdownOpen = !this.hamburgerDropdownOpen;
-  }
-
-  goToLogin() {
-    if (this.isLoggedIn) {
-      this.userAuthService.logout();
-      this.isLoggedIn = false;
-    }
-    this.router.navigateByUrl('/home');
-  }
-
-  logout() {
-    this.userAuthService.logout();
-    this.router.navigateByUrl('/home');
-  }
-
-  onMouseEnter() {
-    this.animationsService.scaleAnimation('#animated-svg', 1.1, 0.5);
-  }
-
-  onMouseLeave() {
-    this.animationsService.scaleAnimation('#animated-svg', 1, 0.5);
+  goToClosetDetails(modelName: string, closetName: string) {
+    this.router.navigateByUrl(`/models/${modelName}/${closetName}`);
   }
 }

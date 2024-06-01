@@ -1,0 +1,12 @@
+.accordion-header {
+    transition: background-color 0.3s ease;
+  }
+  
+  .accordion-header:hover {
+    background-color: #e2e8f0;
+  }
+  
+  .accordion-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
