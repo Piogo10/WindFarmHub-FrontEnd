@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserAuthService } from '../../services/user-auth.service';
 import { AlertService } from '../../services/alert.service';
 import { v4 as uuidv4 } from 'uuid';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-login',
@@ -17,11 +18,13 @@ export class LoginComponent implements OnInit {
   loginAttempts = 0;
   isLocked = false;
   ip = '';
+  storageLanguage = "";
 
   constructor(
     private alertService: AlertService,
     private userAuthService: UserAuthService,
-    private router: Router
+    private router: Router,
+    private translationService: TranslationService,
   ) { }
 
   async ngOnInit() {
@@ -29,6 +32,7 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/home');
     }
     this.setBrowserId();
+    this.verifyLanguage();
   }
 
   private async setBrowserId() {
@@ -38,6 +42,24 @@ export class LoginComponent implements OnInit {
     }
     this.ip = await this.userAuthService.getIPAddress();
     localStorage.setItem('ipAddress', this.ip);
+  }
+
+  getTranslatedText(key: string): string {
+    return this.translationService.translate(key);
+  }
+
+  private verifyLanguage() {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage && (storedLanguage === 'pt' || storedLanguage === 'en')) {
+      this.storageLanguage = storedLanguage;
+    } else {
+      this.storageLanguage = 'en';
+    }
+    if (localStorage.getItem('language') !== this.storageLanguage) {
+      localStorage.setItem('language', this.storageLanguage);
+    }
+
+    this.translationService.setLanguage(this.storageLanguage);
   }
 
   login() {

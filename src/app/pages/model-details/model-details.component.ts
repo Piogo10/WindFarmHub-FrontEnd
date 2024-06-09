@@ -5,6 +5,7 @@ import { AnimationsService } from '../../services/animations.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { UserService } from '../../services/user.service';
 import { ModelService } from '../../services/model.service';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-model-details',
@@ -43,10 +44,9 @@ export class ModelDetailsComponent implements OnInit {
   constructor(
     private userService: UserService,
     private modelService: ModelService,
-    private userAuthService: UserAuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private animationsService: AnimationsService
+    private translationService: TranslationService,
   ) { }
 
   async ngOnInit() {
@@ -61,6 +61,10 @@ export class ModelDetailsComponent implements OnInit {
       const models = await this.modelService.getModelsByUserId(id);
       this.model = models.find((model: { name: string }) => model.name === this.modelName);
     }
+  }
+
+  getTranslatedText(key: string): string {
+    return this.translationService.translate(key);
   }
 
   toggleItem(item: number): void {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuthService } from '../../services/user-auth.service';
 import { v4 as uuidv4 } from 'uuid';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private userAuthService: UserAuthService,
+    private translationService: TranslationService,
   ) { }
 
   async ngOnInit() {
@@ -25,5 +27,9 @@ export class HomeComponent implements OnInit {
     }
     this.ip = await this.userAuthService.getIPAddress();
     localStorage.setItem('ipAddress', this.ip);
+  }
+
+  getTranslatedText(key: string): string {
+    return this.translationService.translate(key);
   }
 }

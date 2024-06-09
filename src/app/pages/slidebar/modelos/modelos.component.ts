@@ -2,6 +2,7 @@ import { Component, OnInit, model } from '@angular/core';
 import { ModelService } from '../../../services/model.service';
 import { DashboardService } from '../../../services/dashboard.service';
 import { UserService } from '../../../services/user.service';
+import { TranslationService } from '../../../services/translation.service';
 
 @Component({
   selector: 'app-modelos',
@@ -70,7 +71,8 @@ export class ModelosComponent implements OnInit {
   constructor(
     private modelService: ModelService,
     private dashboardService: DashboardService,
-    private userService: UserService
+    private userService: UserService,
+    private translationService: TranslationService
   ) { }
 
   ngOnInit() {
@@ -86,6 +88,10 @@ export class ModelosComponent implements OnInit {
       this.users = users;
       this.VerifyStatus();
     });
+  }
+
+  getTranslatedText(key: string): string {
+    return this.translationService.translate(key);
   }
 
   async VerifyStatus(): Promise<void> {

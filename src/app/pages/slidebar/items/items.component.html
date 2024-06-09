@@ -4,7 +4,7 @@
 <div class="flex items-center justify-center w-full mt-5 mb-6">
     <!-- Estatísticas de Usuários -->
     <div class="bg-white rounded-lg shadow-md p-6 me-6">
-        <h2 class="text-lg font-semibold mb-4">Nº total de utilizadores</h2>
+        <h2 class="text-lg font-semibold mb-4">{{ getTranslatedText('dashboard_items_stats') }}</h2>
         <p class="text-center text-xl">{{ products.length }}</p>
     </div>
 </div>
@@ -13,32 +13,32 @@
 <div class="bg-white rounded-lg shadow-md p-6 w-full space-y-4">
     <!-- Cabeçalho da Lista -->
     <div class="flex mb-4 items-center">
-        <h2 class="text-lg font-semibold">Lista de Produtos</h2>
+        <h2 class="text-lg font-semibold">{{ getTranslatedText('dasboard_items_title') }}</h2>
 
         <div class="flex-grow"></div>
 
         <div class="flex items-center justify-center space-x-2 lg:me-44"> <!-- Modified: Added justify-center class -->
-            <input type="text" placeholder="Pesquisar produto..." class="border border-gray-300 rounded-md py-2 px-3"
+            <input type="text" placeholder="{{ getTranslatedText('dashboard_items_search') }}" class="border border-gray-300 rounded-md py-2 px-3"
                 [(ngModel)]="searchField">
             <select [(ngModel)]="searchOption" class="border border-gray-300 rounded-md py-2 px-3">
-                <option value="material">Material ID</option>
-                <option value="text_brief_material">Nome</option>
+                <option value="material">{{ getTranslatedText('dashboard_items_materialid') }}</option>
+                <option value="text_brief_material">{{ getTranslatedText('dashboard_items_name') }}</option>
             </select>
         </div>
 
         <button (click)="toggleAddProductModal()"
-            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Adicionar Produto</button>
+            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">{{ getTranslatedText('dashboard_items_add') }}</button>
     </div>
 
     <table class="w-full">
         <thead>
             <tr>
-                <th>Material ID</th>
-                <th>Nome do Material</th>
-                <th>Localização</th>
-                <th>Stock</th>
-                <th>Diferença</th>
-                <th>Ações</th>
+                <th>{{ getTranslatedText('dashboard_items_materialid') }}</th>
+                <th>{{ getTranslatedText('dashboard_items_name') }}</th>
+                <th>{{ getTranslatedText('dashboard_items_location') }}</th>
+                <th>{{ getTranslatedText('dashboard_items_stock') }}</th>
+                <th>{{ getTranslatedText('dashboard_items_difference') }}</th>
+                <th>{{ getTranslatedText('dashboard_items_action') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -59,7 +59,7 @@
                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                             </svg>
                         </span>
-                        <span class="hidden md:inline-block">Edit</span>
+                        <span class="hidden md:inline-block">{{ getTranslatedText('dashboard_items_action_edit') }}</span>
                     </button>
 
                     <!-- Delete -->
@@ -72,7 +72,7 @@
                                     d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                             </svg>
                         </span>
-                        <span class="hidden md:inline-block">Delete</span>
+                        <span class="hidden md:inline-block">{{ getTranslatedText('dashboard_items_action_delete') }}</span>
                     </button>
                 </td>
             </tr>
@@ -102,70 +102,70 @@
                     clip-rule="evenodd"></path>
             </svg>
         </button>
-        <h2 class="text-xl font-semibold mb-4 text-center">Editar Produto</h2>
+        <h2 class="text-xl font-semibold mb-4 text-center">{{ getTranslatedText('dashboard_items_edit_title') }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Material</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_materialid') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.material">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Nome do Produto</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_name') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.text_brief_material">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Deposit ID</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_deposit_id') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.deposit">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Localizção</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_location') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.deposit_denomination">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">SAP</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_sap') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.sap">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">UM Básica</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_um_basic') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.basic_unit_of_measurement">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">LOTE</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_lot') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.lot">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Valor utilizado livre</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_free_utilization_value') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.free_utilization_value">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Moeda</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_currency') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.currency">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">STOCK</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_stock') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.stock_count">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Diferença</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_difference') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.difference">
@@ -174,7 +174,7 @@
         <div class="flex justify-center items-center mt-3">
             <button (click)="confirmEdit()" type="button"
                 class="py-2 px-4 text-sm font-medium w-52 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300">
-                Confirmar
+                {{ getTranslatedText('dashboard_users_geral_confirm') }}
             </button>
         </div>
     </div>
@@ -193,70 +193,70 @@
                     clip-rule="evenodd"></path>
             </svg>
         </button>
-        <h2 class="text-xl font-semibold mb-4 text-center">Adicionar Novo Produto</h2>
+        <h2 class="text-xl font-semibold mb-4 text-center">{{ getTranslatedText('dashboard_items_add_title') }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Material</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_materialid') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.material">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Nome do Produto</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_name') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.text_brief_material">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Deposit ID</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_deposit_id') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.deposit">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Localizção</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_location') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.deposit_denomination">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">SAP</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_sap') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.sap">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">UM Básica</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_um_basic') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.basic_unit_of_measurement">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">LOTE</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_lot') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.lot">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Valor utilizado livre</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_free_utilization_value') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.free_utilization_value">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Moeda</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_currency') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.currency">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">STOCK</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_stock') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.stock_count">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
-                <label for="name" class="block text-gray-700 font-medium">Diferença</label>
+                <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_items_difference') }}</label>
                 <input id="name" type="text"
                     class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
                     [(ngModel)]="productmodal.difference">
@@ -265,7 +265,7 @@
         <div class="flex justify-center items-center mt-3">
             <button (click)="confirmAdd()" type="button"
                 class="py-2 px-4 text-sm font-medium w-52 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300">
-                Confirmar
+                {{ getTranslatedText('dashboard_users_geral_confirm') }}
             </button>
         </div>
     </div>
@@ -289,15 +289,15 @@
                 d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                 clip-rule="evenodd"></path>
         </svg>
-        <p class="mb-4 text-gray-500 dark:text-gray-300">Deseja mesmo eliminar?</p>
+        <p class="mb-4 text-gray-500 dark:text-gray-300">{{ getTranslatedText('dashboard_users_confirm_delete') }}</p>
         <div class="flex justify-center items-center space-x-4">
             <button (click)="toggleDeleteModal(null)" type="button"
                 class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-                Cancelar
+                {{ getTranslatedText('dashboard_users_geral_cancel') }}
             </button>
             <button type="submit" (click)="confirmDelete()" type="button"
                 class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-                Continuar
+                {{ getTranslatedText('dashboard_users_geral_confirm') }}
             </button>
         </div>
     </div>

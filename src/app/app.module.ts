@@ -17,6 +17,7 @@ import { ProductsComponent } from './pages/slidebar/items/items.component';
 import { AlertComponent } from './alert/alert.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ModelClosetDetailsComponent } from './pages/model-closet-details/model-closet-details.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ModelClosetDetailsComponent } from './pages/model-closet-details/model-
     ProductsComponent,
     AlertComponent,
     NavbarComponent,
-    ModelClosetDetailsComponent
+    ModelClosetDetailsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

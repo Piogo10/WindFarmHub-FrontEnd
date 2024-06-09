@@ -5,6 +5,7 @@ import { AnimationsService } from '../../services/animations.service';
 import { ModelService } from '../../services/model.service';
 import { UserService } from '../../services/user.service';
 import { AlertService } from '../../services/alert.service';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-models',
@@ -21,12 +22,10 @@ export class ModelsComponent implements OnInit {
   userEmail = '';
 
   constructor(
-    private userAuthService: UserAuthService,
     private userService: UserService,
     private modelService: ModelService,
     private router: Router,
-    private animationsService: AnimationsService,
-    private alertService: AlertService
+    private translationService: TranslationService,
   ) { }
 
   async ngOnInit() {
@@ -45,5 +44,9 @@ export class ModelsComponent implements OnInit {
 
   goToModelDetails(modelName: string) {
     this.router.navigateByUrl(`/models/${modelName}`);
+  }
+
+  getTranslatedText(key: string): string {
+    return this.translationService.translate(key);
   }
 }

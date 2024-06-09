@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { UserAuthService } from '../services/user-auth.service';
 import { AlertService } from '../services/alert.service';
 import { v4 as uuidv4 } from 'uuid';
+import { TranslationService } from '../services/translation.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,24 +15,33 @@ import { v4 as uuidv4 } from 'uuid';
 export class NavbarComponent implements OnInit {
 
   isHome = false;
+  storageLanguage = '';
   isModels = false;
+  isItems = false;
   userDropdownOpen = false;
   hamburgerDropdownOpen = false;
+  languageDropdownOpen: boolean = false;
+
+  testopen = false;
+
   isLoggedIn = false;
   havePerms = false;
   userName = '';
   userEmail = '';
   ip = '';
+  translatedTexts: any;
 
   constructor(
     private userService: UserService,
     private userAuthService: UserAuthService,
     private alertService: AlertService,
     private router: Router,
-    private animationsService: AnimationsService
+    private animationsService: AnimationsService,
+    private translationService: TranslationService
   ) { }
 
   async ngOnInit() {
+
     this.isLoggedIn = await this.userAuthService.VerifyLogin();
     if (!this.isLoggedIn) {
       if (localStorage.getItem('accessToken')) {
@@ -42,28 +52,35 @@ export class NavbarComponent implements OnInit {
       this.updateUserInformation();
       this.havePerms = await this.userAuthService.havePerms();
     }
-    this.setBrowserId();
 
-    if (document.getElementById('home')) {
-      this.isHome = true;
-      const labelHome = document.getElementById('label_home');
-      if (labelHome) {
-        labelHome.classList.add('text-blue-700');
-      }
+    this.setBrowserId();
+    this.verifyLanguage();
+    this.isHome = !!document.getElementById('home');
+    this.isModels = !!document.getElementById('models');
+    this.isItems = !!document.getElementById('items');
+  }
+
+  changeLanguage(language: string): void {
+    localStorage.setItem('language', language);
+    this.translationService.setLanguage(language);
+  }
+
+  getTranslatedText(key: string): string {
+    return this.translationService.translate(key);
+  }
+
+  private verifyLanguage() {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage && (storedLanguage === 'pt' || storedLanguage === 'en')) {
+      this.storageLanguage = storedLanguage;
+    } else {
+      this.storageLanguage = 'en';
     }
-    else {
-      this.isHome = false;
+    if (localStorage.getItem('language') !== this.storageLanguage) {
+      localStorage.setItem('language', this.storageLanguage);
     }
-    if (document.getElementById('models')) {
-      this.isModels = true;
-      const labelModels = document.getElementById('label_models');
-      if (labelModels) {
-        labelModels.classList.add('text-blue-700');
-      }
-    }
-    else {
-      this.isModels = false;
-    }
+
+    this.translationService.setLanguage(this.storageLanguage);
   }
 
   private async setBrowserId() {
@@ -73,6 +90,10 @@ export class NavbarComponent implements OnInit {
     }
     this.ip = await this.userAuthService.getIPAddress();
     localStorage.setItem('ipAddress', this.ip);
+  }
+
+  toogleTest() {
+    this.testopen = !this.testopen;
   }
 
   toggleUserDropdown() {
@@ -97,11 +118,15 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
-  onMouseEnter() {
-    this.animationsService.scaleAnimation('#animated-svg', 1.1, 0.5);
+  onMouseEnter(target: string) {
+    this.animationsService.scaleAnimation(target, 1.1, 0.5);
+  }
+  
+  onMouseLeave(target: string) {
+    this.animationsService.scaleAnimation(target, 1, 0.5);
   }
 
-  onMouseLeave() {
-    this.animationsService.scaleAnimation('#animated-svg', 1, 0.5);
-  }
+  toggleLanguageDropdown(): void {
+    this.languageDropdownOpen = !this.languageDropdownOpen;
+} 
 }

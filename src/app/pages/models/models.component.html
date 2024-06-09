@@ -3,7 +3,7 @@
 <section id="models" class="bg-gray-100 w-full h-full">
     <div class="py-10">
         <div class="text-center m-auto my-20 text-2xl">
-            <h1 class="font-bold text-black mb-4">Modelos</h1>
+            <h1 class="font-bold text-black mb-4">{{ getTranslatedText('models_title') }}</h1>
         </div>
         <div id="render-section" class="grid lg:grid-cols-2 md:grid-cols-1 gap-12 lg:gap-8 px-4 sm:px-6 lg:px-8">
             <div *ngFor="let model of models" (click)="goToModelDetails(model.name)"
@@ -11,8 +11,10 @@
                 <div class="w-full h-96 bg-model_eco80 {{ model.type }} bg-cover">
                 </div>
                 <h3 class="text-xl font-bold py-4 bg-gray-300">{{ model.name }}</h3>
-                <p class="leading-relaxed bg-gray-300">{{ model.description }}</p>
+                <p class="leading-relaxed bg-gray-300">{{ model.description }}</p> <!-- ALTERAR -->
             </div>
         </div>
     </div>
 </section>
+
+<app-footer></app-footer>

@@ -8,7 +8,7 @@ export class AnimationsService {
 
   constructor() { }
 
-  scaleAnimation(elementId: string, scaleTo: number, duration: number) {
-    gsap.to(elementId, { duration: duration, scale: scaleTo });
-  }
+  scaleAnimation(target: string, scale: number, duration: number) {
+    gsap.to(target, { scale, duration });
+  }  
 }

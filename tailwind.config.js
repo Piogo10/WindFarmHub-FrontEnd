@@ -6,7 +6,10 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'imageArmario': "url('../src/app/imagens/image.png')",
+        'imageArmario': "url('../src/app/imagens/nacel-x.png')",
+        'hur-image': "url('../src/app/imagens/hur-image.png')",
+        'hur-2-image': "url('../src/app/imagens/hur-2-image.png')",
+        'closet-conversor-power': "url('../src/app/imagens/closet-conversor-power.png')",
         'logo': "url('../src/app/imagens/logo.png')",
         'home_nav': "url('../src/app/imagens/bg.jpeg')",
         'home_single1': "url('../src/app/imagens/single1.jpg')",

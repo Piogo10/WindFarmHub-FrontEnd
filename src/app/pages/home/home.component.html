@@ -12,23 +12,26 @@
 <section id="services" class=" bg-gray-100">
     <div class="py-20">
         <div class="text-center m-auto mb-20 text-2xl">
-            <h1 class="font-bold text-black mb-4">Nossos Serviços</h1>
+            <h1 class="font-bold text-black mb-4">{{ getTranslatedText('home_our_services') }}</h1>
         </div>
         <div class="grid lg:grid-cols-2 md:grid-cols-1 gap-12 lg:gap-8 px-4 sm:px6 lg:px-8">
 
             <div class="text-center px-5 rounded-2xl cursor-pointer">
                 <div class="w-full h-96 bg-home_single3 bg-cover">
                 </div>
-                <h3 class="text-xl font-bold py-4">Centralizar a Informações para Otimizar a Manutenção</h3>
+                <h3 class="text-xl font-bold py-4">{{ getTranslatedText('home_our_services_title1') }}</h3>
                 <p class="leading-relaxed">
-                    Com este projeto, centralizamos todas essas informações num único local, permitindo consultas em tempo real. Focamo-nos especificamente na organização dos manuais de apoio e nas informações sobre peças. Ao proporcionar uma plataforma eficiente e acessível, visamos melhorar significativamente a eficiência do trabalho dos técnicos, elevando o desempenho geral da empresa no competitivo setor de energia eólica.</p>
+                    {{ getTranslatedText('home_our_services_desc1') }}
+                </p>
             </div>
 
             <div class="text-center px-5 rounded-2xl cursor-pointer">
                 <div class="w-full h-96 bg-home_single4 bg-cover">
                 </div>
-                <h3 class="text-xl font-bold py-4">Funcionalidades de Pesquisa e Procura</h3>
-                <p class="leading-relaxed">Este projeto não só centraliza informações essenciais, mas também oferece funcionalidades avançadas de monitorização e pesquisa de peças necessárias para a resolução de problemas. Os técnicos podem acompanhar onde e quantas peças existem num determinado armazem e todas as informação para se precisarem de utiliza-las para as intervenções de manutenção de forma detalhada. Com esta plataforma, pretendemos melhorar a precisão e a rapidez na resolução de problemas, elevando a eficiência operacional e o desempenho geral da empresa no setor de energia eólica.</p>
+                <h3 class="text-xl font-bold py-4">{{ getTranslatedText('home_our_services_title2') }}</h3>
+                <p class="leading-relaxed">
+                    {{ getTranslatedText('home_our_services_desc2') }}
+                </p>
             </div>
         </div>
     </div>
@@ -43,8 +46,10 @@
             </div>
 
             <div class="text-center bg-gray-300">
-                <h3 class="text-xl font-bold py-12">Sobre Nós</h3>
-                <p class="leading-relaxed pb-5 px-5">Somos uma equipe dedicada apaixonada por tecnologia e comprometida em impulsionar a inovação no setor de energia eólica. Nosso objetivo é fornecer soluções eficientes e acessíveis para facilitar o trabalho dos técnicos, melhorando o desempenho das empresas e contribuindo para um futuro mais sustentável. Com uma abordagem centrada no cliente e na excelência, estamos comprometidos em oferecer as melhores soluções para as necessidades específicas do mercado de energia eólica.</p>
+                <h3 class="text-xl font-bold py-12">{{ getTranslatedText('home_about_us') }}</h3>
+                <p class="leading-relaxed pb-5 px-5">
+                    {{ getTranslatedText('home_about_us_desc') }}
+                </p>
             </div>
 
             <div class="w-full h-96 bg-home_double bg-cover bg-fixed">
@@ -59,27 +64,18 @@
         <div class="grid lg:grid-cols-2 md:grid-cols-1">
 
             <div class="text-center text-white h-max w-7/12 lg:ml-auto bg-[#0A0A0A] bg-opacity-75">
-                <h3 class="text-xl font-bold py-8">Tens algum problema?</h3>
-                <p class="leading-relaxed pb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <button class="items-center bg-[#3A97CB] text-xl py-2 ps-4 pe-4">Entrar em Contacto</button>
+                <h3 class="text-xl font-bold py-8">{{ getTranslatedText('home_contact_us1') }}</h3>
+                <p class="leading-relaxed pb-10">{{ getTranslatedText('home_contact_us_desc') }}</p>
+                <button class="items-center bg-[#3A97CB] text-xl py-2 ps-4 pe-4">{{ getTranslatedText('home_contact_us_button') }}</button>
             </div>
             <div class="text-center text-white h-max w-7/12 lg:mt-5 lg:ml-0 bg-[#3A97CB]">
-                <h3 class="text-xl font-bold py-8">Tens algum problema?</h3>
-                <p class="leading-relaxed pb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <button class="items-center bg-[#0A0A0A] bg-opacity-75 text-xl py-2 ps-4 pe-4">Entrar em
-                    Contacto</button>
+                <h3 class="text-xl font-bold py-8">{{ getTranslatedText('home_contact_us2') }}</h3>
+                <p class="leading-relaxed pb-10">{{ getTranslatedText('home_contact_us_desc2') }}</p>
+                <button class="items-center bg-[#0A0A0A] bg-opacity-75 text-xl py-2 ps-4 pe-4">{{ getTranslatedText('home_contact_us_button') }}</button>
             </div>
         </div>
     </div>
 </section>
 
-<section id="feet" class="bg-gray-700">
-    <div class="pt-5 text-center">
-        <div class="grid justify-items-center">
-            <div class="bg-home w-32 h-32 bg-cover"></div>
-        </div>
-        <div class="p-4 text-white">
-            <p>© Copyright 2024 - WindFarmHub. Todos os direitos reservados</p>
-        </div>
-    </div>
-</section>
+
+<app-footer></app-footer>

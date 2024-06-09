@@ -1,0 +1,183 @@
+{
+    "navbar_menu_language": "Linguagem",
+    "navbar_menu_dashboard": "Dashboard",
+    "navbar_menu_signout": "Sair",
+    "navbar_language_english": "Inglês",
+    "navbar_language_portuguese": "Português",
+    "navbar_home": "Início",
+    "navbar_models": "Modelos",
+    "navbar_contacts": "Contatos",
+    "navbar_items": "Peças",
+    "navbar_dashboard": "Painel de Controle",
+    "navbar_sign_out": "Sair",
+
+    "home_our_services": "Nossos Serviços",
+    "home_our_services_title1": "Centralizar a Informações para Otimizar a Manutenção",
+    "home_our_services_desc1": "Com este projeto, centralizamos todas essas informações num único local, permitindo consultas em tempo real. Focamo-nos especificamente na organização dos manuais de apoio e nas informações sobre peças. Ao proporcionar uma plataforma eficiente e acessível, visamos melhorar significativamente a eficiência do trabalho dos técnicos, elevando o desempenho geral da empresa no competitivo setor de energia eólica.",
+    "home_our_services_title2": "Funcionalidades de Pesquisa e Procura",
+    "home_our_services_desc2": "Este projeto não só centraliza informações essenciais, mas também oferece funcionalidades avançadas de monitorização e pesquisa de peças necessárias para a resolução de problemas. Os técnicos podem acompanhar onde e quantas peças existem num determinado armazem e todas as informação para se precisarem de utiliza-las para as intervenções de manutenção de forma detalhada. Com esta plataforma, pretendemos melhorar a precisão e a rapidez na resolução de problemas, elevando a eficiência operacional e o desempenho geral da empresa no setor de energia eólica.",
+    "home_about_us": "Sobre Nós",
+    "home_about_us_desc": "Somos uma equipe dedicada apaixonada por tecnologia e comprometida em impulsionar a inovação no setor de energia eólica. Nosso objetivo é fornecer soluções eficientes e acessíveis para facilitar o trabalho dos técnicos, melhorando o desempenho das empresas e contribuindo para um futuro mais sustentável. Com uma abordagem centrada no cliente e na excelência, estamos comprometidos em oferecer as melhores soluções para as necessidades específicas do mercado de energia eólica.",
+    "home_contact_us1": "Tens algum problema?",
+    "home_contact_us_desc": "Se tiveres alguma dúvida ou problema, não hesites em contactar-nos. Estamos aqui para ajudar-te!",
+    "home_contact_us2": "Queres aderir?",
+    "home_contact_us_desc2": "Se estiveres interessado em aderir à nossa plataforma, contacta-nos para obteres mais informações.",
+    "home_contact_us_button": "Contacta-nos",
+
+    "login_title": "Log In",
+    "login_desc": "Inicia sessão com o teu email e password!",
+    "login_email": "Email",
+    "login_password": "Password",
+    "login_logIn": "Entrar",
+    "login_subdesc": "Se não tiveres conta, contacta um administrador!",
+
+    "models_title": "Modelos",
+
+    "models_detail_title": "Modelo",
+    "models_detail_table_especification": "Especificação",
+    "models_detail_table_value": "Valor",
+
+    "models_table_name": "Nome",
+    "models_table_power_rated_power": "Potência Nominal",
+    "models_table_power_flexible_ratings": "Potência Flexível",
+    "models_table_power_cut_in_speed": "Velocidade do Vento de Corte",
+    "models_table_power_rated_speed": "Velocidade do Vento Nominal",
+    "models_table_power_cut_out_speed": "Velocidade do Vento de Corte Final",
+    "models_table_power_survival_speed": "Velocidade do Vento de Sobrevivência",
+    "models_table_power_wind_zone": "Zona de Vento (DIBt)",
+    "models_table_power_wind_class": "Classe de Vento (IEC)",
+    "models_table_rotor_diameter": "Diâmetro do Rotor",
+    "models_table_rotor_swept_area": "Área Varrida pelo Rotor",
+    "models_table_rotor_blades": "Número de Pás do Rotor",
+    "models_table_rotor_max_speed": "Velocidade Máxima do Rotor",
+    "models_table_rotor_tipspeed": "Velocidade das Pontas das Pás do Rotor",
+    "models_table_rotor_type": "Tipo de Rotor",
+    "models_table_rotor_material": "Material do Rotor",
+    "models_table_rotor_manufacturer": "Fabricante do Rotor",
+    "models_table_rotor_power_density1": "Densidade de Potência do Rotor 1",
+    "models_table_rotor_power_density2": "Densidade de Potência do Rotor 2",
+    "models_table_gearbox_type": "Tipo de Caixa de Engrenagens",
+    "models_table_gearbox_stages": "Estágios da Caixa de Engrenagens",
+    "models_table_gearbox_ratio": "Rácio da Caixa de Engrenagens",
+    "models_table_gearbox_manufacturer": "Fabricante da Caixa de Engrenagens",
+    "models_table_generator_type": "Tipo de Gerador",
+    "models_table_generator_number": "Número de Geradores",
+    "models_table_generator_max_speed": "Velocidade Máxima do Gerador",
+    "models_table_generator_voltage": "Voltagem do Gerador",
+    "models_table_generator_grid_connection": "Conexão à Rede do Gerador",
+    "models_table_generator_grid_frequency": "Frequência da Rede do Gerador",
+    "models_table_generator_manufacturer": "Fabricante do Gerador",
+    "models_table_tower_hub_height": "Altura do Cubo da Torre",
+    "models_table_tower_type": "Tipo de Torre",
+    "models_table_tower_shape": "Formato da Torre",
+    "models_table_tower_corrosion_protection": "Proteção contra Corrosão da Torre",
+    "models_table_tower_manufacturer": "Fabricante da Torre",
+    "models_table_weight_single_blade": "Peso de Uma Única Pá",
+    "models_table_weight_hub": "Peso do Cubo",
+    "models_table_weight_rotor": "Peso do Rotor",
+    "models_table_weight_nacelle": "Peso da Nacele",
+    "models_table_weight_tower_max": "Peso Total da Torre",
+    "models_tabel_weight_total": "Peso Total",
+
+    "models_detail_nacel": "Nacel",
+    "modelos_detail_nacel_power_convertor": "Conversor de Potência",
+    "modelos_detail_nacel_galileo_reset": "Galileo Reset",
+
+
+    "models_detail_tower": "Torre",
+    "models_detail_base": "Base",
+
+
+    "dashboard_users_stats": "Nº total de utilizadores",
+    "dashboard_users_stats_active": "Nº de utilizadores ativos",
+    "dashboard_users_title": "Lista de Utilizadores",
+    "dashboard_users_name": "Nome",
+    "dashboard_users_email": "Email",
+    "dashboard_users_action": "Ações",
+    "dashboard_users_action_edit": "Editar",
+    "dashboard_users_action_delete": "Eliminar",
+    "dashboard_users_add": "Adicionar Utilizador",
+    "dashboard_users_search": "Pesquisar utilizador",
+
+    "dashboard_users_model_name": "Nome",
+    "dashboard_users_model_email": "Email",
+    "dashboard_users_model_role": "Cargo",
+    "dashboard_users_model_role_admin": "Administrador",
+    "dashboard_users_model_role_user": "Utilizador",
+    "dashboard_users_model_active": "Ativado",
+    "dashboard_users_model_password": "Password",
+
+    "dashboard_users_geral_confirm": "Confirmar",
+    "dashboard_users_confirm_delete": "Deseja mesmo eliminar?",
+    "dashboard_users_geral_cancel": "Cancelar",
+    "dashboard_users_edit_title": "Editar Utilizador",
+    "dashboard_users_add_title": "Adicionar Utilizador",
+
+
+
+    "dashboard_models_stats_model": "Nº total de modelos",
+    "dashboard_models_stats_model_active": "Nº de modelos ativos",
+    "dashboard_models_stats_association": "Nº de Associações",
+    "dashboard_models_stats_association_active": "Nº de Associações ativas",
+
+    "dasboard_models_title": "Lista de Modelos",
+    "dashboard_models_name": "Nome",
+    "dashboard_models_action": "Ações",
+    "dashboard_models_search": "Pesquisar modelo",
+    "dashboard_models_add": "Adicionar Modelo",
+    "dashboard_models_action_edit": "Editar",
+    "dashboard_models_action_delete": "Eliminar",
+    "dashboard_models_edit_title": "Editar Modelo",
+    "dashboard_models_add_title": "Adicionar Modelo",
+
+
+    "dashboard_association_title": "Lista de Associações",
+    "dashboard_association_search": "Pesquisar associação",
+    "dashboard_association_search_email": "Email",
+    "dashboard_association_search_model": "Modelo",
+    "dashboard_association_add": "Adicionar Associação",
+
+    "dashboard_association_name": "Nome",
+    "dashboard_association_email": "Email",
+    "dashboard_association_association": "Associação",
+    "dashboard_association_associations": "Associações",
+    "dashboard_association_action": "Ações",
+    "dashboard_association_action_edit": "Editar",
+    "dashboard_association_action_delete": "Eliminar",
+    
+    "dashboard_association_edit_title": "Editar Associação",
+    "dashboard_association_add_title": "Adicionar Associação",
+
+    "dashboard_items_stats": "Nº total de peças",
+
+    "dasboard_items_title": "Lista de Peças",
+    "dashboard_items_search": "Pesquisar peça",
+
+    "dashboard_items_name": "Nome do Material",
+    "dashboard_items_materialid": "Material ID",
+    "dashboard_items_location": "Localização",
+    "dashboard_items_stock": "Stock",
+    "dashboard_items_difference": "Diferença",
+    "dashboard_items_action": "Ações",
+
+    "dashboard_items_deposit_id": "Desposito ID",
+    "dashboard_items_sap": "SAP",
+    "dashboard_items_um_basic": "UM Básico",
+    "dashboard_items_lot": "Lote",
+    "dashboard_items_free_utilization_value": "Valor Livre de Utilização ",
+    "dashboard_items_currency": "Moeda",
+
+    "dashboard_items_action_edit": "Editar",
+    "dashboard_items_action_delete": "Eliminar",
+    "dashboard_items_add": "Adicionar Peça",
+
+    "dashboard_items_edit_title": "Editar Peça",
+    "dashboard_items_add_title": "Adicionar Peça"
+
+    
+
+
+
+    
+
+}

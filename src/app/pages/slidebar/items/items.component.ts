@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../../services/alert.service';
 import { DashboardService } from '../../../services/dashboard.service';
 import { ItemService } from '../../../services/item.service';
+import { TranslationService } from '../../../services/translation.service';
 
 @Component({
   selector: 'app-products',
@@ -32,6 +33,7 @@ export class ProductsComponent implements OnInit{
     private alertService: AlertService,
     private dashboardService: DashboardService,
     private itemService: ItemService,
+    private translationService: TranslationService
   ) {}
 
   ngOnInit() {
@@ -39,6 +41,10 @@ export class ProductsComponent implements OnInit{
       this.products = products;
       console.log('products:', this.products);
     });
+  }
+
+  getTranslatedText(key: string): string {
+    return this.translationService.translate(key);
   }
 
   filtrarProduct(): any[] {

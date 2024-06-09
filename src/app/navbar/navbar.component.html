@@ -1,4 +1,4 @@
-<nav class="border-b border-gray-300 bg bg-gray-100 bg-opacity-80 backdrop-blur-sm fixed w-full z-20 top-0 start-0">
+    <nav class="border-b border-gray-300 bg bg-gray-100 bg-opacity-80 backdrop-blur-sm fixed w-full z-20 top-0 start-0">
     <div class="max-w-screen-xl mx-auto px-4">
         <div class="flex justify-between items-center py-4">
             <!-- Logo e nome da empresa -->
@@ -12,24 +12,35 @@
             <!-- Labels -->
             <div
                 class="hidden md:flex space-x-6 p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-100 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent">
-                <a id="label_home"
-                    class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0" [routerLink]="['/home']"
-                    [ngClass]="{
-                        'text-blue-700': isHome
-                    }">Home</a>
-                
-                    <a id="label_model" *ngIf="isLoggedIn"
-                    class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
+
+                <a id="label_model"
+                    class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 relative"
+                    [routerLink]="['/home']"
+                    [ngClass]="isHome ? 'after:content-[\'\'] after:absolute after:bg-blue-400 after:w-full after:h-[1px] after:left-0 after:bottom-[-2px] after:scale-x-100 after:transition-transform after:duration-300' : 'after:content-[\'\'] after:absolute after:bg-blue-400 after:w-full after:h-[1px] after:left-0 after:bottom-[-2px] after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100'">
+                    {{ getTranslatedText('navbar_home') }}
+                </a>
+
+                <a id="label_model" *ngIf="isLoggedIn"
+                    class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 relative"
                     [routerLink]="['/models']"
-                    [ngClass]="{
-                        'text-blue-700': isModels
-                    }">Modelos</a>
+                    [ngClass]="isModels ? 'after:content-[\'\'] after:absolute after:bg-blue-400 after:w-full after:h-[1px] after:left-0 after:bottom-[-2px] after:scale-x-100 after:transition-transform after:duration-300' : 'after:content-[\'\'] after:absolute after:bg-blue-400 after:w-full after:h-[1px] after:left-0 after:bottom-[-2px] after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100'">
+                    {{ getTranslatedText('navbar_models') }}
+                </a>
+
+                <a id="label_model" *ngIf="isLoggedIn"
+                    class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 relative"
+                    [routerLink]="['/models']"
+                    [ngClass]="isItems ? 'after:content-[\'\'] after:absolute after:bg-blue-400 after:w-full after:h-[1px] after:left-0 after:bottom-[-2px] after:scale-x-100 after:transition-transform after:duration-300' : 'after:content-[\'\'] after:absolute after:bg-blue-400 after:w-full after:h-[1px] after:left-0 after:bottom-[-2px] after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100'">
+                    {{ getTranslatedText('navbar_items') }}
+                </a>
+
             </div>
 
             <!-- Dropdown de usuário -->
             <div class="relative" *ngIf="isLoggedIn">
                 <button type="button" class="flex items-center text-gray-800 hover:text-gray-600 focus:outline-none"
-                    (click)="toggleUserDropdown()" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+                    (click)="toggleUserDropdown()" (mouseenter)="onMouseEnter('#animated-svg')"
+                    (mouseleave)="onMouseLeave('#animated-svg')">
                     <svg id="animated-svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="9" r="3" stroke="#000000" stroke-width="1.5"></circle>
@@ -43,20 +54,184 @@
 
                 <!-- Dropdown menu do usuário -->
                 <div [class.hidden]="!userDropdownOpen"
-                    class="absolute top-full right-0 mt-2 border-b border-gray-300 bg bg-gray-100 bg-opacity-80 backdrop-blur-sm  rounded-md shadow-lg"
+                    class="absolute top-full right-0 mt-2 border-b border-gray-300 bg-gray-100 bg-opacity-80 backdrop-blur-sm rounded-md shadow-lg"
                     id="user-dropdown">
                     <div class="py-1">
-                        <div class="px-4 py-3 border-b-4">
-                            <span class="block text-sm text-gray-900 ">{{userName}}</span>
-                            <span class="block text-sm text-gray-900 ">{{userEmail}}</span>
+                        <div class="px-4 py-3 border-b-4 relative">
+                            <span class="block text-sm text-gray-900">{{userName}}</span>
+                            <span class="block text-sm text-gray-900">{{userEmail}}</span>
                         </div>
-                        <a *ngIf="havePerms" [routerLink]="['/dashboard/main']"
-                            class="block px-4 py-2 text-gray-800  hover:bg-gray-100">Dashboard</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800  hover:bg-gray-100" (click)="logout()">Sign
-                            out</a>
+
+                        <div class="relative">
+                            <button (click)="toggleLanguageDropdown()" (mouseenter)="onMouseEnter('#svg-language')"
+                                (mouseleave)="onMouseLeave('#svg-language')"
+                                class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center w-full">
+                                <span class="mr-2">
+                                    <svg *ngIf="storageLanguage === 'en'" id="svg-language" class="w-4 h-4" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path style="fill:#41479B;"
+                                                d="M473.655,88.276H38.345C17.167,88.276,0,105.443,0,126.621V385.38 c0,21.177,17.167,38.345,38.345,38.345h435.31c21.177,0,38.345-17.167,38.345-38.345V126.621 C512,105.443,494.833,88.276,473.655,88.276z">
+                                            </path>
+                                            <path style="fill:#F5F5F5;"
+                                                d="M511.469,120.282c-3.022-18.159-18.797-32.007-37.814-32.007h-9.977l-163.54,107.147V88.276h-88.276 v107.147L48.322,88.276h-9.977c-19.017,0-34.792,13.847-37.814,32.007l139.778,91.58H0v88.276h140.309L0.531,391.717 c3.022,18.159,18.797,32.007,37.814,32.007h9.977l163.54-107.147v107.147h88.276V316.577l163.54,107.147h9.977 c19.017,0,34.792-13.847,37.814-32.007l-139.778-91.58H512v-88.276H371.691L511.469,120.282z">
+                                            </path>
+                                            <g>
+                                                <polygon style="fill:#FF4B55;"
+                                                    points="282.483,88.276 229.517,88.276 229.517,229.517 0,229.517 0,282.483 229.517,282.483 229.517,423.724 282.483,423.724 282.483,282.483 512,282.483 512,229.517 282.483,229.517 ">
+                                                </polygon>
+                                                <path style="fill:#FF4B55;"
+                                                    d="M24.793,421.252l186.583-121.114h-32.428L9.224,410.31 C13.377,415.157,18.714,418.955,24.793,421.252z">
+                                                </path>
+                                                <path style="fill:#FF4B55;"
+                                                    d="M346.388,300.138H313.96l180.716,117.305c5.057-3.321,9.277-7.807,12.287-13.075L346.388,300.138z">
+                                                </path>
+                                                <path style="fill:#FF4B55;"
+                                                    d="M4.049,109.475l157.73,102.387h32.428L15.475,95.842C10.676,99.414,6.749,104.084,4.049,109.475z">
+                                                </path>
+                                                <path style="fill:#FF4B55;"
+                                                    d="M332.566,211.862l170.035-110.375c-4.199-4.831-9.578-8.607-15.699-10.86L300.138,211.862H332.566z">
+                                                </path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                    <svg *ngIf="storageLanguage === 'pt'" id="svg-language" class="w-4 h-4"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                                        <path d="M5,4H13V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z"
+                                            fill="#2b6519"></path>
+                                        <path d="M16,4h15V28h-15c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z"
+                                            transform="rotate(180 21.5 16)" fill="#ea3323"></path>
+                                        <path
+                                            d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                            opacity=".15"></path>
+                                        <path
+                                            d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                            fill="#fff" opacity=".2"></path>
+                                        <circle cx="12" cy="16" r="5" fill="#ff5"></circle>
+                                        <path
+                                            d="M14.562,13.529l-5.125-.006v3.431h0c.004,.672,.271,1.307,.753,1.787,.491,.489,1.132,.759,1.805,.759,.684,0,1.328-.267,1.813-.75,.485-.484,.753-1.126,.753-1.808v-3.413Z"
+                                            fill="#ea3323"></path>
+                                    </svg>
+                                </span>
+                                <span>{{ getTranslatedText('navbar_menu_language') }}</span>
+                            </button>
+
+                            <!-- Dropdown de linguagem -->
+                            <div [class.hidden]="!languageDropdownOpen"
+                                class="absolute right-10 me-24 -top-2/4 w-full border-b border-gray-300 bg-gray-100 bg-opacity-80 backdrop-blur-sm rounded-md shadow-lg">
+                                <!-- Opções de linguagem -->
+                                <button (click)="changeLanguage('en')"
+                                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center w-full">
+                                    <span class="mr-2">
+                                        <svg id="svg-uk" class="w-4 h-4" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
+                                            xml:space="preserve" fill="#000000">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path style="fill:#41479B;"
+                                                    d="M473.655,88.276H38.345C17.167,88.276,0,105.443,0,126.621V385.38 c0,21.177,17.167,38.345,38.345,38.345h435.31c21.177,0,38.345-17.167,38.345-38.345V126.621 C512,105.443,494.833,88.276,473.655,88.276z">
+                                                </path>
+                                                <path style="fill:#F5F5F5;"
+                                                    d="M511.469,120.282c-3.022-18.159-18.797-32.007-37.814-32.007h-9.977l-163.54,107.147V88.276h-88.276 v107.147L48.322,88.276h-9.977c-19.017,0-34.792,13.847-37.814,32.007l139.778,91.58H0v88.276h140.309L0.531,391.717 c3.022,18.159,18.797,32.007,37.814,32.007h9.977l163.54-107.147v107.147h88.276V316.577l163.54,107.147h9.977 c19.017,0,34.792-13.847,37.814-32.007l-139.778-91.58H512v-88.276H371.691L511.469,120.282z">
+                                                </path>
+                                                <g>
+                                                    <polygon style="fill:#FF4B55;"
+                                                        points="282.483,88.276 229.517,88.276 229.517,229.517 0,229.517 0,282.483 229.517,282.483 229.517,423.724 282.483,423.724 282.483,282.483 512,282.483 512,229.517 282.483,229.517 ">
+                                                    </polygon>
+                                                    <path style="fill:#FF4B55;"
+                                                        d="M24.793,421.252l186.583-121.114h-32.428L9.224,410.31 C13.377,415.157,18.714,418.955,24.793,421.252z">
+                                                    </path>
+                                                    <path style="fill:#FF4B55;"
+                                                        d="M346.388,300.138H313.96l180.716,117.305c5.057-3.321,9.277-7.807,12.287-13.075L346.388,300.138z">
+                                                    </path>
+                                                    <path style="fill:#FF4B55;"
+                                                        d="M4.049,109.475l157.73,102.387h32.428L15.475,95.842C10.676,99.414,6.749,104.084,4.049,109.475z">
+                                                    </path>
+                                                    <path style="fill:#FF4B55;"
+                                                        d="M332.566,211.862l170.035-110.375c-4.199-4.831-9.578-8.607-15.699-10.86L300.138,211.862H332.566z">
+                                                    </path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <span class="mr-2">{{ getTranslatedText('navbar_language_english') }}</span>
+                                </button>
+                                <button (click)="changeLanguage('pt')"
+                                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center w-full">
+                                    <span class="mr-2">
+                                        <svg id="svg-pt" class="w-4 h-4" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 32 32">
+                                            <path d="M5,4H13V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z"
+                                                fill="#2b6519"></path>
+                                            <path d="M16,4h15V28h-15c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z"
+                                                transform="rotate(180 21.5 16)" fill="#ea3323"></path>
+                                            <path
+                                                d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z"
+                                                opacity=".15"></path>
+                                            <path
+                                                d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z"
+                                                fill="#fff" opacity=".2"></path>
+                                            <circle cx="12" cy="16" r="5" fill="#ff5"></circle>
+                                            <path
+                                                d="M14.562,13.529l-5.125-.006v3.431h0c.004,.672,.271,1.307,.753,1.787,.491,.489,1.132,.759,1.805,.759,.684,0,1.328-.267,1.813-.75,.485-.484,.753-1.126,.753-1.808v-3.413Z"
+                                                fill="#ea3323"></path>
+                                        </svg> 
+                                    </span>
+                                    <span class="mr-2">{{ getTranslatedText('navbar_language_portuguese') }}</span>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <button *ngIf="havePerms" [routerLink]="['/dashboard/main']"
+                            (mouseenter)="onMouseEnter('#svg-dashboard')" (mouseleave)="onMouseLeave('#svg-dashboard')"
+                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center">
+                            <span class="mr-2">
+                                <svg id="svg-dashboard" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 12C12 11.4477 12.4477 11 13 11H19C19.5523 11 20 11.4477 20 12V19C20 19.5523 19.5523 20 19 20H13C12.4477 20 12 19.5523 12 19V12Z"
+                                        stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                                    <path
+                                        d="M4 5C4 4.44772 4.44772 4 5 4H8C8.55228 4 9 4.44772 9 5V19C9 19.5523 8.55228 20 8 20H5C4.44772 20 4 19.5523 4 19V5Z"
+                                        stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                                    <path
+                                        d="M12 5C12 4.44772 12.4477 4 13 4H19C19.5523 4 20 4.44772 20 5V7C20 7.55228 19.5523 8 19 8H13C12.4477 8 12 7.55228 12 7V5Z"
+                                        stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </span>
+                            <span>{{ getTranslatedText('navbar_menu_dashboard') }}</span>
+                        </button>
+
+                        <button (click)="logout()" (mouseenter)="onMouseEnter('#svg-logout')"
+                            (mouseleave)="onMouseLeave('#svg-logout')"
+                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100 flex items-center w-full">
+                            <span class="mr-2">
+                                <svg id="svg-logout" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M19 23H11C10.4477 23 10 22.5523 10 22C10 21.4477 10.4477 21 11 21H19C19.5523 21 20 20.5523 20 20V4C20 3.44772 19.5523 3 19 3L11 3C10.4477 3 10 2.55229 10 2C10 1.44772 10.4477 1 11 1L19 1C20.6569 1 22 2.34315 22 4V20C22 21.6569 20.6569 23 19 23Z"
+                                        fill="#0F0F0F" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M2.48861 13.3099C1.83712 12.5581 1.83712 11.4419 2.48862 10.6902L6.66532 5.87088C7.87786 4.47179 10.1767 5.32933 10.1767 7.18074L10.1767 9.00001H16.1767C17.2813 9.00001 18.1767 9.89544 18.1767 11V13C18.1767 14.1046 17.2813 15 16.1767 15L10.1767 15V16.8193C10.1767 18.6707 7.87786 19.5282 6.66532 18.1291L2.48861 13.3099ZM4.5676 11.3451C4.24185 11.7209 4.24185 12.2791 4.5676 12.6549L8.1767 16.8193V14.5C8.1767 13.6716 8.84827 13 9.6767 13L16.1767 13V11L9.6767 11C8.84827 11 8.1767 10.3284 8.1767 9.50001L8.1767 7.18074L4.5676 11.3451Z"
+                                        fill="#0F0F0F" />
+                                </svg>
+                            </span>
+                            <span>{{ getTranslatedText('sign_out') }}</span>
+                        </button>
                     </div>
                 </div>
             </div>
+
+            
+
 
             <div *ngIf="!isLoggedIn">
                 <button [routerLink]="['/login']"
@@ -71,19 +246,17 @@
                             stroke-linejoin="round" />
                     </svg>
                 </button>
-                <!-- Dropdown menu do hamburger -->
+                <!-- Dropdown navbar_menu do hamburger -->
                 <div *ngIf="hamburgerDropdownOpen"
                     class="absolute top-full left-0 mt-2 -ml-16 bg-white border border-gray-200  rounded-md shadow-lg">
                     <div class="py-1">
-                        <a href="#" class="block px-4 py-2 text-blue-700  hover:bg-gray-100 ">Home</a>
+                        <a href="#" class="block px-4 py-2 text-blue-700  hover:bg-gray-100 ">{{ getTranslatedText('navbar_home') }}</a>
                         <a href="#" *ngIf="isLoggedIn" class="block px-4 py-2 text-gray-800  hover:bg-gray-100"
-                            [routerLink]="['/models']">Modelos</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800  hover:bg-gray-100 ">Contact</a>
+                            [routerLink]="['/models']">{{ getTranslatedText('navbar_models') }}</a> <!-- ALTERAR -->
+                        <a href="#" class="block px-4 py-2 text-gray-800  hover:bg-gray-100 ">{{ getTranslatedText('navbar_contacts') }}</a>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 </nav>

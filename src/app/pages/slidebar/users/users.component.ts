@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { AlertService } from '../../../services/alert.service';
 import { DashboardService } from '../../../services/dashboard.service';
+import { TranslationService } from '../../../services/translation.service';
 
 @Component({
   selector: 'app-users',
@@ -29,6 +30,7 @@ export class UsersComponent implements OnInit{
     private alertService: AlertService,
     private userService: UserService,
     private dashboardService: DashboardService,
+    private translationService: TranslationService,
   ) {}
 
   ngOnInit() {
@@ -36,6 +38,10 @@ export class UsersComponent implements OnInit{
       this.usuarios = users;
       this.VerifyStatus();
     });
+  }
+
+  getTranslatedText(key: string): string {
+    return this.translationService.translate(key);
   }
 
   filtrarUsuarios(): any[] {
