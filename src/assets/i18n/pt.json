@@ -10,7 +10,8 @@
     "navbar_items": "Peças",
     "navbar_dashboard": "Painel de Controle",
     "navbar_sign_out": "Sair",
-
+    "navbar_login": "Entrar",
+    
     "home_our_services": "Nossos Serviços",
     "home_our_services_title1": "Centralizar a Informações para Otimizar a Manutenção",
     "home_our_services_desc1": "Com este projeto, centralizamos todas essas informações num único local, permitindo consultas em tempo real. Focamo-nos especificamente na organização dos manuais de apoio e nas informações sobre peças. Ao proporcionar uma plataforma eficiente e acessível, visamos melhorar significativamente a eficiência do trabalho dos técnicos, elevando o desempenho geral da empresa no competitivo setor de energia eólica.",

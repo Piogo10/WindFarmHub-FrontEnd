@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationsService } from '../services/animations.service';
 import { UserService } from '../services/user.service';
@@ -21,8 +21,6 @@ export class NavbarComponent implements OnInit {
   userDropdownOpen = false;
   hamburgerDropdownOpen = false;
   languageDropdownOpen: boolean = false;
-
-  testopen = false;
 
   isLoggedIn = false;
   havePerms = false;
@@ -62,7 +60,9 @@ export class NavbarComponent implements OnInit {
 
   changeLanguage(language: string): void {
     localStorage.setItem('language', language);
+    this.storageLanguage = language;
     this.translationService.setLanguage(language);
+    this.toggleLanguageDropdown();
   }
 
   getTranslatedText(key: string): string {
@@ -92,16 +92,29 @@ export class NavbarComponent implements OnInit {
     localStorage.setItem('ipAddress', this.ip);
   }
 
-  toogleTest() {
-    this.testopen = !this.testopen;
-  }
-
   toggleUserDropdown() {
     this.userDropdownOpen = !this.userDropdownOpen;
   }
 
   toggleHamburgerDropdown() {
     this.hamburgerDropdownOpen = !this.hamburgerDropdownOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    const targetElement = event.target as HTMLElement;
+
+    if (this.userDropdownOpen && !targetElement.closest('.relative')) {
+      this.userDropdownOpen = false;
+    }
+
+    if (this.hamburgerDropdownOpen && !targetElement.closest('.relative')) {
+      this.hamburgerDropdownOpen = false;
+    }
+
+    if (this.languageDropdownOpen && !targetElement.closest('.relative')) {
+      this.languageDropdownOpen = false;
+    }
   }
 
   async updateUserInformation() {
