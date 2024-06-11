@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorService } from '../../services/error.service';
+import { TranslationService } from '../../services/translation.service';
+import { AnimationsService } from '../../services/animations.service';
 
 interface ErrorMessage {
   id: number;
@@ -30,7 +32,11 @@ export class ModelClosetDetailsComponent implements OnInit {
   showResults: boolean = false;
   selectedResult: { error_message: string; solutions: { topic: string; descriptions: string[] }[] } | null = null;
 
-  constructor(private errorService: ErrorService) { }
+  constructor(
+    private errorService: ErrorService,
+    private translationService: TranslationService,
+    private animationsService: AnimationsService,
+  ) { }
 
   ngOnInit() {
     this.errorService.getErrorMessagesAndSolutions().subscribe(
@@ -86,5 +92,54 @@ export class ModelClosetDetailsComponent implements OnInit {
 
   closeSolution() {
     this.selectedResult = null;
+  }
+
+  activeSection: number = -1;
+
+  sections = [
+    {
+      title: 'Constumers',
+      items: [
+        { type: 'PDF', label: 'CSC_Customer', file: 'a' },
+        { type: 'PDF', label: 'CMW_messages_V1', file: 'a' },
+      ]
+    },
+    {
+      title: 'Programas',
+      items: [
+        { type: 'EXE', label: 'Data Visualizer', file: 'a' },
+        { type: 'EXE', label: 'WuT ComServer', file: 'a' },
+      ]
+    },
+    {
+      title: 'Esquema Elétrico',
+      items: [
+        { type: 'EXE', label: 'SVG', file: 'a' },
+        { type: 'PDF', label: 'PDF', file: 'a' },
+      ]
+    },
+    {
+      title: 'Componentes',
+      items: [
+        { type: 'EXE', label: 'XML', file: 'a' },
+        { type: '', label: 'JSON', file: 'a' },
+      ]
+    },
+  ];
+
+  toggleSection(index: number) {
+    this.activeSection = this.activeSection === index ? -1 : index;
+  }
+
+  getTranslatedText(key: string): string {
+    return this.translationService.translate(key);
+  }
+
+  onMouseEnter(target: string) {
+    this.animationsService.scaleAnimation(target, 1.1, 0.5);
+  }
+  
+  onMouseLeave(target: string) {
+    this.animationsService.scaleAnimation(target, 1, 0.5);
   }
 }

@@ -1,3 +1,4 @@
+<app-alert></app-alert>
 <app-navbar id="mode-detail"></app-navbar>
 
 <section id="models" class="bg-gray-100 h-full mt-10">
@@ -31,163 +32,203 @@
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.name || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_power_rated_power') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_power_rated_power') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.power_rated_power || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_power_flexible_ratings') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_power_flexible_ratings') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.power_flexible_ratings || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_power_cut_in_speed') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_power_cut_in_speed') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.power_cut_in_speed || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_power_rated_speed') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_power_rated_speed') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.power_rated_speed || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_power_cut_out_speed') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_power_cut_out_speed') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.power_cut_out_speed || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_power_survival_speed') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_power_survival_speed') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.power_survival_speed || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_power_wind_zone') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_power_wind_zone')
+                                }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.power_wind_zone || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_power_wind_class') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_power_wind_class') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.power_wind_class || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_diameter') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_diameter')
+                                }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_diameter || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_swept_area') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_rotor_swept_area') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_swept_area || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_blades') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_blades') }}
+                            </td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_blades || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_max_speed') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_max_speed')
+                                }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_max_speed || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_tipspeed') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_tipspeed')
+                                }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_tipspeed || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_type') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_type') }}
+                            </td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_type || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_material') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_material')
+                                }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_material || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_manufacturer') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_rotor_manufacturer') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_manufacturer || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_power_density1') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_rotor_power_density1') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_power_density1 || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_rotor_power_density2') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_rotor_power_density2') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.rotor_power_density2 || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_gearbox_type') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_gearbox_type') }}
+                            </td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.gearbox_type || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_gearbox_stages') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_gearbox_stages')
+                                }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.gearbox_stages || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_gearbox_ratio') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_gearbox_ratio')
+                                }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.gearbox_ratio || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_gearbox_manufacturer') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_gearbox_manufacturer') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.gearbox_manufacturer || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_generator_type') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_generator_type')
+                                }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_type || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_generator_number') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_generator_number') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_number || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_generator_max_speed') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_generator_max_speed') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_max_speed || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_generator_voltage') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_generator_voltage') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_voltage || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_generator_grid_connection') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_generator_grid_connection') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_grid_connection || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_generator_grid_frequency') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_generator_grid_frequency') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_grid_frequency || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_generator_manufacturer') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_generator_manufacturer') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.generator_manufacturer || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_tower_hub_height') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_tower_hub_height') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.tower_hub_height || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_tower_type') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_tower_type') }}
+                            </td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.tower_type || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_tower_shape') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_tower_shape') }}
+                            </td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.tower_shape || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_tower_corrosion_protection') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_tower_corrosion_protection') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.tower_corrosion_protection || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_tower_manufacturer') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_tower_manufacturer') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.tower_manufacturer || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_weight_single_blade') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_weight_single_blade') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.weight_single_blade || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_weight_hub') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_weight_hub') }}
+                            </td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.weight_hub || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_weight_rotor') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_weight_rotor') }}
+                            </td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.weight_rotor || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_weight_nacelle') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_weight_nacelle')
+                                }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.weight_nacelle || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_table_weight_tower_max') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{
+                                getTranslatedText('models_table_weight_tower_max') }}</td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.weight_tower_max || 'n/a' }}</td>
                         </tr>
                         <tr>
-                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_tabel_weight_total') }}</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ getTranslatedText('models_tabel_weight_total') }}
+                            </td>
                             <td class="px-4 py-2 whitespace-nowrap">{{ model.weight_total || 'n/a' }}</td>
                         </tr>
                     </tbody>
@@ -198,8 +239,10 @@
 </section>
 
 
-<div class="bg-gray-100 mx-auto p-4">
+<div class="bg-gray-100 mx-auto p-4 text-black">
     <div class="hs-accordion-group space-y-4">
+
+        <!-- nacelle -->
         <div class="hs-accordion bg-white border border-transparent rounded-xl shadow-sm"
             [ngClass]="{'hs-accordion-active:border-gray-200': activeSection === 0}"
             id="hs-active-bordered-heading-one">
@@ -226,13 +269,20 @@
                     <div class="flex justify-center items-center bg-cover bg-no-repeat bg-center bg-imageArmario"
                         style="height: 400px; width: 100%;"></div>
                     <div class="flex flex-wrap justify-center mt-4 space-x-4">
-                        <button class="bg-red-500 text-white py-2 px-4 rounded-lg mt-2">{{ getTranslatedText('modelos_detail_nacel_galileo_reset') }}</button>
-                        <button class="bg-red-500 text-white py-2 px-4 rounded-lg mt-2" (click)="goToClosetDetails(model.name, 'conversor-de-potencia')">{{ getTranslatedText('modelos_detail_nacel_power_convertor') }}</button>
+                        <button *ngFor="let image of images" (click)="handleImageClick(image.src)"
+                            class="flex flex-col items-center mt-4">
+                            <img id="{{image.src}}"
+                                class="w-56 h-72 object-cover rounded-lg bg-{{image.src}} bg-no-repeat bg-cover"
+                                (mouseenter)="onMouseEnter('#' + image.src)"
+                                (mouseleave)="onMouseLeave('#' + image.src)">
+                            <label class="mt-2 text-black">{{ image.label }}</label>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-
+        
+        <!-- tower -->
         <div class="hs-accordion bg-white border border-transparent rounded-xl shadow-sm"
             [ngClass]="{'hs-accordion-active:border-gray-200': activeSection === 1}"
             id="hs-active-bordered-heading-two">
@@ -261,6 +311,7 @@
             </div>
         </div>
 
+        <!-- base -->
         <div class="hs-accordion bg-white border border-transparent rounded-xl shadow-sm"
             [ngClass]="{'hs-accordion-active:border-gray-200': activeSection === 2}"
             id="hs-active-bordered-heading-three">
