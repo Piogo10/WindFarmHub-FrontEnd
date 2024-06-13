@@ -17,16 +17,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.setBrowserId();
-  }
-
-  private async setBrowserId() {
-    const browserId = localStorage.getItem('browserId') || uuidv4();
-    if (localStorage.getItem('browserId') !== browserId) {
-      localStorage.setItem('browserId', browserId);
-    }
-    this.ip = await this.userAuthService.getIPAddress();
-    localStorage.setItem('ipAddress', this.ip);
   }
 
   getTranslatedText(key: string): string {

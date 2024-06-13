@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ErrorService } from '../../services/error.service';
 import { TranslationService } from '../../services/translation.service';
 import { AnimationsService } from '../../services/animations.service';
+import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 interface ErrorMessage {
   id: number;
@@ -18,7 +20,7 @@ interface Solution {
   urgent_service: boolean;
 }
 
-@Component({ 
+@Component({
   selector: 'app-model-closet-details',
   templateUrl: './model-closet-details.component.html',
   styleUrls: ['./model-closet-details.component.scss']
@@ -36,7 +38,8 @@ export class ModelClosetDetailsComponent implements OnInit {
     private errorService: ErrorService,
     private translationService: TranslationService,
     private animationsService: AnimationsService,
-  ) { }
+
+  ) { pdfDefaultOptions.assetsFolder = 'bleeding-edge'; }
 
   ngOnInit() {
     this.errorService.getErrorMessagesAndSolutions().subscribe(
@@ -47,6 +50,7 @@ export class ModelClosetDetailsComponent implements OnInit {
       error => console.error('Error:', error)
     );
   }
+
 
   onSearch() {
     if (!this.query.trim()) {
@@ -84,7 +88,7 @@ export class ModelClosetDetailsComponent implements OnInit {
       topic,
       descriptions
     }));
-  } 
+  }
 
   toggleSolution(result: { error_message: string; solutions: { topic: string; descriptions: string[] }[] }) {
     this.selectedResult = this.selectedResult === result ? null : result;
@@ -100,8 +104,8 @@ export class ModelClosetDetailsComponent implements OnInit {
     {
       title: 'Constumers',
       items: [
-        { type: 'PDF', label: 'CSC_Customer', file: 'a' },
-        { type: 'PDF', label: 'CMW_messages_V1', file: 'a' },
+        { type: 'PDF', label: 'CSC_Customer', file: 'example.pdf' },
+        { type: 'PDF', label: 'CMW_messages_V1', file: 'example.pdf' },
       ]
     },
     {
@@ -138,8 +142,34 @@ export class ModelClosetDetailsComponent implements OnInit {
   onMouseEnter(target: string) {
     this.animationsService.scaleAnimation(target, 1.1, 0.5);
   }
-  
+
   onMouseLeave(target: string) {
     this.animationsService.scaleAnimation(target, 1, 0.5);
   }
+
+  showPDF = false;
+  srcComplete: string | null = null;
+  fileName: string | null = null;
+  isFileDocument: boolean = false;
+  scrollHandler!: EventListenerObject;
+
+  tooglePDF(item: any) {
+    this.showPDF = !this.showPDF;
+
+    document.body.style.overflow = this.showPDF ? 'hidden' : 'auto';
+    const method = this.showPDF ? 'addEventListener' : 'removeEventListener';
+    document.body[method]('scroll', this.scrollHandler);
+
+    if (!this.showPDF) {
+      this.fileName = null;
+      this.isFileDocument = false;
+      return;
+    }
+
+    if (item == null) return;
+
+    this.fileName = item.file;
+    this.srcComplete = `assets/${item.file}`;
+  }
+
 }

@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit {
 
     this.isLoggedIn = await this.userAuthService.VerifyLogin();
     if (!this.isLoggedIn) {
-      if (localStorage.getItem('accessToken')) {
+      if (typeof window !== 'undefined' && localStorage && localStorage.getItem('accessToken')) {
         this.alertService.showAlert('Sua sessão expirou!', 'warn');
         this.logout();
       }
@@ -53,9 +53,17 @@ export class NavbarComponent implements OnInit {
 
     this.setBrowserId();
     this.verifyLanguage();
-    this.isHome = !!document.getElementById('home');
-    this.isModels = !!document.getElementById('models');
-    this.isItems = !!document.getElementById('items');
+
+
+    if (typeof document !== 'undefined') {
+      this.isHome = !!document.getElementById('home');
+      this.isModels = !!document.getElementById('models');
+      this.isItems = !!document.getElementById('items');
+    } else {
+      this.isHome = false;
+      this.isModels = false;
+      this.isItems = false;
+    }
   }
 
   changeLanguage(language: string): void {
@@ -70,26 +78,31 @@ export class NavbarComponent implements OnInit {
   }
 
   private verifyLanguage() {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage && (storedLanguage === 'pt' || storedLanguage === 'en')) {
-      this.storageLanguage = storedLanguage;
-    } else {
-      this.storageLanguage = 'en';
-    }
-    if (localStorage.getItem('language') !== this.storageLanguage) {
-      localStorage.setItem('language', this.storageLanguage);
-    }
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      
+      const storedLanguage = localStorage.getItem('language');
+      if (storedLanguage && (storedLanguage === 'pt' || storedLanguage === 'en')) {
+        this.storageLanguage = storedLanguage;
+      } else {
+        this.storageLanguage = 'en';
+      }
+      if (localStorage.getItem('language') !== this.storageLanguage) {
+        localStorage.setItem('language', this.storageLanguage);
+      }
 
-    this.translationService.setLanguage(this.storageLanguage);
+      this.translationService.setLanguage(this.storageLanguage);
+    }
   }
 
   private async setBrowserId() {
-    const browserId = localStorage.getItem('browserId') || uuidv4();
-    if (localStorage.getItem('browserId') !== browserId) {
-      localStorage.setItem('browserId', browserId);
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      const browserId = localStorage.getItem('browserId') || uuidv4();
+      if (localStorage.getItem('browserId') !== browserId) {
+        localStorage.setItem('browserId', browserId);
+      }
+      this.ip = await this.userAuthService.getIPAddress();
+      localStorage.setItem('ipAddress', this.ip);
     }
-    this.ip = await this.userAuthService.getIPAddress();
-    localStorage.setItem('ipAddress', this.ip);
   }
 
   toggleUserDropdown() {
@@ -134,12 +147,12 @@ export class NavbarComponent implements OnInit {
   onMouseEnter(target: string) {
     this.animationsService.scaleAnimation(target, 1.1, 0.5);
   }
-  
+
   onMouseLeave(target: string) {
     this.animationsService.scaleAnimation(target, 1, 0.5);
   }
 
   toggleLanguageDropdown(): void {
     this.languageDropdownOpen = !this.languageDropdownOpen;
-} 
+  }
 }
