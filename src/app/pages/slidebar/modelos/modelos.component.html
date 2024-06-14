@@ -30,9 +30,9 @@
             <h2 class="text-lg font-semibold">{{ getTranslatedText('dasboard_models_title') }}</h2>
             <div class="flex items-center">
                 <input type="text" placeholder="{{ getTranslatedText('dashboard_models_search') }}"
-                    class="bg-gray-100 ms-3 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-4 py-2 mr-4"
+                class="border border-gray-300 focus:outline-none focus:ring-1 focus:ring-color-primary rounded-md py-2 px-3 focus:border-color-primary mx-4"
                     [(ngModel)]="searchField">
-                <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md" (click)="toggleAddModelTemplate()">{{ getTranslatedText('dashboard_models_add') }}</button>
+                <button class="bg-color-primary hover:bg-hover-color-primary text-white px-4 py-2 rounded-md" (click)="toggleAddModelTemplate()">{{ getTranslatedText('dashboard_models_add') }}</button>
             </div>
         </div>
 
@@ -50,7 +50,7 @@
                     <td>
                         <!-- Editar -->
                         <button (click)="toggleEditModelTemplate(modelo)"
-                            class="text-white me-1 text-sm bg-gray-700 hover:bg-gray-1000 border border-slate-200 rounded-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
+                            class="text-white me-1 text-sm bg-gray-600 hover:bg-gray-800 border border-slate-200 rounded-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
                             <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -63,7 +63,7 @@
                         <!-- Delete -->
                         <button (click)="toogleDeleteModelTemplate(modelo)"
                             class="text-white my-4 me-1 bg-red-600 text-sm hover:bg-red-700 border border-slate-200 rounded-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
-                            <span>
+                        <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -88,14 +88,14 @@
             <div class="flex items-center">
                 <div class="flex items-center justify-center space-x-2 lg:me-44">
                     <input type="text" placeholder="{{ getTranslatedText('dashboard_association_search') }}"
-                    class="bg-gray-100 ms-3 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-4 py-2 mr-4"
+                    class="border border-gray-300 focus:outline-none focus:ring-1 focus:ring-color-primary rounded-md py-2 px-3 focus:border-color-primary"
                     [(ngModel)]="searchFieldAssociations">
-                    <select [(ngModel)]="searchOptionAssociations" class="border border-gray-300 rounded-md py-2 px-3">
+                    <select [(ngModel)]="searchOptionAssociations" class="border border-gray-300 focus:outline-none focus:ring-1 focus:ring-color-primary rounded-md py-2 px-3">
                         <option value="email">{{ getTranslatedText('dasboard_geral_email') }}</option>
                         <option value="name">{{ getTranslatedText('dashboard_association_search_model') }}</option>
                     </select>
                 </div>
-                <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md" (click)="toggleAddAssociationTemplate()">{{ getTranslatedText('dashboard_association_add') }}</button>
+                <button class="bg-color-primary hover:bg-hover-color-primary text-white px-4 py-2 rounded-md" (click)="toggleAddAssociationTemplate()">{{ getTranslatedText('dashboard_association_add') }}</button>
             </div>
         </div>
 
@@ -117,7 +117,7 @@
                     <td>
                         <!-- Editar -->
                         <button (click)="toggleEditAssociationTemplate(associacoes)"
-                            class="text-white me-1 text-sm bg-gray-700 hover:bg-gray-1000 border border-slate-200 rounded-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
+                            class="text-white me-1 text-sm bg-gray-600 hover:bg-gray-800 border border-slate-200 rounded-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
                             <span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -130,7 +130,7 @@
                         <!-- Delete -->
                         <button (click)="toggleDeleteAssociationTemplate(associacoes)"
                             class="text-white my-4 me-1 bg-red-600 text-sm hover:bg-red-700 border border-slate-200 rounded-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
-                            <span>
+                        <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -151,16 +151,12 @@
 
 
 <!-- DIV - EDIT - MODELO -->
-<div *ngIf="showEditModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-20">
+<div *ngIf="showEditModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-24 ">
     <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
     <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full">
-        <button (click)="toggleEditModelTemplate(null)"
-            class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
-            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"></path>
+        <button (click)="toggleEditModelTemplate(null)" class="absolute top-2.5 right-2.5 bg-transparent hover:bg-blue-400 hover:text-white  rounded-lg text-sm p-1.5 inline-flex items-center">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
             </svg>
         </button>
         <h2 class="text-xl font-semibold mb-4 text-center">{{ getTranslatedText('dashboard_models_edit_title') }}</h2>
@@ -169,267 +165,267 @@
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_name') }}</label>
                 <input id="name" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.name">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="description" class="block text-gray-700 font-medium">Descrição</label>
                 <textarea id="description"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.description"></textarea>
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_flexible_ratings" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_flexible_ratings') }}</label>
                 <input id="power_flexible_ratings" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_flexible_ratings">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_rated_power" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_rated_power') }}</label>
                 <input id="power_rated_power" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_rated_power">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_cut_in_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_cut_in_speed') }}</label>
                 <input id="power_cut_in_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_cut_in_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_rated_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_rated_speed') }}</label>
                 <input id="power_rated_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_rated_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_cut_out_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_cut_out_speed') }}</label>
                 <input id="power_cut_out_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_cut_out_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_survival_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_survival_speed') }}</label>
                 <input id="power_survival_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_survival_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_wind_zone" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_wind_zone') }}</label>
                 <input id="power_wind_zone" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_wind_zone">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_wind_class" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_wind_class') }}</label>
                 <input id="power_wind_class" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_wind_class">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_diameter" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_diameter') }}</label>
                 <input id="rotor_diameter" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_diameter">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_swept_area" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_swept_area') }}</label>
                 <input id="rotor_swept_area" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_swept_area">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_blades" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_blades') }}</label>
                 <input id="rotor_blades" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_blades">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_max_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_max_speed') }}</label>
                 <input id="rotor_max_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_max_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_tipspeed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_tipspeed') }}</label>
                 <input id="rotor_tipspeed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_tipspeed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_type" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_type') }}</label>
                 <input id="rotor_type" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_type">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_material" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_material') }}</label>
                 <input id="rotor_material" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_material">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_manufacturer" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_manufacturer') }}</label>
                 <input id="rotor_manufacturer" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_manufacturer">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_power_density1" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_power_density1') }}</label>
                 <input id="rotor_power_density1" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_power_density1">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_power_density2" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_power_density2') }}</label>
                 <input id="rotor_power_density2" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_power_density2">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="gearbox_type" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_gearbox_type') }}</label>
                 <input id="gearbox_type" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.gearbox_type">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="gearbox_stages" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_gearbox_stages') }}</label>
                 <input id="gearbox_stages" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.gearbox_stages">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="gearbox_ratio" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_gearbox_ratio') }}</label>
                 <input id="gearbox_ratio" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.gearbox_ratio">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="gearbox_manufacturer" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_gearbox_manufacturer') }}</label>
                 <input id="gearbox_manufacturer" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.gearbox_manufacturer">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_type" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_type') }}</label>
                 <input id="generator_type" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_type">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_number" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_number') }}</label>
                 <input id="generator_number" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_number">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_max_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_max_speed') }}</label>
                 <input id="generator_max_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_max_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_voltage" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_voltage') }}</label>
                 <input id="generator_voltage" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_voltage">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_grid_connection" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_grid_connection') }}</label>
                 <input id="generator_grid_connection" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_grid_connection">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_grid_frequency" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_grid_frequency') }}</label>
                 <input id="generator_grid_frequency" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_grid_frequency">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_manufacturer" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_manufacturer') }}</label>
                 <input id="generator_manufacturer" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_manufacturer">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="tower_hub_height" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_tower_hub_height') }}</label>
                 <input id="tower_hub_height" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.tower_hub_height">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="tower_type" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_tower_type') }}</label>
                 <input id="tower_type" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.tower_type">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="tower_shape" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_tower_shape') }}</label>
                 <input id="tower_shape" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.tower_shape">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="tower_corrosion_protection" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_tower_corrosion_protection') }}</label>
                 <input id="tower_corrosion_protection" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.tower_corrosion_protection">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="tower_manufacturer" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_tower_manufacturer') }}</label>
                 <input id="tower_manufacturer" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.tower_manufacturer">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_single_blade" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_weight_single_blade') }}</label>
                 <input id="weight_single_blade" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_single_blade">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_hub" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_weight_hub') }}</label>
                 <input id="weight_hub" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_hub">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_rotor" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_weight_rotor') }}</label>
                 <input id="weight_rotor" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_rotor">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_nacelle" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_weight_nacelle') }}</label>
                 <input id="weight_nacelle" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_nacelle">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_tower_max" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_weight_tower_max') }}</label>
                 <input id="weight_tower_max" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_tower_max">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_total" class="block text-gray-700 font-medium">{{ getTranslatedText('models_tabel_weight_total') }}</label>
                 <input id="weight_total" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_total">
             </div>
 
@@ -443,23 +439,19 @@
         
         <div class="flex justify-center items-center mt-3">
             <button (click)="confirmEdit()" type="button"
-                class="py-2 px-4 text-sm font-medium w-52 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300">
-                {{ getTranslatedText('dashboard_geral_confirm') }}
+            class="py-2 px-4 text-sm font-medium w-52 text-white bg-color-primary rounded-lg hover:bg-hover-color-primary focus:ring-4 focus:outline-none focus:ring-blue-400">
+            {{ getTranslatedText('dashboard_geral_confirm') }}
             </button>
         </div>
     </div>
 </div>
 <!-- DIV - ADD - MODELO -->
-<div *ngIf="showAddModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-20">
+<div *ngIf="showAddModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-24">
     <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
     <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full"> 
-        <button (click)="toggleAddModelTemplate()"
-            class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
-            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"></path>
+        <button (click)="toggleAddModelTemplate()" class="absolute top-2.5 right-2.5 bg-transparent hover:bg-blue-400 hover:text-white  rounded-lg text-sm p-1.5 inline-flex items-center">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
             </svg>
         </button>
         <h2 class="text-xl font-semibold mb-4 text-center">{{ getTranslatedText('dashboard_models_add') }}</h2>
@@ -468,268 +460,268 @@
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_name') }}</label>
                 <input id="name" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.name">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="description" class="block text-gray-700 font-medium">Descrição</label>
                 <textarea id="description"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.description"></textarea>
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_flexible_ratings" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_flexible_ratings') }}</label>
                 <input id="power_flexible_ratings" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_flexible_ratings">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_rated_power" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_rated_power') }}</label>
                 <input id="power_rated_power" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_rated_power">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_cut_in_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_cut_in_speed') }}</label>
                 <input id="power_cut_in_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_cut_in_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_rated_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_rated_speed') }}</label>
                 <input id="power_rated_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_rated_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_cut_out_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_cut_out_speed') }}</label>
                 <input id="power_cut_out_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_cut_out_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_survival_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_survival_speed') }}</label>
                 <input id="power_survival_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_survival_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_wind_zone" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_wind_zone') }}</label>
                 <input id="power_wind_zone" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_wind_zone">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="power_wind_class" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_power_wind_class') }}</label>
                 <input id="power_wind_class" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.power_wind_class">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_diameter" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_diameter') }}</label>
                 <input id="rotor_diameter" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_diameter">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_swept_area" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_swept_area') }}</label>
                 <input id="rotor_swept_area" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_swept_area">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_blades" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_blades') }}</label>
                 <input id="rotor_blades" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_blades">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_max_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_max_speed') }}</label>
                 <input id="rotor_max_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_max_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_tipspeed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_tipspeed') }}</label>
                 <input id="rotor_tipspeed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_tipspeed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_type" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_type') }}</label>
                 <input id="rotor_type" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_type">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_material" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_material') }}</label>
                 <input id="rotor_material" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_material">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_manufacturer" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_manufacturer') }}</label>
                 <input id="rotor_manufacturer" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_manufacturer">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_power_density1" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_power_density1') }}</label>
                 <input id="rotor_power_density1" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_power_density1">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="rotor_power_density2" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_rotor_power_density2') }}</label>
                 <input id="rotor_power_density2" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.rotor_power_density2">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="gearbox_type" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_gearbox_type') }}</label>
                 <input id="gearbox_type" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.gearbox_type">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="gearbox_stages" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_gearbox_stages') }}</label>
                 <input id="gearbox_stages" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.gearbox_stages">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="gearbox_ratio" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_gearbox_ratio') }}</label>
                 <input id="gearbox_ratio" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.gearbox_ratio">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="gearbox_manufacturer" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_gearbox_manufacturer') }}</label>
                 <input id="gearbox_manufacturer" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.gearbox_manufacturer">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_type" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_type') }}</label>
                 <input id="generator_type" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_type">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_number" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_number') }}</label>
                 <input id="generator_number" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_number">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_max_speed" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_max_speed') }}</label>
                 <input id="generator_max_speed" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_max_speed">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_voltage" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_voltage') }}</label>
                 <input id="generator_voltage" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_voltage">
             </div>
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_grid_connection" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_grid_connection') }}</label>
                 <input id="generator_grid_connection" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_grid_connection">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_grid_frequency" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_grid_frequency') }}</label>
                 <input id="generator_grid_frequency" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_grid_frequency">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="generator_manufacturer" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_generator_manufacturer') }}</label>
                 <input id="generator_manufacturer" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.generator_manufacturer">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="tower_hub_height" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_tower_hub_height') }}</label>
                 <input id="tower_hub_height" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.tower_hub_height">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="tower_type" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_tower_type') }}</label>
                 <input id="tower_type" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.tower_type">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="tower_shape" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_tower_shape') }}</label>
                 <input id="tower_shape" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.tower_shape">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="tower_corrosion_protection" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_tower_corrosion_protection') }}</label>
                 <input id="tower_corrosion_protection" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.tower_corrosion_protection">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="tower_manufacturer" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_tower_manufacturer') }}</label>
                 <input id="tower_manufacturer" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.tower_manufacturer">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_single_blade" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_weight_single_blade') }}</label>
                 <input id="weight_single_blade" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_single_blade">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_hub" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_weight_hub') }}</label>
                 <input id="weight_hub" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_hub">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_rotor" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_weight_rotor') }}</label>
                 <input id="weight_rotor" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_rotor">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_nacelle" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_weight_nacelle') }}</label>
                 <input id="weight_nacelle" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_nacelle">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_tower_max" class="block text-gray-700 font-medium">{{ getTranslatedText('models_table_weight_tower_max') }}</label>
                 <input id="weight_tower_max" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_tower_max">
             </div>
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="weight_total" class="block text-gray-700 font-medium">{{ getTranslatedText('models_tabel_weight_total') }}</label>
                 <input id="weight_total" type="text"
-                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50"
+                    class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary"
                     [(ngModel)]="modelModelo.weight_total">
             </div>
 
@@ -742,38 +734,35 @@
         </div>
         <div class="flex justify-center items-center mt-3">
             <button (click)="confirmAdd()" type="button"
-                class="py-2 px-4 text-sm font-medium w-52 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300">
-                {{ getTranslatedText('dashboard_models_add') }}
+                class="py-2 px-4 text-sm font-medium w-52 text-white bg-color-primary rounded-lg hover:bg-hover-color-primary focus:ring-4 focus:outline-none focus:ring-blue-400">
+            {{ getTranslatedText('dashboard_models_add') }}
             </button>
         </div>
     </div>
 </div>
-<!-- DIV - DELETE - MODELO --> <!--ALTERAR-->
+<!-- DIV - DELETE - MODELO -->
 <div *ngIf="showDeleteModal" class="fixed top-0 left-0 w-full h-full flex justify-center items-center">
     <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
-    <div class="bg-gray-800 p-8 rounded-lg shadow-lg relative">
-        <button (click)="toogleDeleteModelTemplate(null)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
-            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"></path>
+    <div class="bg-white p-8 rounded-lg shadow-lg relative">
+        <button (click)="toogleDeleteModelTemplate(null)" class="absolute top-2.5 right-2.5 bg-transparent hover:bg-blue-400 hover:text-white  rounded-lg text-sm p-1.5 inline-flex items-center">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
             </svg>
         </button>
-        <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor"
+        <svg class="text-black w-10 h-10 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor"
             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
                 d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                 clip-rule="evenodd"></path>
         </svg>
-        <p class="mb-4 text-gray-500 dark:text-gray-300">{{ getTranslatedText('dashboard_geral_confirm_delete') }}</p>
+        <p class="mb-4 text-black">{{ getTranslatedText('dashboard_geral_confirm_delete') }}</p>
         <div class="flex justify-center items-center space-x-4">
             <button (click)="toogleDeleteModelTemplate(null)" type="button"
-                class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                class="py-2 px-3 text-sm font-medium text-black bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10">
                 {{ getTranslatedText('dashboard_geral_cancel') }}
             </button>
             <button type="submit" (click)="confirmDelete()" type="button"
-                class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300">
                 {{ getTranslatedText('dashboard_geral_confirm') }}
             </button>
         </div>
@@ -787,29 +776,24 @@
 <div *ngIf="showEditAssociationModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-20">
     <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
     <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full">
-        <button (click)="toggleEditAssociationTemplate(null)"
-            class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
-            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"></path>
+        <button (click)="toggleEditAssociationTemplate(null)" class="absolute top-2.5 right-2.5 bg-transparent hover:bg-blue-400 hover:text-white  rounded-lg text-sm p-1.5 inline-flex items-center">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
             </svg>
         </button>
         <h2 class="text-xl font-semibold mb-4 text-center">{{ getTranslatedText('dashboard_association_edit_title') }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
-
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dasboard_geral_email') }}</label>
-                <select id="name" class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50" [(ngModel)]="modelAssociation.user_email">
+                <select id="name" class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary" [(ngModel)]="modelAssociation.user_email">
                     <option *ngFor="let option of emailOptions" [value]="option">{{ option }}</option>
                 </select>
             </div>            
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_association_association') }}</label>
-                <select id="name" class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50" [(ngModel)]="modelAssociation.model_name">
+                <select id="name" class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary" [(ngModel)]="modelAssociation.model_name">
                     <option *ngFor="let option of associationOptions" [value]="option">{{ option }}</option>
                 </select>
             </div>
@@ -823,8 +807,8 @@
         </div>
         <div class="flex justify-center items-center mt-3">
             <button (click)="confirmEditAssociation()" type="button"
-                class="py-2 px-4 text-sm font-medium w-52 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300">
-                {{ getTranslatedText('dashboard_geral_confirm') }}
+                class="py-2 px-4 text-sm font-medium w-52 text-white bg-color-primary rounded-lg hover:bg-hover-color-primary focus:ring-4 focus:outline-none focus:ring-blue-400">
+            {{ getTranslatedText('dashboard_geral_confirm') }}
             </button>
         </div>
     </div>
@@ -834,13 +818,9 @@
 <div *ngIf="showAddAssociationModal" class="fixed top-0 left-0 w-full h-5/6 flex justify-center items-center mt-20">
     <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
     <div class="bg-white p-8 rounded-lg shadow-lg relative overflow-auto max-h-full">
-        <button (click)="toggleAddAssociationTemplate()"
-            class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
-            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"></path>
+        <button (click)="toggleAddAssociationTemplate()" class="absolute top-2.5 right-2.5 bg-transparent hover:bg-blue-400 hover:text-white  rounded-lg text-sm p-1.5 inline-flex items-center">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
             </svg>
         </button>
         <h2 class="text-xl font-semibold mb-4 text-center">{{ getTranslatedText('dashboard_association_add') }}</h2>
@@ -849,14 +829,14 @@
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dasboard_geral_email') }}</label>
-                <select id="name" class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50" [(ngModel)]="modelAssociation.user_email">
+                <select id="name" class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary" [(ngModel)]="modelAssociation.user_email">
                     <option *ngFor="let option of emailOptions" [value]="option">{{ option }}</option>
                 </select>
             </div>            
 
             <div class="bg-gray-200 p-4 rounded-md">
                 <label for="name" class="block text-gray-700 font-medium">{{ getTranslatedText('dashboard_association_association') }}</label>
-                <select id="name" class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50" [(ngModel)]="modelAssociation.model_name">
+                <select id="name" class="mt-1 block w-full border-gray-300 ps-2 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-color-primary focus:border-color-primary" [(ngModel)]="modelAssociation.model_name">
                     <option *ngFor="let option of associationOptions" [value]="option">{{ option }}</option>
                 </select>
             </div>
@@ -870,8 +850,8 @@
         </div>
         <div class="flex justify-center items-center mt-3">
             <button (click)="confirmAddAssociation()" type="button"
-                class="py-2 px-4 text-sm font-medium w-52 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300">
-                {{ getTranslatedText('dashboard_association_add') }}
+                class="py-2 px-4 text-sm font-medium w-52 text-white bg-color-primary rounded-lg hover:bg-hover-color-primary focus:ring-4 focus:outline-none focus:ring-blue-400">
+            {{ getTranslatedText('dashboard_association_add') }}
             </button>
         </div>
     </div>
@@ -880,29 +860,26 @@
 <!-- DIV - DELETE - ASSOCIATION -->
 <div *ngIf="showDeleteAssociationModal" class="fixed top-0 left-0 w-full h-full flex justify-center items-center">
     <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"></div> <!-- FILTRO-->
-    <div class="bg-gray-800 p-8 rounded-lg shadow-lg relative">
-        <button (click)="toggleDeleteAssociationTemplate(null)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-900">
-            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"></path>
+    <div class="bg-white p-8 rounded-lg shadow-lg relative">
+        <button (click)="toggleDeleteAssociationTemplate(null)" class="absolute top-2.5 right-2.5 bg-transparent hover:bg-blue-400 hover:text-white  rounded-lg text-sm p-1.5 inline-flex items-center">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
             </svg>
         </button>
-        <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor"
+        <svg class="text-black w-10 h-10 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor"
             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
                 d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                 clip-rule="evenodd"></path>
         </svg>
-        <p class="mb-4 text-gray-500 dark:text-gray-300">{{ getTranslatedText('dashboard_geral_confirm_delete') }}</p>
+        <p class="mb-4 text-black">{{ getTranslatedText('dashboard_geral_confirm_delete') }}</p>
         <div class="flex justify-center items-center space-x-4">
             <button (click)="toggleDeleteAssociationTemplate(null)" type="button"
-                class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                class="py-2 px-3 text-sm font-medium text-black bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10">
                 {{ getTranslatedText('dashboard_geral_cancel') }}
             </button>
             <button type="submit" (click)="confirmDeleteAssociation()" type="button"
-                class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300">
                 {{ getTranslatedText('dashboard_geral_confirm') }}
             </button>
         </div>

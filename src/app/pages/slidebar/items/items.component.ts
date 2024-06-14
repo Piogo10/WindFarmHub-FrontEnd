@@ -29,6 +29,9 @@ export class ProductsComponent implements OnInit{
     stock_count: '',
     difference: ''
   };
+
+  scrollHandler!: EventListenerObject;
+
   constructor(
     private alertService: AlertService,
     private dashboardService: DashboardService,
@@ -65,6 +68,10 @@ export class ProductsComponent implements OnInit{
     this.editModel = product;
     this.showEditModal = !this.showEditModal;
     this.productmodal = { ... this.editModel };
+
+    document.body.style.overflow = this.editModel ? 'hidden' : 'auto';
+    const method = this.editModel ? 'addEventListener' : 'removeEventListener';
+    document.body[method]('scroll', this.scrollHandler);
   }
   confirmEdit() {
     if (!this.productmodal.material || !this.productmodal.text_brief_material) {
@@ -105,6 +112,10 @@ export class ProductsComponent implements OnInit{
     this.deleteModel = product;
     this.showDeleteModal = !this.showDeleteModal;
     console.log('Peça to delete:', this.deleteModel);
+
+    document.body.style.overflow = this.deleteModel ? 'hidden' : 'auto';
+    const method = this.deleteModel ? 'addEventListener' : 'removeEventListener';
+    document.body[method]('scroll', this.scrollHandler);
   }
   confirmDelete() {
 
@@ -129,6 +140,10 @@ export class ProductsComponent implements OnInit{
     if (this.showAddProductModal) {
       this.limparvariavels();
     }
+
+    document.body.style.overflow = this.showAddProductModal ? 'hidden' : 'auto';
+    const method = this.showAddProductModal ? 'addEventListener' : 'removeEventListener';
+    document.body[method]('scroll', this.scrollHandler);
   }
 
   confirmAdd() {

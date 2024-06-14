@@ -218,7 +218,6 @@ export class ModelosComponent implements OnInit {
       }
 
       this.dashboardService.addModel(this.modelModelo).then((userId: any) => {
-        console.log('AAAAAAAAAAAAA:', userId);
         if (userId !== undefined) {
           this.modelos.push({ id: userId, ...this.modelModelo })
         }
@@ -324,6 +323,10 @@ export class ModelosComponent implements OnInit {
     this.modelAssociation.user_email = this.editAssociation.user.email;
     this.modelAssociation.model_name = this.editAssociation.model.name;
     this.modelAssociation.status = this.editAssociation.status;
+
+    document.body.style.overflow = this.showEditAssociationModal ? 'hidden' : 'auto';
+    const method = this.showEditAssociationModal ? 'addEventListener' : 'removeEventListener';
+    document.body[method]('scroll', this.scrollHandler);
   }
   confirmEditAssociation(): void {
     const userid = this.users.find(user => user.email === this.modelAssociation.user_email)?.id;
@@ -407,6 +410,10 @@ export class ModelosComponent implements OnInit {
     this.showDeleteAssociationModal = !this.showDeleteAssociationModal;
     this.deleteAssociation = association;
     console.log('Association selected for deletion:', this.deleteAssociation);
+
+    document.body.style.overflow = this.showDeleteAssociationModal ? 'hidden' : 'auto';
+    const method = this.showDeleteAssociationModal ? 'addEventListener' : 'removeEventListener';
+    document.body[method]('scroll', this.scrollHandler);
   }
   confirmDeleteAssociation(): void {
     if (this.deleteAssociation) {

@@ -9,8 +9,8 @@ import { TranslationService } from '../../../services/translation.service';
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
-export class UsersComponent implements OnInit{
-  
+export class UsersComponent implements OnInit {
+
   alertMessage: string = '';
   alertType: string = '';
   mainalert: boolean = true;
@@ -25,13 +25,15 @@ export class UsersComponent implements OnInit{
 
   searchField: string = '';
   searchOption: string = 'name';
-  
+
+  scrollHandler!: EventListenerObject;
+
   constructor(
     private alertService: AlertService,
     private userService: UserService,
     private dashboardService: DashboardService,
     private translationService: TranslationService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.userService.getUsers().then(users => {
@@ -54,7 +56,7 @@ export class UsersComponent implements OnInit{
     }
   }
 
-  
+
   async VerifyStatus(): Promise<void> {
     this.activeUsers = 0;
 
@@ -69,15 +71,19 @@ export class UsersComponent implements OnInit{
 
   //EDIT
   showEditModal = false;
-  editedUser = { id: 0, name: '', email: '', role: '', status: false};
+  editedUser = { id: 0, name: '', email: '', role: '', status: false };
   toggleEditUserTemplate(user: any): void {
     this.showEditModal = !this.showEditModal;
     this.mainalert = !this.mainalert;
     this.editUser = user;
 
     if (this.showEditModal && this.editUser) {
-      this.editedUser = { id: this.editUser.id, name: this.editUser.name, email: this.editUser.email, role: this.editUser.role, status: this.editUser.status};
+      this.editedUser = { id: this.editUser.id, name: this.editUser.name, email: this.editUser.email, role: this.editUser.role, status: this.editUser.status };
     }
+
+    document.body.style.overflow = this.showEditModal ? 'hidden' : 'auto';
+    const method = this.showEditModal ? 'addEventListener' : 'removeEventListener';
+    document.body[method]('scroll', this.scrollHandler);
   }
 
   confirmEdit(): void {
@@ -97,7 +103,7 @@ export class UsersComponent implements OnInit{
           this.VerifyStatus();
           this.editUser = null;
           this.alertService.showAlert('Usuário editado com sucesso!', 'success');
-          
+
         } else {
           this.alertService.showAlert('O email já está sendo usado por outro usuário.', 'warn');
         }
@@ -110,10 +116,14 @@ export class UsersComponent implements OnInit{
   //DELETE
   showDeleteModal = false;
   toggleDeleteModal(user: any): void {
-      this.showDeleteModal = !this.showDeleteModal;
-      this.mainalert = !this.mainalert;
-      this.delUser = user;
-      console.log('Usuário selecionado para deletar:', this.delUser);
+    this.showDeleteModal = !this.showDeleteModal;
+    this.mainalert = !this.mainalert;
+    this.delUser = user;
+    console.log('Usuário selecionado para deletar:', this.delUser);
+
+    document.body.style.overflow = this.showDeleteModal ? 'hidden' : 'auto';
+    const method = this.showDeleteModal ? 'addEventListener' : 'removeEventListener';
+    document.body[method]('scroll', this.scrollHandler);
   }
   confirmDelete(): void {
     if (this.delUser) {
@@ -135,6 +145,10 @@ export class UsersComponent implements OnInit{
   toggleAddUserModal(): void {
     this.showAddUserModal = !this.showAddUserModal;
     this.mainalert = !this.mainalert;
+
+    document.body.style.overflow = this.showAddUserModal ? 'hidden' : 'auto';
+    const method = this.showAddUserModal ? 'addEventListener' : 'removeEventListener';
+    document.body[method]('scroll', this.scrollHandler);
   }
   addUser(): void {
     if (this.newUser.name && this.isEmailValid(this.newUser.email) && this.newUser.password && this.newUser.role) {
@@ -149,7 +163,7 @@ export class UsersComponent implements OnInit{
             this.newUser = { name: '', email: '', password: '', role: '', status: false };
             this.VerifyStatus
           }
-          else{
+          else {
             this.alertService.showAlert('O email já está sendo usado por outro usuário.', 'warn');
           }
         }
@@ -166,5 +180,5 @@ export class UsersComponent implements OnInit{
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
-  
+
 }
