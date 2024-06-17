@@ -19,12 +19,6 @@ module.exports = {
         'home_double': "url('../src/app/imagens/double.jpg')",
         'model_eco80': "url('../src/app/imagens/eco80.jpg')",
         'login': "url('../src/app/imagens/login_bg.jpg')",
-
-        'closet-control': "url('../src/app/imagens/Eco-80/closet-cabine-control.png')",
-        'closet-estator': "url('../src/app/imagens/Eco-80/closet-estator.png')",
-        'closet-multiply': "url('../src/app/imagens/Eco-80/closet-multiply.png')",
-        'closet-conversor-power': "url('../src/app/imagens/closet-conversor-power.png')",
-        'closet-rotor': "url('../src/app/imagens/Eco-80/closet-rotor.png')",
       },
 
       colors: {

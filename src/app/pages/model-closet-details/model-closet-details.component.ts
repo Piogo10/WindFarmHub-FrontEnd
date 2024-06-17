@@ -4,6 +4,7 @@ import { TranslationService } from '../../services/translation.service';
 import { AnimationsService } from '../../services/animations.service';
 import { pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { ItemService } from '../../services/item.service';
 
 interface ErrorMessage {
   id: number;
@@ -28,15 +29,33 @@ interface Solution {
 export class ModelClosetDetailsComponent implements OnInit {
 
   query: string = '';
+  products: any[] = [];
   errorMessages: ErrorMessage[] = [];
   solutions: Solution[] = [];
   results: { error_message: string; solutions: { topic: string; descriptions: string[] }[] }[] = [];
   showResults: boolean = false;
   selectedResult: { error_message: string; solutions: { topic: string; descriptions: string[] }[] } | null = null;
 
+
+  componentes = [
+    { id: 'baterias', number: '50040558', imgSrc: 'assets/images/Eco-80/power-convertor/baterias.jpg', name: 'Baterias', stock: null },
+    { id: 'botao_comando', number: '', imgSrc: 'assets/images/Eco-80/power-convertor/botao_comando.jpg', name: 'Botão do Comando', stock: null },
+    { id: 'contador_lado', number: '20176155', imgSrc: 'assets/images/Eco-80/power-convertor/contador_lado.jpg', name: 'Contactor de Lado', stock: null },
+    { id: 'contador_potencia', number: '50038692', imgSrc: 'assets/images/Eco-80/power-convertor/contador_potencia.jpg', name: 'Contactor de Potência', stock: null },
+    { id: 'display_cmw1', number: '50065390', imgSrc: 'assets/images/Eco-80/power-convertor/display_cmw1.jpg', name: 'Display CMW1', stock: null },
+    { id: 'grupo_IGBTS', number: '50077412', imgSrc: 'assets/images/Eco-80/power-convertor/grupo_IGBTS.jpg', name: 'Grupo IGBT´S', stock: null },
+    { id: 'hur', number: '50065383', imgSrc: 'assets/images/Eco-80/power-convertor/hur.jpg', name: 'Hur', stock: 2 },
+    { id: 'modelo_bus', number: '50041493', imgSrc: 'assets/images/Eco-80/power-convertor/modelo_bus.jpg', name: 'Modulo BUS', stock: null },
+    { id: 'modelo_gm1_r', number: '', imgSrc: 'assets/images/Eco-80/power-convertor/modelo_gm1_r.jpg', name: 'Modulo GM1´R', stock: null },
+    { id: 'rotor', number: '50040534', imgSrc: 'assets/images/Eco-80/power-convertor/rotor.jpg', name: 'Relés', stock: null },
+    { id: 'sur', number: '50065397', imgSrc: 'assets/images/Eco-80/power-convertor/sur.jpg', name: 'Sur', stock: null },
+    { id: 'ventilacao', number: '50042630', imgSrc: 'assets/images/Eco-80/power-convertor/ventilacao.jpg', name: 'Ventilação', stock: null },
+  ];
+
   constructor(
     private errorService: ErrorService,
     private translationService: TranslationService,
+    private itemService: ItemService,
     private animationsService: AnimationsService,
 
   ) { pdfDefaultOptions.assetsFolder = 'bleeding-edge'; }
@@ -49,6 +68,21 @@ export class ModelClosetDetailsComponent implements OnInit {
       },
       error => console.error('Error:', error)
     );
+
+    this.itemService.getAllItems().then(products => {
+      this.products = products;
+      console.log('products:', this.products);
+
+      this.componentes.forEach(component => {
+        console.log('a',component)
+        const matchingProduct = this.products.find(product => product.material === component.number);
+        console.log('b',matchingProduct);
+        if (matchingProduct) {
+        component.stock = matchingProduct.stock_count;
+        console.log('c',component.stock);
+        }
+      });
+    });
   }
 
 
@@ -104,36 +138,52 @@ export class ModelClosetDetailsComponent implements OnInit {
     {
       title: 'Constumers',
       items: [
-        { type: 'PDF', label: 'CSC_Customer', file: 'example.pdf' },
-        { type: 'PDF', label: 'CMW_messages_V1', file: 'example.pdf' },
+        { type: 'PDF', label: 'CSC_Customer', file: 'CSC_Customer.pdf' },
+        { type: 'PDF', label: 'CMW_messages_V1', file: 'CMW_messages_V1.pdf' },
       ]
     },
     {
       title: 'Programas',
       items: [
-        { type: 'EXE', label: 'Data Visualizer', file: 'a' },
-        { type: 'EXE', label: 'WuT ComServer', file: 'a' },
+        { type: 'EXE', label: 'Data_Visualizer', file: 'DataVisualizer_KP-RMS_18603.exe' },
+        { type: 'EXE', label: 'WuT_ComServer', file: 'e-58135-ww-swww-383.exe' },
       ]
     },
     {
       title: 'Esquema Elétrico',
       items: [
-        { type: 'EXE', label: 'SVG', file: 'a' },
-        { type: 'PDF', label: 'PDF', file: 'a' },
+        { type: 'PDF', label: 'CW1670ET14_3_62422BP3-D02_C', file: 'CW1670ET14.3_62422BP3-D02.C.pdf' },
       ]
     },
     {
       title: 'Componentes',
-      items: [
-        { type: 'EXE', label: 'XML', file: 'a' },
-        { type: '', label: 'JSON', file: 'a' },
-      ]
-    },
+      items: null
+    }
   ];
+
+  closetInfo = [
+    { "title": "Tipo", "desc": "FU1670ET14.1" },
+    { "title": "Número de Comando", "desc": "CD0-42-05U-004" },
+    { "title": "Número do Cliente", "desc": "ECO 74" },
+    { "title": "Tensão (Rede)", "desc": "690 V" },
+    { "title": "Tensão (Gerador)", "desc": "0-750 V" },
+    { "title": "Tensão Auxiliar", "desc": "400/230 V" },
+    { "title": "Corrente (Rede)", "desc": "400 A" },
+    { "title": "Corrente (Gerador)", "desc": "625 A" },
+    { "title": "Frequência", "desc": "50 Hz (Rede) / 0-17 Hz (Gerador)" },
+    { "title": "Tipo de Enclosure", "desc": "IP 54" },
+    { "title": "Temperatura Máxima Ambiente", "desc": "45 °C" },
+    { "title": "Capacidade de Curto-Circuito", "desc": "25 kA" },
+    { "title": "Ano de Fabricação", "desc": "2006" },
+    { "title": "Modelo", "desc": "624Q2BP0.4" },
+    { "title": "Fabricante", "desc": "SEG Schaltanlagen-Elektronik-Geräte GmbH & Co. KG" },
+  ]
+
 
   toggleSection(index: number) {
     this.activeSection = this.activeSection === index ? -1 : index;
   }
+
 
   getTranslatedText(key: string): string {
     return this.translationService.translate(key);
@@ -169,7 +219,66 @@ export class ModelClosetDetailsComponent implements OnInit {
     if (item == null) return;
 
     this.fileName = item.file;
-    this.srcComplete = `assets/${item.file}`;
+    this.srcComplete = `assets/files/eco-80/closets/power-conversor/${item.file}`;
   }
+
+  downloadFile(url: string) {
+    const link = document.createElement('a');
+    this.srcComplete = `assets/files/eco-80/closets/power-conversor/${url}`;
+    link.href = this.srcComplete;
+    link.download = url.split('/').pop() || '';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  handleItemClick(item: any) {
+    if (item.type === 'PDF') {
+      this.tooglePDF(item);
+    } else if (item.type === 'EXE') {
+      this.downloadFile(item.file);
+    }
+  }
+
+  selectedComponent: any;
+  componentInfo: any[] = [];
+  componentInfoKeys = [
+    { label: 'Nome', key: 'text_brief_material' },
+    { label: 'Localização', key: 'deposit_denomination' },
+    { label: 'SAP', key: 'sap' },
+    { label: 'LOTE', key: 'lot' },
+    { label: 'Valor Livre de Utilização', key: 'free_utilization_value' },
+    { label: 'Moeda', key: 'currency' },
+    { label: 'Stock', key: 'stock_count' },
+    { label: 'Diferença', key: 'difference' }
+  ];
+
+  toggleComponentDetail = false;
+
+  toogleComponentDetails(component: any) {
+    this.toggleComponentDetail = !this.toggleComponentDetail;
+
+    document.body.style.overflow = this.toggleComponentDetail ? 'hidden' : 'auto';
+    const method = this.toggleComponentDetail ? 'addEventListener' : 'removeEventListener';
+    document.body[method]('scroll', this.scrollHandler);
+
+    if (!this.toggleComponentDetail) {
+      this.selectedComponent = null;
+      this.componentInfo = [];
+      return
+    }
+
+    this.selectedComponent = component;
+
+    if (this.selectedComponent) {
+      const matchingProduct = this.products.find(product => product.material === this.selectedComponent.number);
+      if (matchingProduct) {
+        this.componentInfo = [matchingProduct];
+      } else {
+        this.componentInfo = [];
+      }
+    }
+  }
+
 
 }

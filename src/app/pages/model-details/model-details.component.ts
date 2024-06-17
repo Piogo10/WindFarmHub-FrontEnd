@@ -32,7 +32,7 @@ import { AlertService } from '../../services/alert.service';
 })
 export class ModelDetailsComponent implements OnInit {
 
-  activeItem: number | null = null;
+  activeItem: number | null = 0;
   userDropdownOpen = false;
   hamburgerDropdownOpen = false;
   isLoggedIn = false;
@@ -58,11 +58,11 @@ export class ModelDetailsComponent implements OnInit {
   }
 
   images = [
-    { src: 'closet-control', label: 'Armário Controle de Cabine' },
-    { src: 'closet-estator', label: 'Armário do Estator' },
-    { src: 'closet-multiply', label: 'Armário Multiplicadora' },
-    { src: 'closet-conversor-power', label: 'Armário Conversor de Potência' },
-    { src: 'closet-rotor', label: 'Armário do Rotor' }
+    { id: 'closet-control', src: 'assets/images/Eco-80/closet-cabine-control.png', label: 'Armário Controle de Cabine' },
+    { id: 'closet-estator', src: 'assets/images/Eco-80/closet-estator.png', label: 'Armário do Estator' },
+    { id: 'closet-multiply', src: 'assets/images/Eco-80/closet-multiply.png', label: 'Armário Multiplicadora' },
+    { id: 'closet-conversor-power', src: 'assets/images/Eco-80/closet-power-conversor.png', label: 'Armário Conversor de Potência' },
+    { id: 'closet-rotor', src: 'assets/images/Eco-80/closet-rotor.png', label: 'Armário do Rotor' }
   ];
 
   async updateUserInformation() {
@@ -82,8 +82,8 @@ export class ModelDetailsComponent implements OnInit {
     this.activeItem = (this.activeItem === item) ? null : item;
   }
 
-  handleImageClick(imageSrc: string): void {
-    if (imageSrc === 'closet-conversor-power') {
+  handleImageClick(id: string): void {
+    if (id === 'closet-conversor-power') {
       this.goToClosetDetails(this.modelName, 'conversor-de-potencia');
     } else {
       this.alertService.showAlert('Indisponível', 'error');

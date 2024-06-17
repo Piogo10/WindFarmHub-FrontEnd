@@ -269,12 +269,12 @@
                     <div class="flex justify-center items-center bg-cover bg-no-repeat bg-center bg-imageArmario"
                         style="height: 400px; width: 100%;"></div>
                     <div class="flex flex-wrap justify-center mt-4 space-x-4">
-                        <button *ngFor="let image of images" (click)="handleImageClick(image.src)"
+                        <button *ngFor="let image of images" (click)="handleImageClick(image.id)"
                             class="flex flex-col items-center mt-4">
-                            <img id="{{image.src}}"
-                                class="w-56 h-72 object-cover rounded-lg bg-{{image.src}} bg-no-repeat bg-cover"
-                                (mouseenter)="onMouseEnter('#' + image.src)"
-                                (mouseleave)="onMouseLeave('#' + image.src)">
+                            <img id="{{image.id}}" [src]="image.src"
+                                class="w-56 h-72"
+                                (mouseenter)="onMouseEnter('#' + image.id)"
+                                (mouseleave)="onMouseLeave('#' + image.id)">
                             <label class="mt-2 text-black">{{ image.label }}</label>
                         </button>
                     </div>

@@ -10,9 +10,9 @@
                 class=" h-max grid lg:grid-cols-2 md:grid-cols-1 gap-12 lg:gap-8 px-4 sm:px-6 lg:px-8">
                 <div id="photo-model"
                     class="h-max text-center px-5 rounded-2xl cursor-pointer w-9/12 justify-center mx-auto items-center">
-                    <div class="w-full h-96 bg-closet-conversor-power bg-no-repeat bg-center bg-cover"></div>
+                    <img [src]="'assets/images/Eco-80/closet-power-conversor2.png'" class="w-full h-1/4">
                     <h3 class="text-xl font-bold py-4 bg-gray-300">Conversor de Potência</h3>
-                    <p class="leading-relaxed bg-gray-300">EPA NAO SEI</p>
+                    <p class="leading-relaxed bg-gray-300"></p>
                 </div>
 
 
@@ -29,9 +29,9 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-300">
-                            <tr>
-                                <td class="px-4 py-2 whitespace-nowrap">Nome</td>
-                                <td class="px-4 py-2 whitespace-nowrap">OLA</td>
+                            <tr *ngFor="let info of closetInfo">
+                                <td class="px-4 py-2 whitespace-nowrap">{{ info.title }}</td>
+                                <td class="px-4 py-2 whitespace-nowrap">{{ info.desc }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -40,42 +40,104 @@
         </div>
     </section>
 
+    <!-- SEARCH BAR -->
+    <section class="w-full flex flex-col items-center pt-10 pb-20">
+        <div class="text-xl text-left mb-4">
+            <h1 class="font-bold text-black">Pesquisar Erros</h1>
+        </div>
+        <div class="w-full flex justify-center">
+            <div class="relative w-5/6">
+                <input [(ngModel)]="query" (input)="onSearch()" type="text" placeholder="Pesquisar..."
+                    class="border p-2 w-full pl-10 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                <svg class="w-6 h-6 absolute left-3 top-2 text-gray-400" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M11 6C13.7614 6 16 8.23858 16 11M16.6588 16.6549L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Mostrar os resultados da pesquisa -->
+        <div *ngIf="showResults && results.length > 0 && !selectedResult"
+            class="relative w-5/6 mt-2 bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
+            <ul class="w-full divide-y divide-gray-300">
+                <li *ngFor="let result of results" class="px-4 py-2 whitespace-nowrap">
+                    <label (click)="toggleSolution(result)" style="cursor: pointer;">{{ result.error_message}}
+                    </label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Mostrar a solução selecionada -->
+        <div *ngIf="selectedResult"
+            class="relative w-5/6 mt-2 bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
+            <!-- Ícone SVG para fechar o div -->
+            <button (click)="closeSolution()" class="absolute top-2.5 right-2.5 bg-transparent hover:bg-blue-400 hover:text-white rounded-lg text-sm p-1.5 inline-flex items-center">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+
+            <div class="font-bold my-4">Possíveis soluções para: {{ selectedResult.error_message }}</div>
+            <ol>
+                <li *ngFor="let solution of selectedResult.solutions; let i = index">
+                    <div class="font-semibold">{{ i + 1 }}. {{ solution.topic }}</div>
+                    <ol>
+                        <li *ngFor="let description of solution.descriptions; let j = index">
+                            <div class="ml-4">{{ description }}</div>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+
+        <div *ngIf="query && results.length === 0 && showResults"
+            class="w-5/6 mt-2 bg-white border border-gray-300 p-4 rounded-lg shadow-lg text-red-500">
+            Não encontrado
+        </div>
+    </section>
+
 
 
     <div class="bg-gray-100 mx-auto p-4 text-black">
 
         <div class="hs-accordion-group space-y-4">
-            <div *ngFor="let section of sections; let i = index"
-                class="hs-accordion bg-white border border-transparent rounded-xl shadow-sm"
-                [ngClass]="{'hs-accordion-active:border-gray-200': activeSection === i}">
-
-                <button (click)="toggleSection(i)"
-                    class="hs-accordion-toggle inline-flex justify-between items-center gap-x-3 w-full font-semibold text-start text-gray-800 py-4 px-5 hover:text-gray-500"
-                    [attr.aria-controls]="'hs-basic-active-bordered-collapse-' + i">
-                    {{ section.title }}
-                    <svg class="hs-accordion-active:hidden block size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
-                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14"></path>
-                        <path d="M12 5v14"></path>
-                    </svg>
-                    <svg class="hs-accordion-active:block hidden size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
-                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14"></path>
-                    </svg>
-                </button>
-
-                <div [id]="'hs-basic-active-bordered-collapse-' + i"
-                    class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
-                    [ngClass]="{'hidden': activeSection !== i}">
-                    <div class="pb-4 px-5">
-                        <div class="flex flex-wrap justify-start space-x-8">
-                            <button *ngFor="let item of section.items" class="flex flex-col items-center p-0 space-y-2"
-                                (mouseenter)="onMouseEnter('#' + item.label)"
-                                (mouseleave)="onMouseLeave('#' + item.label)" 
-                                (click)="tooglePDF(item)">
-                                <svg class="w-20 h-max" [ngSwitch]="item.type" id="{{ item.label }}">
+            <div *ngFor="let section of sections; let i = index" 
+                 class="hs-accordion bg-white border border-transparent rounded-xl shadow-sm"
+                 [ngClass]="{'hs-accordion-active:border-gray-200': activeSection === i}">
+              
+              <button (click)="toggleSection(i)"
+                      class="hs-accordion-toggle inline-flex justify-between items-center gap-x-3 w-full font-semibold text-start text-gray-800 py-4 px-5 hover:text-gray-500"
+                      [attr.aria-controls]="'hs-basic-active-bordered-collapse-' + i">
+                {{ section.title }}
+                <svg class="hs-accordion-active:hidden block size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5v14"></path>
+                </svg>
+                <svg class="hs-accordion-active:block hidden size-3.5" xmlns="http://www.w3.org/2000/svg" width="24"
+                     height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"></path>
+                </svg>
+              </button>
+              
+              <div [id]="'hs-basic-active-bordered-collapse-' + i"
+                   class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+                   [ngClass]="{'hidden': activeSection !== i}">
+                <div class="pb-4 px-5">
+                  <div *ngIf="section.items; else componentSection">
+                    <div class="flex flex-wrap justify-start space-x-8">
+                      <button *ngFor="let item of section.items" class="flex flex-col items-center p-0 space-y-2"
+                              (mouseenter)="onMouseEnter('#' + item.label)"
+                              (mouseleave)="onMouseLeave('#' + item.label)" (click)="handleItemClick(item)">
+                        <svg class="w-20 h-max" [ngSwitch]="item.type" id="{{ item.label }}">
                                     <ng-container *ngSwitchCase="'PDF'">
                                         <svg class="w-20 h-max" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
@@ -145,113 +207,113 @@
                             </button>
                         </div>
                     </div>
+                    <ng-template #componentSection>
+                        <div class="flex flex-wrap justify-start gap-8">
+                          <div *ngFor="let component of componentes" id="{{ component.id }}" class="flex flex-col items-center p-4 space-y-3 my-3 bg-white rounded-lg shadow-lg"
+                            (mouseenter)="onMouseEnter('#' + component.id)"
+                            (mouseleave)="onMouseLeave('#' + component.id)"
+                            (click)="toogleComponentDetails(component)">
+                            <img [src]="component.imgSrc" class="w-72 h-56 rounded-md object-cover">
+                            <label class="text-black font-bold text-lg">{{ component.name }}</label>
+                            <label class="text-gray-500 text-sm">Unidades em stock: <strong [style.color]="component.stock ? 'inherit' : 'red'">{{ component.stock ?? 'Sem Informação' }}</strong></label>
+                          </div>
+                        </div>
+                      </ng-template>                      
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-    <!-- SEARCH BAR -->
-    <section class="w-full flex flex-col items-center pt-10 pb-20">
-        <div class="text-xl text-left mb-4">
-            <h1 class="font-bold text-black">Pesquisar Erros</h1>
-        </div>
-        <div class="w-full flex justify-center">
-            <div class="relative w-5/6">
-                <input [(ngModel)]="query" (input)="onSearch()" type="text" placeholder="Pesquisar..."
-                    class="border p-2 w-full pl-10 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-                <svg class="w-6 h-6 absolute left-3 top-2 text-gray-400" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <path
-                            d="M11 6C13.7614 6 16 8.23858 16 11M16.6588 16.6549L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
-                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </g>
-                </svg>
-            </div>
-        </div>
-
-        <!-- Mostrar os resultados da pesquisa -->
-        <div *ngIf="showResults && results.length > 0 && !selectedResult"
-            class="relative w-5/6 mt-2 bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
-            <ul>
-                <li *ngFor="let result of results">
-                    <strong (click)="toggleSolution(result)" style="cursor: pointer;">{{ result.error_message
-                        }}</strong>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Mostrar a solução selecionada -->
-        <div *ngIf="selectedResult"
-            class="relative w-5/6 mt-2 bg-white border border-gray-300 p-4 rounded-lg shadow-lg">
-            <!-- Ícone SVG para fechar o div -->
-            <svg (click)="closeSolution()"
-                class="w-6 h-6 absolute top-3 right-3 text-gray-500 cursor-pointer hover:text-gray-700" fill="none"
-                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-
-            <div class="font-bold my-4">Possíveis soluções para: {{ selectedResult.error_message }}</div>
-            <ol>
-                <li *ngFor="let solution of selectedResult.solutions; let i = index">
-                    <div class="font-semibold">{{ i + 1 }}. {{ solution.topic }}</div>
-                    <ol>
-                        <li *ngFor="let description of solution.descriptions; let j = index">
-                            <div class="ml-4">{{ j + 1 }}. {{ description }}</div>
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-        </div>
-
-        <div *ngIf="query && results.length === 0 && showResults"
-            class="w-5/6 mt-2 bg-white border border-gray-300 p-4 rounded-lg shadow-lg text-red-500">
-            Não encontrado
-        </div>
-    </section>
 </div>
 
-<div *ngIf="showPDF" class="fixed top-0 right-0 bottom-0 left-0 flex items-center justify-center bg-gray-900 bg-opacity-75"> <!-- FILTRO -->
+<div *ngIf="showPDF"
+    class="fixed top-0 right-0 bottom-0 left-0 flex items-center justify-center bg-gray-900 bg-opacity-75">
+    <!-- FILTRO -->
     <div class="relative w-3/4 h-3/4 bg-white border border-gray-300 p-4 rounded-lg shadow-lg flex flex-col">
-      <div class="flex justify-between items-center mb-4">
-        <label class="text-gray-700 mr-auto">Visualizador de PDF:</label>
-        <button (click)="tooglePDF(null)" class="absolute top-2.5 right-2.5 bg-transparent hover:bg-blue-400 hover:text-white  rounded-lg text-sm p-1.5 inline-flex items-center">
-            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-            </svg>
-        </button>
-      </div>
-      <ngx-extended-pdf-viewer
-        [src]="srcComplete || ''"
-        [height]="'100%'"
-        [useBrowserLocale]="true"
-        [textLayer]="true"
-        [showHandToolButton]="true"
-        class="flex-1"
-      >
-      </ngx-extended-pdf-viewer>
+        <div class="flex justify-between items-center mb-4">
+            <label class="text-gray-700 mr-auto">Visualizador de PDF:</label>
+            <button (click)="tooglePDF(null)"
+                class="absolute top-2.5 right-2.5 bg-transparent hover:bg-blue-400 hover:text-white  rounded-lg text-sm p-1.5 inline-flex items-center">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <ngx-extended-pdf-viewer [src]="srcComplete || ''" [height]="'100%'" [useBrowserLocale]="true"
+            [textLayer]="true" [showHandToolButton]="true" class="flex-1">
+        </ngx-extended-pdf-viewer>
     </div>
-  </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
+</div>
+
+<!-- Modal Div (adicionado ao fim do documento) -->
+<div *ngIf="toggleComponentDetail" class="fixed top-0 left-0 w-full h-full m-auto flex items-center justify-center">
+    <div class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-sm mt-10"></div>
+        <div class="bg-white p-5 rounded-lg shadow-lg w-1/4 h-3/4 relative overflow-y-auto">
+            <button (click)="toogleComponentDetails(null)" class="absolute top-2.5 right-2.5 bg-transparent hover:bg-blue-400 hover:text-white rounded-lg text-sm p-1.5 inline-flex items-center">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+            <img [src]="selectedComponent.imgSrc" class="mt-7 w-full h-48 rounded-md object-cover mb-4">
+            <h2 class="text-xl font-bold mb-2 text-center">{{ selectedComponent.name }}</h2>
+            <div class="max-h-96 overflow-y-auto">
+                <table class="w-full table-fixed divide-y divide-gray-300">
+                    <tbody class="bg-white divide-y divide-gray-300">
+                        <tr>
+                            <td class="px-4 py-2 text-black tracking-wider">Nome</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ componentInfo[0]?.text_brief_material ?? 'n/a'  }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 text-black tracking-wider">Localização</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ componentInfo[0]?.deposit_denomination ?? 'n/a'  }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 text-black tracking-wider">SAP</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ componentInfo[0]?.sap ?? 'n/a'  }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 text-black tracking-wider">LOTE</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ componentInfo[0]?.lot ?? 'n/a' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 text-black tracking-wider">Valor Livre de Utilização</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ componentInfo[0]?.free_utilization_value ?? 'n/a'  }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 text-black tracking-wider">Moeda</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ componentInfo[0]?.currency ?? 'n/a'  }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 text-black tracking-wider">Stock</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ componentInfo[0]?.stock_count ?? 'n/a'  }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-2 text-black tracking-wider">Diferença</td>
+                            <td class="px-4 py-2 whitespace-nowrap">{{ componentInfo[0]?.difference ?? 'n/a'  }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <app-footer></app-footer>
